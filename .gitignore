@@ -1,0 +1,4 @@
+#Ignorar carpetas del workspace de eclipse
+/.metadata/
+/RemoteSystemsTempFiles/
+*.project
