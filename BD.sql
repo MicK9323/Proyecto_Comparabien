@@ -75,8 +75,8 @@ CREATE TABLE tb_det_seg_beneficios (
     CONSTRAINT pk_det_seg_bene PRIMARY KEY (id_tipo , id_seg)
 )  engine = InnoDB, default charset = utf8;
 
-drop table if exists tb_contacto;
-create table tb_contacto
+drop table if exists tb_contactos;
+create table tb_contactos
 (
 	id_contacto char(5) not null primary key,
     id_empresa char(5) not null,
@@ -89,16 +89,16 @@ create table tb_contacto
     constraint fk_empresa foreign key (id_empresa) references tb_empresas (id_emp)
 ) engine = InnoDB, default charset = utf8;
 
-Drop table if exists tb_rol;
-CREATE TABLE tb_rol (
+Drop table if exists tb_roles;
+CREATE TABLE tb_roles (
     id_rol TINYINT PRIMARY KEY AUTO_INCREMENT,
     nom_rol VARCHAR(30) NOT NULL,
     fec_reg DATE NOT NULL,
     estado BOOLEAN DEFAULT 1
 )engine = InnoDB, default charset = utf8;
 
-Drop table if exists tb_enlace;
-CREATE TABLE tb_enlace (
+Drop table if exists tb_enlaces;
+CREATE TABLE tb_enlaces (
     id_enlace TINYINT PRIMARY KEY AUTO_INCREMENT,
     nom_enlace VARCHAR(45) NOT NULL,
     ruta VARCHAR(45) NOT NULL,
@@ -106,20 +106,20 @@ CREATE TABLE tb_enlace (
     estado BOOLEAN DEFAULT 1
 )engine = InnoDB, default charset = utf8;
 
-Drop table if exists tb_rol_enlace;
-Create table tb_rol_enlace
+Drop table if exists tb_rol_enlaces;
+Create table tb_rol_enlaces
 (
 	id_rol tinyint not null,
 	id_enlace tinyint not null,
 	constraint pk_rol_enlaces primary key (id_rol,id_enlace),
-	constraint fk_enlaces_rol foreign key (id_rol) references tb_rol(id_rol)
+	constraint fk_enlaces_rol foreign key (id_rol) references tb_roles(id_rol)
 	on delete restrict on update restrict,
-	constraint fk_enlaces_enlace foreign key (id_enlace) references tb_enlace(id_enlace)
+	constraint fk_enlaces_enlace foreign key (id_enlace) references tb_enlaces(id_enlace)
 	on delete restrict on update restrict
 )engine = InnoDB, default charset = utf8;
 
-drop table if exists tb_usuario;
-create table tb_usuario
+drop table if exists tb_usuarios;
+create table tb_usuarios
 (
 	id_contacto char(5) not null,
     usuario char(8) not null,
@@ -127,7 +127,7 @@ create table tb_usuario
     id_rol tinyint not null,
     estado boolean default 1,
     fec_reg date not null,
-    constraint fk_rol foreign key (id_rol) references tb_rol (id_rol)
+    constraint fk_rol foreign key (id_rol) references tb_roles (id_rol)
 )engine = InnoDB, default charset = utf8;
 
 
