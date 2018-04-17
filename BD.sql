@@ -75,7 +75,7 @@ CREATE TABLE tb_det_seg_beneficios (
     CONSTRAINT pk_det_seg_bene PRIMARY KEY (id_tipo , id_seg)
 )  engine = InnoDB, default charset = utf8;
 
-drop table if exists tb_contactos;
+/*drop table if exists tb_contactos;
 create table tb_contactos
 (
 	id_contacto char(5) not null primary key,
@@ -87,7 +87,7 @@ create table tb_contactos
     foto_contacto varchar(100),
     fec_reg date not null,
     constraint fk_empresa foreign key (id_empresa) references tb_empresas (id_emp)
-) engine = InnoDB, default charset = utf8;
+) engine = InnoDB, default charset = utf8;*/
 
 Drop table if exists tb_roles;
 CREATE TABLE tb_roles (
@@ -121,16 +121,17 @@ Create table tb_rol_enlaces
 drop table if exists tb_usuarios;
 create table tb_usuarios
 (
-	id_contacto char(5) not null,
-    usuario char(8) not null,
+	dni_user char(8) primary key not null,
+	nom_user varchar(80) not null,
+    ape_user varchar(80) not null,
+    usuario char(8) not null unique,
     clave char(8) not null,
+    foto varchar(100),
     id_rol tinyint not null,
     estado boolean default 1,
     fec_reg date not null,
     constraint fk_rol foreign key (id_rol) references tb_roles (id_rol)
 )engine = InnoDB, default charset = utf8;
-
-
 
 
 /*POPULATE TABLES*/
@@ -181,6 +182,9 @@ insert into tb_generales values('VEH04','VEH','Camioneta Pick UP',curdate());
 insert into tb_generales values('VEH05','VEH','Camioneta Panel',curdate());
 insert into tb_generales values('VEH06','VEH','Motocicletas',curdate());
 
-
-
-
+#Roles
+insert into tb_roles values(null,'Administrador',curdate(),1);
+insert into tb_roles values(null,'Registrador',curdate(),1);
+#Administrador
+insert into tb_usuarios values('70417573','Miguel Angel','Cortegana Alvarez','70417573','70417573','',1,1,curdate());
+insert into tb_usuarios values('12345678','Demo','Demo','12345678','12345678','',2,1,curdate());

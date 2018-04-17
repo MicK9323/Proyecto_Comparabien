@@ -4,21 +4,21 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<!-- <typeAlias type="beans." alias=""/> -->
+		<typeAlias type="beans.UsuarioDTO" alias="UsuarioIbatis"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC"/>
 			<dataSource type="UNPOOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver"/>
-				<property name="url" value="jdbc:mysql://localhost/db_comparabien"/>
+				<property name="url" value="jdbc:mysql://localhost/db_comparabien?noAccessToProcedureBodies=true"/>
 				<property name="username" value="root"/>
 				<property name="password" value="mysql"/>
 			</dataSource>
 		</environment>
 	</environments>
 	<mappers>
-		<!-- <mapper resource=".xml"/> -->
+		<mapper resource="mapperUsuario.xml"/>
 	</mappers>
 </configuration>
 

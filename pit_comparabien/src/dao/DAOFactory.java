@@ -1,5 +1,7 @@
 package dao;
 
+import interfaces.UsuarioDAO;
+
 public abstract class DAOFactory {
 	// los posibles orígenes de datos
 	public static final int MYSQL = 1;
@@ -8,7 +10,7 @@ public abstract class DAOFactory {
 	public static final int SQLSERVER = 4;
 	public static final int XML = 5;
 	
-	
+	public abstract UsuarioDAO getUsuarioDAO();
 
 	public static DAOFactory getDAOFactory(int whichFactory) {
 		switch (whichFactory) {

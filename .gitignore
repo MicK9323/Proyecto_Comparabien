@@ -1,3 +1,4 @@
 #Ignorar carpetas del workspace de eclipse
 /.metadata/
 /RemoteSystemsTempFiles/
+/.recommenders/

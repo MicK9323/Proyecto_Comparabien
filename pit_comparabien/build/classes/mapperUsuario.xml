@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pit">
+	<!-- <resultMap type="java.util.map" id="resultLogin"></resultMap> <select 
+		id="execSpLogin" statementType="CALLABLE" resultMap="resultLogin"> {call 
+		sp_login( #{ vUsuario, jdbcType = CHAR, mode = IN }, #{ vClave, jdbcType 
+		= CHAR, mode = IN } )} </select> -->
+
+	<!-- <resultMap type="java.util.map" id="resultLogin"></resultMap> -->
+	<select id="execSpLogin" statementType="CALLABLE" resultType="UsuarioIbatis">
+		<!-- {call sp_login(#{param.vUsuario, jdbcType=CHAR, mode = IN}, #{param.vClave, jdbcType=CHAR, mode=IN})} -->
+		call sp_login ( #{vUsuario}, #{vClave} )		
+	</select>
+
+</mapper>
