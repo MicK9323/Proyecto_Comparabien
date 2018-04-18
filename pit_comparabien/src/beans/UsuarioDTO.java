@@ -11,6 +11,7 @@ public class UsuarioDTO {
 	private int id_rol;
 	private boolean estado;
 	private String fec_reg;
+	private String nom_rol;
 	
 	public String getDni_user() {
 		return dni_user;
@@ -65,6 +66,12 @@ public class UsuarioDTO {
 	}
 	public void setFec_reg(String fec_reg) {
 		this.fec_reg = fec_reg;
+	}
+	public String getNom_rol() {
+		return nom_rol;
+	}
+	public void setNom_rol(String nom_rol) {
+		this.nom_rol = nom_rol;
 	}
 	
 }

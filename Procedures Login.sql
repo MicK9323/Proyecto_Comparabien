@@ -19,7 +19,8 @@ Begin
 					signal sqlstate '45000' set message_text = 'Clave Incorrecta';								
                 else
 					if exists (select * from tb_usuarios u where u.usuario = vUsuario and u.clave = vClave and u.estado = 1) then
-						select * from tb_usuarios u where u.usuario = vUsuario and u.clave = vClave;
+						select u.*, r.nom_rol from tb_usuarios u inner join tb_roles r
+                        on u.id_rol = r.id_rol where u.usuario = vUsuario and u.clave = vClave;
 					else
 						signal sqlstate '45000' set message_text = 'Error General';
 					end if;
@@ -29,7 +30,25 @@ Begin
 End$$
 DELIMITER ;
 
-call sp_login('70417573','70417573');
-call sp_login('12345678','12345678');
+-- OBTENER ENLACES
+Drop procedure if exists sp_cargarEnlaces;
+DELIMITER $$
+Create procedure sp_cargarEnlaces
+(
+vRol int,
+vOpcion varchar(5)
+)
+Begin
+		Select
+		e.nom_enlace,
+		e.ruta
+		from tb_roles r inner join tb_rol_enlaces d
+        on r.id_rol = d.id_rol inner join tb_enlaces e
+        on d.id_enlace = e.id_enlace where d.id_rol = vRol and e.opcion = vOpcion
+        order by 1 asc;
+End$$
+DELIMITER ;
 
-select * from tb_usuarios;
+call sp_login('70417573','70417573');
+
+call sp_cargarEnlaces(1,'EMP');

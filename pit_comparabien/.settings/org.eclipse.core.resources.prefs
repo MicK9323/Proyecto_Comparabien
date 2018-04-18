@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
+encoding//WebContent/layout/footer.jsp=UTF-8
+encoding//WebContent/layout/head.jsp=UTF-8
+encoding//WebContent/layout/preloader.jsp=UTF-8
+encoding//WebContent/layout/scripts.jsp=UTF-8
+encoding//WebContent/layout/sidebar.jsp=UTF-8
+encoding//WebContent/layout/topbar.jsp=UTF-8
 encoding//src/utils/Utilitario.java=UTF-8

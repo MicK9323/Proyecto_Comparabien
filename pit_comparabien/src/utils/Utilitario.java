@@ -23,7 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -42,7 +44,22 @@ public class Utilitario {
 		public static final String K_OCT = "OCTUBRE";
 		public static final String K_NOV = "NOVIEMBRE";
 		public static final String K_DIC = "DICIEMBRE";
+		public static final int ORIGEN_DATOS=1;
 	}
+	
+	public static ArrayList<ArrayList<String>> armarSalidaProcedure(List<Map<String, Object>> lista) {
+		ArrayList<ArrayList<String>> retorno = new ArrayList<ArrayList<String>>();		
+		for (Map<String, Object> mapa : lista) {
+			ArrayList<String> hijo = new ArrayList<String>();
+			for(Map.Entry<String, Object> entry : mapa.entrySet()) {
+			    Object v = entry.getValue();
+			    hijo.add((v!=null)?v.toString().trim():"");
+			}	
+			retorno.add(hijo);
+		}
+		return retorno;
+	}
+	
 
 	/**
 	 * Para poder probar las funciones utilitarias.

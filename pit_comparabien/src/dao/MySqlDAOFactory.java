@@ -1,5 +1,6 @@
 package dao;
 
+import interfaces.EmpresaDAO;
 import interfaces.UsuarioDAO;
 
 public class MySqlDAOFactory extends DAOFactory {
@@ -8,6 +9,12 @@ public class MySqlDAOFactory extends DAOFactory {
 	public UsuarioDAO getUsuarioDAO() {
 		// TODO Auto-generated method stub
 		return new UsuarioDaoImpl();
+	}
+
+	@Override
+	public EmpresaDAO getEmpresaDAO() {
+		// TODO Auto-generated method stub
+		return new EmpresaDaoImpl();
 	}
 
 }

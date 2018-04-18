@@ -15,13 +15,15 @@ drop table if exists tb_empresas;
 CREATE TABLE tb_empresas
 (
     id_emp char(5) primary key not null,
+    ruc_empresa char(11) not null,
     nom_empresa varchar(50) not null,
     telf_empresa varchar(10) not null,
     dir_empresa varchar(50) not null,
     email_empresa varchar(50) not null,
     cobertura_dep JSON not null,
     logo varchar(100),
-    fec_reg date not null
+    fec_reg date not null,
+    rubros json
 ) engine = InnoDB, default charset = utf8;
 
 
@@ -102,6 +104,7 @@ CREATE TABLE tb_enlaces (
     id_enlace TINYINT PRIMARY KEY AUTO_INCREMENT,
     nom_enlace VARCHAR(45) NOT NULL,
     ruta VARCHAR(45) NOT NULL,
+    opcion VARCHAR(5),
     fec_reg DATE NOT NULL,
     estado BOOLEAN DEFAULT 1
 )engine = InnoDB, default charset = utf8;
@@ -182,9 +185,81 @@ insert into tb_generales values('VEH04','VEH','Camioneta Pick UP',curdate());
 insert into tb_generales values('VEH05','VEH','Camioneta Panel',curdate());
 insert into tb_generales values('VEH06','VEH','Motocicletas',curdate());
 
+#Enlaces-----------------------------------------------------------------------------
+-- Empresas
+insert into tb_enlaces values(null,'Empresas','crudEmpresas.jsp','EMP',curdate(),1);
+-- Tarjetas
+insert into tb_enlaces values(null,'Tajetas de Crédito','tarjetas.jsp','TARJ',curdate(),1);
+-- Cta de ahorros
+insert into tb_enlaces values(null,'Ahorros','ahorros.jsp','AHO',curdate(),1);
+insert into tb_enlaces values(null,'Cta. Ahorro','crudAhorros.jsp','AHO',curdate(),1);
+insert into tb_enlaces values(null,'Cta. Sueldo','crudSueldos.jsp','AHO',curdate(),1);
+insert into tb_enlaces values(null,'CTS','crudCts.jsp','AHO',curdate(),1);
+insert into tb_enlaces values(null,'Depósito de Pension','crudPension.jsp','AHO',curdate(),1);
+insert into tb_enlaces values(null,'Depósito a Plazo Fijo','crudPlazo.jsp','AHO',curdate(),1);
+-- Creditos
+insert into tb_enlaces values(null,'Créditos','creditos.jsp','CRED',curdate(),1);
+insert into tb_enlaces values(null,'Hipotecario','crudHipotecario.jsp','CRED',curdate(),1);
+insert into tb_enlaces values(null,'Vehicular','crudVehicular.jsp','CRED',curdate(),1);
+insert into tb_enlaces values(null,'Estudiantil','crudEstudiantil.jsp','CRED',curdate(),1);
+insert into tb_enlaces values(null,'Personal','crudPersonal.jsp','CRED',curdate(),1);
+-- Seguros
+insert into tb_enlaces values(null,'Seguros','seguros.jsp','SEG',curdate(),1);
+insert into tb_enlaces values(null,'SOAT','crudSoat.jsp','SEG',curdate(),1);
+-- Comunicaciones
+insert into tb_enlaces values(null,'Comunicaciones','comunicaciones.jsp','COM',curdate(),1);
+-- Parametros
+insert into tb_enlaces values(null,'Vehiculos','vehiculos.jsp','ADM',curdate(),1);
+insert into tb_enlaces values(null,'Rubros','rubros.jsp','ADM',curdate(),1);
+insert into tb_enlaces values(null,'Servicios','servicios.jsp','ADM',curdate(),1);
+-- Usuario
+insert into tb_enlaces values(null,'Usuarios','usuarios.jsp','ADM',curdate(),1);
+
 #Roles
 insert into tb_roles values(null,'Administrador',curdate(),1);
 insert into tb_roles values(null,'Registrador',curdate(),1);
 #Administrador
 insert into tb_usuarios values('70417573','Miguel Angel','Cortegana Alvarez','70417573','70417573','',1,1,curdate());
 insert into tb_usuarios values('12345678','Demo','Demo','12345678','12345678','',2,1,curdate());
+
+# Detalle de roles y enlaces -----------------
+# Administrador
+insert into tb_rol_enlaces values(1,1);
+insert into tb_rol_enlaces values(1,2);
+insert into tb_rol_enlaces values(1,3);
+insert into tb_rol_enlaces values(1,4);
+insert into tb_rol_enlaces values(1,5);
+insert into tb_rol_enlaces values(1,6);
+insert into tb_rol_enlaces values(1,7);
+insert into tb_rol_enlaces values(1,8);
+insert into tb_rol_enlaces values(1,9);
+insert into tb_rol_enlaces values(1,10);
+insert into tb_rol_enlaces values(1,11);
+insert into tb_rol_enlaces values(1,12);
+insert into tb_rol_enlaces values(1,13);
+insert into tb_rol_enlaces values(1,14);
+insert into tb_rol_enlaces values(1,15);
+insert into tb_rol_enlaces values(1,16);
+insert into tb_rol_enlaces values(1,17);
+insert into tb_rol_enlaces values(1,18);
+insert into tb_rol_enlaces values(1,19);
+insert into tb_rol_enlaces values(1,20);
+
+# Registrador
+insert into tb_rol_enlaces values(2,1);
+insert into tb_rol_enlaces values(2,2);
+insert into tb_rol_enlaces values(2,3);
+insert into tb_rol_enlaces values(2,4);
+insert into tb_rol_enlaces values(2,5);
+insert into tb_rol_enlaces values(2,6);
+insert into tb_rol_enlaces values(2,7);
+insert into tb_rol_enlaces values(2,8);
+insert into tb_rol_enlaces values(2,9);
+insert into tb_rol_enlaces values(2,10);
+insert into tb_rol_enlaces values(2,11);
+insert into tb_rol_enlaces values(2,12);
+insert into tb_rol_enlaces values(2,13);
+insert into tb_rol_enlaces values(2,14);
+insert into tb_rol_enlaces values(2,15);
+insert into tb_rol_enlaces values(2,16);
+

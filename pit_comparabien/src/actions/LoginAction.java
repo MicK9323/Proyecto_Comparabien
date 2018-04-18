@@ -1,6 +1,7 @@
 package actions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -9,6 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import beans.EnlaceDTO;
 import beans.UsuarioDTO;
 import services.LoginService;
 
@@ -25,8 +27,9 @@ public class LoginAction extends ActionSupport {
 	private String usuario, clave;
 	private String mensaje;	
 	
+	@SuppressWarnings("unchecked")
 	@Action(value="/login", results= {
-			@Result(name="loged",location="/main/index.jsp"),
+			@Result(name="loged",location="/main/main-menu.jsp"),
 			@Result(name="error",location="/main/login.jsp")
 	})
 	public String login() {
@@ -38,14 +41,25 @@ public class LoginAction extends ActionSupport {
 			response.put("msg", mensaje);
 			return "error";
 		}else {
+			Map<String, Object> enlaces = loginServ.enlaces(user.getId_rol());
+			List<EnlaceDTO> menuEmpresa = (List<EnlaceDTO>) enlaces.get("0");
+			List<EnlaceDTO> menuTarjetas = (List<EnlaceDTO>) enlaces.get("1");
+			List<EnlaceDTO> menuAhorros = (List<EnlaceDTO>) enlaces.get("2");
+			List<EnlaceDTO> menuCreditos = (List<EnlaceDTO>) enlaces.get("3");
+			List<EnlaceDTO> menuSeguros = (List<EnlaceDTO>) enlaces.get("4");
+			List<EnlaceDTO> menuCom = (List<EnlaceDTO>) enlaces.get("5");
+			List<EnlaceDTO> menuAdmin = (List<EnlaceDTO>) enlaces.get("6");
 			session.put("usuario", user);
+			session.put("opcionesEmpresa", menuEmpresa);
+			session.put("opcionesTarjetas", menuTarjetas);
+			session.put("opcionesAhorros", menuAhorros);
+			session.put("opcionesCreditos", menuCreditos);
+			session.put("opcionesSeguros", menuSeguros);
+			session.put("opcionesComu", menuCom);
+			session.put("opcionesAdmin", menuAdmin);
 			return "loged";
 		}
-	}
-	
-	
-	
-	
+	}	
 	
 	public String getUsuario() {
 		return usuario;
