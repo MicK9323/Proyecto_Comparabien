@@ -92,16 +92,17 @@
 												</thead>
 												<tbody>
 													<s:iterator value="response.empresas">
+														<s:url id="idBuscar" action="verEmpresa">
+								 							<s:param name="empresa.id_emp" value="id_emp"/>
+														 </s:url>
 														<tr>
 															<td> 
-																<span class="dropify-render">
 																	<img class="img-responsive img-rounded"  
 																	alt="<s:property value="nom_empresa" />" 
-																	src="<s:property value="logo" />">
-																</span>
+																	src="../assets/images/bancos/company.png">
 															</td>
 															<td><s:property value="nom_empresa" /></td>
-															<td><s:a action="" class="btn btn-outline-info" >Ver Empresa</s:a></td>
+															<td><s:a href="%{idBuscar}" class="btn btn-outline-primary">Ver Empresa</s:a></td>
 														</tr>
 													</s:iterator>
 												</tbody>

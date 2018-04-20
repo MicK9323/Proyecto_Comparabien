@@ -1,11 +1,8 @@
 package dao;
 
-import java.io.File;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -36,10 +33,8 @@ SqlSessionFactory conexion = null;
 		List<EmpresaDTO> lista = new ArrayList<EmpresaDTO>();
 		SqlSession session = null;
 		try {
-			System.out.println("++++++++++++++++inicia procedimiento");
 			session = conexion.openSession();
 			lista = session.selectList("execSpListaEmpresas");
-			System.out.println("lista"+lista);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -86,6 +81,44 @@ SqlSessionFactory conexion = null;
 			session.close();
 		}
 		return lista;
+	}
+
+
+
+	@Override
+	public EmpresaDTO buscarEmpresa(String codigo) {
+		EmpresaDTO empresa = null;
+		SqlSession session = null;
+		try {
+			session = conexion.openSession();
+			empresa = (EmpresaDTO) session.selectOne("execSpBuscarEmpresa", codigo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return empresa;
+	}
+
+
+
+	@Override
+	public String uptEmpresa(EmpresaDTO emp) {
+		String retorno = "";
+		int estado = -1;
+		SqlSession session = null;
+		try {
+			session = conexion.openSession();
+			estado = session.insert("execSpUptEmpresa",emp);
+			if(estado != -1) {
+				retorno = "ok";
+			}				
+		} catch (Exception e) {
+			retorno = e.getCause().toString();
+		}finally {
+			session.close();
+		}
+		return retorno;
 	}
 
 

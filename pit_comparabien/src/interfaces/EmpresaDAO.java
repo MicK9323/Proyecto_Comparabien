@@ -12,5 +12,7 @@ public interface EmpresaDAO {
 	public String regEmpresa(EmpresaDTO emp);
 	public List<EmpresaDTO> listaEmpresas();
 	public List<DepartamentoDTO> listaDepartamentos();
+	public EmpresaDTO buscarEmpresa(String codigo);
+	public String uptEmpresa(EmpresaDTO emp);
 	
 }

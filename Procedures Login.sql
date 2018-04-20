@@ -49,6 +49,3 @@ Begin
 End$$
 DELIMITER ;
 
-call sp_login('70417573','70417573');
-
-call sp_cargarEnlaces(1,'EMP');

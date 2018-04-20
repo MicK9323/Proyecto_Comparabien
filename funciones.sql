@@ -22,4 +22,3 @@ BEGIN
 END$$
 DELIMITER ;
 
-select getCorrelativo('E',495);

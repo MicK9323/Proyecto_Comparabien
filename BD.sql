@@ -21,7 +21,7 @@ CREATE TABLE tb_empresas
     dir_empresa varchar(100) not null,
     email_empresa varchar(50) not null,
     cobertura_dep JSON not null,
-    logo JSON,
+    logo varchar(10),
     fec_reg date not null,
     rubros json
 ) engine = InnoDB, default charset = utf8;
@@ -146,7 +146,6 @@ insert into tb_generales values('RUB03','RUBRO','Créditos y Préstamos',curdate
 insert into tb_generales values('RUB04','RUBRO','Tarjetas de Crédito',curdate());
 insert into tb_generales values('RUB05','RUBRO','Comunicaciones',curdate());
 insert into tb_generales values('VEH','VEH','Tipos de Vehiculos',curdate());
-insert into tb_generales values('DEP','DEP','Departamentos',curdate());
 /*Tipos de seguros*/
 insert into tb_generales values('SEG01','RUB01','SOAT',curdate());
 insert into tb_generales values('SEG02','RUB01','Seguro Oncológico',curdate());

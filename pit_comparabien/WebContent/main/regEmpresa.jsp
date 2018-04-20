@@ -66,7 +66,8 @@
                                                     <label for="razonsoc"> Razón Social :
                                                         <span class="danger">*</span>
                                                     </label>
-                                                    <s:textfield id="razonsoc" maxlength="100" name="empresa.nom_empresa" cssClass="form-control required" />
+                                                    <s:textfield id="razonsoc" maxlength="100" name="empresa.nom_empresa" 
+                                                    cssClass="form-control required" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

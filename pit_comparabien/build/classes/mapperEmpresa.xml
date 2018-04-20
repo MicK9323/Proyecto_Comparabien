@@ -7,6 +7,10 @@
 		call sp_listaEmpresas()		
 	</select>
 	
+	<select id="execSpBuscarEmpresa" statementType="CALLABLE" resultType="EmpresaIbatis">
+		call sp_buscarEmpresa( #{codigo} )		
+	</select>
+	
 	<insert id="execSpRegEmpresa" statementType="CALLABLE" parameterType="EmpresaIbatis">
 		call sp_regEmpresa( 
 			#{ruc_empresa}, 
@@ -17,5 +21,15 @@
 			#{cobertura_dep},
 			#{logo})
 	</insert>
+	
+	<update id="execSpUptEmpresa" statementType="CALLABLE" parameterType="EmpresaIbatis">	
+		call sp_uptEmpresa(
+			#{id_emp},
+			#{telf_empresa}, 
+			#{dir_empresa}, 
+			#{email_empresa})	
+	</update>
+	
+	
 
 </mapper>

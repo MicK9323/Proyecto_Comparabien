@@ -1,3 +1,5 @@
+<%@ taglib uri="/struts-tags" prefix="s" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <!-- ============================================================== -->
@@ -61,19 +63,19 @@
                                                 <img src="../assets/images/users/1.jpg" alt="user">
                                             </div>
                                             <div class="u-text">
-                                                <h4>Steave Jobs</h4>
-                                                <p class="text-muted">varun@gmail.com</p>
+                                                <h4><s:property value="#session.usuario.nom_user"/></h4>
+                                                <p class="text-muted"><s:property value="#session.usuario.nom_rol"/></p>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="ti-settings"></i> Account Setting</a>
+                                            <i class="ti-settings"></i>Configuración de Cuenta</a>
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-power-off"></i> Logout</a>
+                                            <i class="fa fa-power-off"></i> Cerrar Sesión</a>
                                     </li>
                                 </ul>
                             </div>

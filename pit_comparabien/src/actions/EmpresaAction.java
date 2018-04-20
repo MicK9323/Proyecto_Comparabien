@@ -85,6 +85,25 @@ public class EmpresaAction extends ActionSupport {
 		return "registra";
 	}
 	
+	
+	@Action(value="/verEmpresa",results= {
+			@Result(name="mostrar" ,location="/main/verEmpresa.jsp")
+	})
+	public String verEmpresa() {
+		empresa = servEmpresa.buscarEmpresa(empresa.getId_emp());
+		return "mostrar";
+	}
+	
+	
+	@Action(value="/uptEmpresa",results= {
+			@Result(name="registra" ,type="json")
+	})
+	public String uptEmpresa() {
+		mensaje = servEmpresa.uptEmpresa(empresa);
+		return "registra";
+	}
+	
+	
 
 	public Map<String, Object> getResponse() {
 		return response;

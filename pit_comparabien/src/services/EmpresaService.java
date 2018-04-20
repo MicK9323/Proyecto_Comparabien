@@ -25,5 +25,12 @@ public class EmpresaService {
 	public List<DepartamentoDTO> listaDepartamentos(){
 		return daoEmpresa.listaDepartamentos();
 	}
+	
+	public EmpresaDTO buscarEmpresa(String codigo) {
+		return daoEmpresa.buscarEmpresa(codigo);
+	}
+	public String uptEmpresa(EmpresaDTO emp) {
+		return daoEmpresa.uptEmpresa(emp);
+	}
 
 }

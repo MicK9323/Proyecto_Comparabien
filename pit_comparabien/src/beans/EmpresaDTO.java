@@ -67,11 +67,7 @@ public class EmpresaDTO implements Serializable{
 		this.cobertura_dep = cobertura_dep;
 	}
 	public String getLogo() {
-		int i = this.logo.length();
-		String primero = this.logo.substring(0, 1);
-		String ultimo = this.logo.substring(i-1);
-		String delPrimero = this.logo.replace(primero, "");
-		return delPrimero.replace(ultimo, "");
+		return logo;
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;

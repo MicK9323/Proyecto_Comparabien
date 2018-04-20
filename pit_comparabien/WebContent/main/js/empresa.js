@@ -160,7 +160,7 @@ $(document).ready(function() {
     }
   });
   
-//Consultar Ruc
+// Consultar Ruc
   $('#btnConsulta').click(function(){
 	  var tecactusApi = new TecactusApi("9CP0vrdxq6OJbSw2iqjsWS9auuHXlRb8pxgeyiEp")
 	  tecactusApi.Sunat.getByRuc($('#ruc').val())
@@ -196,7 +196,7 @@ $(document).ready(function() {
             url:"submitEmpresa",
             data:"empresa.ruc_empresa="+ruc+"&empresa.nom_empresa="+raz+"&empresa.telf_empresa="+telf+
             		"&empresa.dir_empresa="+dir+"&empresa.email_empresa="+email+"&empresa.cobertura_dep="+deps,
-//            		"&empresa.logo="+imgB64,
+// "&empresa.logo="+imgB64,
             success:function(data){
               var msg = data.mensaje;
               if(msg == 'ok'){
@@ -215,13 +215,49 @@ $(document).ready(function() {
               swal("Error!", msg, "error");
             }
 	  });
-//	  var input = document.querySelector('#input-file-now');
-//	  var archivo = input.files[0];
-//	  getBase64FromFile(archivo, function(base64){
-//		  var imgB64 = JSON.stringify(base64);
-//		  console.log(imgB64);
+// var input = document.querySelector('#input-file-now');
+// var archivo = input.files[0];
+// getBase64FromFile(archivo, function(base64){
+// var imgB64 = JSON.stringify(base64);
+// console.log(imgB64);
 //		  
-//	  }); 
+// });
+  });
+  
+ 
+  // Actualizar empresa
+  $('#btnUpdate').click(function() {
+	  var cod = $('#cod').val();
+	  var telf = $('#telf').val();
+	  var dir = $('#dir').val();
+	  var email = $('#email').val();
+	  console.log(cod);
+	  console.log(telf);
+	  console.log(dir);
+	  console.log(email);
+	  $.ajax({
+		  type: "POST",
+            url:"uptEmpresa",
+            data:"empresa.id_emp="+cod+"&empresa.telf_empresa="+telf+"&empresa.dir_empresa="+
+            	dir+"&empresa.email_empresa="+email,
+            success:function(data){
+              var msg = data.mensaje;
+              if(msg == 'ok'){
+            	  swal("Empresa Actualizada", {
+        		      icon: "success",
+        		    });
+                setTimeout(function(){
+                  $(location).attr("href","listaEmpresas");
+                },1000);
+              }else{
+            	  swal("Error!", msg, "error");
+              }
+            },
+            error:function(data){
+              var msg = data.mensaje;
+              swal("Error!", msg, "error");
+            }
+	  });
   });
   
   

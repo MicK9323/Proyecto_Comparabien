@@ -16,6 +16,15 @@ Begin
 End$$
 DELIMITER ;
 
+drop procedure if exists sp_buscarEmpresa
+DELIMITER $$
+create procedure sp_buscarEmpresa( vCod char(5))
+Begin
+    select * from tb_empresas e where e.id_emp = vCod;
+End$$
+DELIMITER ;
+
+
 drop procedure if exists sp_regEmpresa;
 DELIMITER $$
 create procedure sp_regEmpresa
@@ -26,7 +35,7 @@ create procedure sp_regEmpresa
     p_dir varchar(100),
     p_email varchar(50),
     p_cobertura JSON,
-    p_logo JSON
+    p_logo varchar(10)
 )
 Begin
     declare cod char(5);
@@ -39,6 +48,20 @@ Begin
 End$$
 DELIMITER ;
 
-call sp_listaEmpresas();
+drop procedure if exists sp_uptEmpresa;
+DELIMITER $$
+create procedure sp_uptEmpresa
+(
+	p_id char(5),
+    p_telf varchar(10),
+    p_dir varchar(100),
+    p_email varchar(50)
+)
+Begin
+    start transaction;
+		update tb_empresas e set e.telf_empresa = p_telf, e.dir_empresa = p_dir, e.email_empresa = p_email
+        where e.id_emp = p_id;
+    commit;
+End$$
+DELIMITER ;
 
-select * from tb_empresas;
