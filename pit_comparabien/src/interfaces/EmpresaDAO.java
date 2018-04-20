@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import beans.EmpresaDTO;
 
 public interface EmpresaDAO {
 
-	public Map<String, Object> regEmpresa(EmpresaDTO emp);
+	public String regEmpresa(EmpresaDTO emp);
 	public List<EmpresaDTO> listaEmpresas();
 	public List<DepartamentoDTO> listaDepartamentos();
 	

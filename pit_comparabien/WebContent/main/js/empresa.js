@@ -1,6 +1,72 @@
 $(document).ready(function() {
+
   var arrayDep = [];
   var arrayCod = [];
+  var departamentos = [];
+  
+  function Departamento(codigo, nombre) {
+	  this.codigo = codigo;
+	  this.nombre = nombre;
+  }
+  
+  function imagenBase64(imagen){
+	  this.imagen = imagen
+  }
+  
+  function mostrarDatos() {
+      console.log('Codigos: '+arrayCod.toString());
+      console.log('Departamentos: '+arrayDep.toString());
+    }
+    
+    function eliminarItem(array, i){
+  	  array.splice(i,1);
+    }
+
+    function modArray(cod, dep) {    	  
+      if (arrayCod.indexOf(cod) === -1) {
+        arrayCod.push(cod);
+        arrayDep.push(dep);
+        console.log("Agrega");
+      } else {
+        arrayCod.splice(arrayCod.indexOf(cod), 1);
+        arrayDep.splice(arrayDep.indexOf(dep), 1);
+        console.log("Elimina");
+      }
+    }
+
+    function pintarLista() {
+      $("#departamentos").html("");
+      for (var i = 0; i < arrayDep.length; i++) {
+        $("#departamentos").fadeIn("slow", function() {
+          $("#departamentos").append(
+            '<span class="badge badge-pill badge-primary">' +
+              arrayDep[i] +
+              "</span>"
+          );
+        });
+      }
+    }
+    
+    function generarJSONArray(){
+    	if( arrayCod.length === arrayDep.length ){
+    		for( var i=0; i < arrayCod.length; i++ ){
+    			var obj = new Departamento(arrayCod[i],arrayDep[i]);
+    			departamentos.push(obj);    			
+    		}    		
+    	}
+    	arrayCod = [];
+		arrayDep = [];
+    	return (JSON.stringify(departamentos));
+    }
+    
+    function getBase64FromFile(img, callback){
+    	  let fileReader = new FileReader();
+    	  fileReader.addEventListener('load', function(evt){
+    	    callback(fileReader.result);
+    	  });
+    	  fileReader.readAsDataURL(img);
+    	};
+  
   $(function() {
     $(".list-group.checked-list-box .list-group-item").each(function() {
       // Settings
@@ -54,40 +120,9 @@ $(document).ready(function() {
         } else {
           $widget.removeClass(style + color + " active");
         }
-
-        // actualizar la lista de departamentos
       }
 
-      function mostrarDatos() {
-        console.log("Codigo:" + arrayCod);
-        console.log("Departamentos: " + arrayDep);
-      }
-
-      function modArray(cod, dep) {
-        if (arrayCod.indexOf(cod) === -1) {
-          arrayCod.push(cod);
-          arrayDep.push(dep);
-          console.log("Agrega");
-        } else {
-          arrayCod.splice(arrayCod.indexOf(cod), 1);
-          arrayDep.splice(arrayDep.indexOf(dep), 1);
-          console.log("Elimina");
-        }
-      }
-
-      function pintarLista() {
-        // $('#departamentos').children('span').fadeOut('fast',function(){$(this).remove();});
-        $("#departamentos").html("");
-        for (var i = 0; i < arrayDep.length; i++) {
-          $("#departamentos").fadeIn("slow", function() {
-            $("#departamentos").append(
-              '<span class="badge badge-pill badge-primary">' +
-                arrayDep[i] +
-                "</span>"
-            );
-          });
-        }
-      }
+      
 
       // Initialization
       function init() {
@@ -124,8 +159,76 @@ $(document).ready(function() {
       $("#display-json").html(JSON.stringify(checkedItems, null, "\t"));
     }
   });
+  
+//Consultar Ruc
+  $('#btnConsulta').click(function(){
+	  var tecactusApi = new TecactusApi("9CP0vrdxq6OJbSw2iqjsWS9auuHXlRb8pxgeyiEp")
+	  tecactusApi.Sunat.getByRuc($('#ruc').val())
+	  .then(function (response) {
+          console.log(response.data)
+          if( response.data.ruc == null ){
+        	  swal("Error!", "Ruc Invalido", "error");
+          }else{
+        	  $('#razonsoc').val(response.data.razon_social);
+    		  $('#dir').val(response.data.direccion);
+          }		  
+	  })
+	  .catch(function (response) {
+	      console.log("algo ocurrió")
+	      console.log("código de error: " + response.code)
+	      console.log("mensaje de respuesta: " + response.status)
+	      console.log(response.data)
+	      swal("Error!", response.status, "error");
+	      
+	  })
+  })
+  
+  
+  $('#btnGuardar').click(function() {
+	  var ruc = $('#ruc').val();
+	  var raz = $('#razonsoc').val();
+	  var telf = $('#telf').val();
+	  var dir = $('#dir').val();
+	  var email = $('#email').val();
+	  var deps = generarJSONArray();
+	  $.ajax({
+		  type: "POST",
+            url:"submitEmpresa",
+            data:"empresa.ruc_empresa="+ruc+"&empresa.nom_empresa="+raz+"&empresa.telf_empresa="+telf+
+            		"&empresa.dir_empresa="+dir+"&empresa.email_empresa="+email+"&empresa.cobertura_dep="+deps,
+//            		"&empresa.logo="+imgB64,
+            success:function(data){
+              var msg = data.mensaje;
+              if(msg == 'ok'){
+            	  swal("Empresa Registrada", {
+        		      icon: "success",
+        		    });
+                setTimeout(function(){
+                  $(location).attr("href","listaEmpresas");
+                },1000);
+              }else{
+            	  swal("Error!", msg, "error");
+              }
+            },
+            error:function(data){
+              var msg = data.mensaje;
+              swal("Error!", msg, "error");
+            }
+	  });
+//	  var input = document.querySelector('#input-file-now');
+//	  var archivo = input.files[0];
+//	  getBase64FromFile(archivo, function(base64){
+//		  var imgB64 = JSON.stringify(base64);
+//		  console.log(imgB64);
+//		  
+//	  }); 
+  });
+  
+  
+  
+  
 
-  //	Subir imagen
+  // Subir imagen
 
   // Basic
   $(".dropify").dropify();

@@ -5,4 +5,5 @@
 <struts>
 	<package name="pit" namespace="/" extends="struts-default,json-default">
 	</package>
+	<constant name="struts.multipart.saveDir" value="F:\Cibertec 6to Ciclo\Proyecto Integrador II\Proyecto_Comparabien\pit_comparabien\uploads" />
 </struts>

@@ -21,12 +21,12 @@ DELIMITER $$
 create procedure sp_regEmpresa
 (
     p_ruc char(11),
-    p_nom varchar(50),
+    p_nom varchar(100),
     p_telf varchar(10),
-    p_dir varchar(50),
+    p_dir varchar(100),
     p_email varchar(50),
     p_cobertura JSON,
-    p_logo varchar(100)
+    p_logo JSON
 )
 Begin
     declare cod char(5);
@@ -38,5 +38,7 @@ Begin
     commit;
 End$$
 DELIMITER ;
+
+call sp_listaEmpresas();
 
 select * from tb_empresas;

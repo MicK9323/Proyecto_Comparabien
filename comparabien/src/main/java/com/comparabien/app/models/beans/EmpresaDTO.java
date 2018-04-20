@@ -1,28 +1,51 @@
-package beans;
+package com.comparabien.app.models.beans;
 
 import java.io.Serializable;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
-import jdk.nashorn.internal.parser.JSONParser;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public class EmpresaDTO implements Serializable{
+@Entity
+@Table(name="tb_empresas")
+public class EmpresaDTO implements Serializable {
 	
-	private static final long serialVersionUID = -1843097614494137201L;
+	private static final long serialVersionUID = 9018145992064934195L;
 	
+	@Id
 	private String id_emp;
-	private String ruc_empresa;
-	private String nom_empresa;
-	private String telf_empresa;
-	private String dir_empresa;
-	private String email_empresa;
-	private String cobertura_dep;
-	private String logo;
-	private String fec_reg;
-	private String[] rubros;
 	
+	@NotEmpty
+	private String ruc_empresa;
+	
+	@NotEmpty
+	private String nom_empresa;
+	
+	@NotEmpty
+	private String telf_empresa;
+	
+	@NotEmpty
+	private String dir_empresa;
+	
+	@NotEmpty
+	private String email_empresa;
+	
+	@NotEmpty
+	private String cobertura_dep;
+	
+	@NotEmpty
+	private String logo;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private String fec_reg;
+	
+	private String[] rubros;
 	
 	public String getId_emp() {
 		return id_emp;
@@ -67,11 +90,7 @@ public class EmpresaDTO implements Serializable{
 		this.cobertura_dep = cobertura_dep;
 	}
 	public String getLogo() {
-		int i = this.logo.length();
-		String primero = this.logo.substring(0, 1);
-		String ultimo = this.logo.substring(i-1);
-		String delPrimero = this.logo.replace(primero, "");
-		return delPrimero.replace(ultimo, "");
+		return logo;
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
@@ -88,7 +107,5 @@ public class EmpresaDTO implements Serializable{
 	public void setRubros(String[] rubros) {
 		this.rubros = rubros;
 	}
-	
-	
 
 }

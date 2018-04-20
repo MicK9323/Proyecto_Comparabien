@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.File;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,18 +51,19 @@ SqlSessionFactory conexion = null;
 
 
 	@Override
-	public Map<String, Object> regEmpresa(EmpresaDTO emp) {
-		Map<String, Object> retorno = new HashMap<String, Object>();
+	public String regEmpresa(EmpresaDTO emp) {
+//		Map<String, Object> retorno = new HashMap<String, Object>();
+		String retorno = "";
 		int estado = -1;
 		SqlSession session = null;
 		try {
 			session = conexion.openSession();
 			estado = session.insert("execSpRegEmpresa",emp);
 			if(estado != -1) {
-				retorno.put("ok", "Registro Exitoso");
+				retorno = "ok";
 			}				
 		} catch (Exception e) {
-			retorno.put("error", e.getCause().toString());
+			retorno = e.getCause().toString();
 		}finally {
 			session.close();
 		}
@@ -85,5 +87,7 @@ SqlSessionFactory conexion = null;
 		}
 		return lista;
 	}
+
+
 
 }

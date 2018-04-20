@@ -91,7 +91,19 @@
 													</tr>
 												</thead>
 												<tbody>
-
+													<s:iterator value="response.empresas">
+														<tr>
+															<td> 
+																<span class="dropify-render">
+																	<img class="img-responsive img-rounded"  
+																	alt="<s:property value="nom_empresa" />" 
+																	src="<s:property value="logo" />">
+																</span>
+															</td>
+															<td><s:property value="nom_empresa" /></td>
+															<td><s:a action="" class="btn btn-outline-info" >Ver Empresa</s:a></td>
+														</tr>
+													</s:iterator>
 												</tbody>
 												<tfoot>
 													<tr>
@@ -118,6 +130,7 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/scripts.jsp" />
+	<script src="js/empresa.js"></script>
 </body>
 
 </html>

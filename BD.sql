@@ -16,12 +16,12 @@ CREATE TABLE tb_empresas
 (
     id_emp char(5) primary key not null,
     ruc_empresa char(11) not null,
-    nom_empresa varchar(50) not null,
+    nom_empresa varchar(100) not null,
     telf_empresa varchar(10) not null,
-    dir_empresa varchar(50) not null,
+    dir_empresa varchar(100) not null,
     email_empresa varchar(50) not null,
     cobertura_dep JSON not null,
-    logo varchar(100),
+    logo JSON,
     fec_reg date not null,
     rubros json
 ) engine = InnoDB, default charset = utf8;
@@ -263,3 +263,4 @@ insert into tb_rol_enlaces values(2,14);
 insert into tb_rol_enlaces values(2,15);
 insert into tb_rol_enlaces values(2,16);
 
+select * from tb_enlaces;

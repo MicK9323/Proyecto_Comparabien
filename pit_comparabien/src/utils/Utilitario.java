@@ -45,6 +45,7 @@ public class Utilitario {
 		public static final String K_NOV = "NOVIEMBRE";
 		public static final String K_DIC = "DICIEMBRE";
 		public static final int ORIGEN_DATOS=1;
+		public static final String UPLOAD_FOLDER = "F:\\Cibertec 6to Ciclo\\Proyecto Integrador II\\Proyecto_Comparabien\\pit_comparabien\\uploads";
 	}
 	
 	public static ArrayList<ArrayList<String>> armarSalidaProcedure(List<Map<String, Object>> lista) {

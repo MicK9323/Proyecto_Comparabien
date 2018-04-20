@@ -18,7 +18,7 @@ public class EmpresaService {
 		return daoEmpresa.listaEmpresas();
 	}
 	
-	public Map<String, Object> regEmpresa(EmpresaDTO emp){
+	public String regEmpresa(EmpresaDTO emp){
 		return daoEmpresa.regEmpresa(emp);
 	}
 	
