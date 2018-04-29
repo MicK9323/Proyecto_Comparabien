@@ -74,7 +74,7 @@ Create table tb_instituciones
 (
 	id_institucion int primary key auto_increment,
     ruc char(11) not null,
-    nom_institución varchar(100) not null,
+    nom_institucion varchar(100) not null,
     tipo_institucion char(5) not null,
     tipo_gestion char(5) not null,
     telf_institucion varchar(10),
@@ -94,7 +94,8 @@ Create table tb_instituciones
 Drop table if exists tb_sedes;
 Create table tb_sedes
 (
-	id_sede int primary key auto_increment,
+	id_sede int auto_increment,
+    id_institucion int not null,
 	nom_sede varchar(120) not null,
 	cod_ubigueo char(6) not null,
 	direccion varchar(120) not null,
@@ -103,7 +104,9 @@ Create table tb_sedes
 	coordenada_y text,
 	estado boolean not null default 1,
 	fec_reg date not null,
-    constraint fk_ubigueo foreign key(cod_ubigueo) references tb_ubigueos(cod_ubigueo)
+    constraint fk_ubigueo foreign key(cod_ubigueo) references tb_ubigueos(cod_ubigueo),
+    constraint fk_institucion foreign key(id_institucion) references tb_instituciones(id_institucion),
+    constraint pk_sede primary key(id_sede, id_institucion)
 )engine = InnoDB, default charset = utf8;
 
 -- =============================================
@@ -137,7 +140,7 @@ CREATE TABLE tb_roles (
 -- =============================================
 -- CREACION DE TABLAS DE ENLACES
 -- =============================================
-Drop table if exists tb_enlaces;
+/*Drop table if exists tb_enlaces;
 CREATE TABLE tb_enlaces (
     id_enlace TINYINT PRIMARY KEY AUTO_INCREMENT,
     nom_enlace VARCHAR(45) NOT NULL,
@@ -145,12 +148,12 @@ CREATE TABLE tb_enlaces (
     opcion VARCHAR(5),
     fec_reg DATE NOT NULL,
     estado BOOLEAN DEFAULT 1
-)engine = InnoDB, default charset = utf8;
+)engine = InnoDB, default charset = utf8;*/
 
 -- =============================================
 -- CREACION DE TABLAS DETALLE ROL - ENLACES
 -- =============================================
-Drop table if exists tb_rol_enlaces;
+/*Drop table if exists tb_rol_enlaces;
 Create table tb_rol_enlaces
 (
 	id_rol tinyint not null,
@@ -160,7 +163,7 @@ Create table tb_rol_enlaces
 	on delete restrict on update restrict,
 	constraint fk_enlaces_enlace foreign key (id_enlace) references tb_enlaces(id_enlace)
 	on delete restrict on update restrict
-)engine = InnoDB, default charset = utf8;
+)engine = InnoDB, default charset = utf8;*/
 
 -- =============================================
 -- CREACION DE TABLA DE USUARIOS
@@ -198,5 +201,10 @@ select * from tb_generales;
 /*ROLES*/
 insert into tb_roles values(null,'Administrador',curdate(),1);
 /*USUARIOS*/
-insert into tb_usuarios values('70417573','Miguel Angel','Cortegana Alvarez','70417573',sha('70417573'),'',1,1,curdate());
-insert into tb_usuarios values('12345678','Demo','Demo','12345678',sha('12345678'),'',1,1,curdate());
+insert into tb_usuarios values('70417573','Miguel Angel','Cortegana Alvarez','70417573','6257b312addd71a858e484e683c6ef03bae518de','',1,1,curdate());
+insert into tb_usuarios values('12345678','Demo','Demo','12345678','7c222fb2927d828af22f592134e8932480637c0d','',1,1,curdate());
+
+select * from tb_usuarios;
+
+select * from tb_ubigueos;
+
