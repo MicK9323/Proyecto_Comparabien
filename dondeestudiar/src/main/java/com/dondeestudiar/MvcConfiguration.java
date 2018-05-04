@@ -15,8 +15,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		
 //		Añadimos la ruta de la carpeta uploads a los recursos del proyecto
 		String resourcePath = Paths.get("uploads").toAbsolutePath().toUri().toString();
-		registry.addResourceHandler("/uploads/**")
-		.addResourceLocations(resourcePath);
+		registry.addResourceHandler("/uploads/**").addResourceLocations(resourcePath);
 		
 		
 	}
