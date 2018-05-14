@@ -21,5 +21,4 @@ public class MvcConfiguration implements WebMvcConfigurer {
 	}
 	
 	
-	
 }

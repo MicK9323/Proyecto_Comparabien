@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es"
+xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/preguntas.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/cards.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/estilos.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <style>
+    @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        .load-page{
+            border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #e6840a;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 10s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+        }
+        .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient( rgb(89, 90, 95), rgba(84, 81, 79, 0.8) ), url();
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading .modal {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+        .block-c{
+            display:block;
+        }
+
+        .none-c{
+            display:none;
+        }
+        .btn-link{
+            text-align: left;
+            color: black !important;
+            background: white !important;
+        }
+        .btn-link:hover{
+            color: white !important;
+             background: #527ac3 !important;
+        }
+    </style>
+	  
+    <title>Donde Estudiar</title>
+  </head>
+  <body class="bg-body">
+        <div class="modal">
+                <div class="container">
+                        <div class="load-page responsive" style="
+            /* text-align: center; */
+            /* color: white; */
+            margin-top: 21rem;
+            margin-left: 30rem;
+        ">
+        
+                        </div>
+                        <h1 style="
+            text-align: center;
+            color: white;
+            margin-top: 0rem;
+        ">
+                            Estamos eligiendo las mejores opciones para ti...
+                        </h1>
+                    </div>
+        </div>
+	
+        <section class="form-box" >
+                <div class="container">
+                        
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="offset-md-3 col-sm-10 col-md-8 col-lg-6 form-wizard">
+                            
+                                <!-- Form Wizard -->
+                                <form role="form" action="Preguntas/Filtros" method="post" autocomplete=”off”>
+        
+                                    <!--<h3>Que piensas estudiar?</h3>-->
+                                    <p>Te haremos algunas preguntas de acuerdo a eso te daremos las mejores opciones</p>
+                                    
+                                    <!-- Form progress -->
+                                    <!-- <div class="form-wizard-steps form-wizard-tolal-steps-3">
+                                        <div class="form-wizard-progress">
+                                            <div class="form-wizard-progress-line" data-now-value="12.25" data-number-of-steps="4" style="width: 12.25%;"></div>
+                                        </div>
+                                        
+                                        <div class="form-wizard-step active">
+                                            <div class="form-wizard-step-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                            <p>Carrera</p>
+                                        </div>
+                                    
+                                        
+                                        
+                                        <div class="form-wizard-step">
+                                            <div class="form-wizard-step-icon"><i class="fa fa-location-arrow" aria-hidden="true"></i></div>
+                                            <p>Institucion</p>
+                                        </div>
+                                        
+                                        
+                                    
+                                        <div class="form-wizard-step">
+                                            <div class="form-wizard-step-icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
+                                            <p>Economia</p>
+                                        </div>
+                                        
+                                        
+                                    
+                                    </div> -->
+                                    <!-- Form progress -->
+                                    
+                                    
+                                    <!-- Form Step 1 -->
+                                    <fieldset>
+        
+                                        
+                                        <div class="form-group">
+                                            <h4>¿Que carrera deseas estudiar?</h4>
+                                            
+                                            <input autocomplete=”off” class="form-control" type="text" id="myInput" name="myInput" onkeyup="myFunction()">                                                             
+                                            <ul id="myUL" class="list-group none-c" style="overflow-y: overlay;
+                                            max-height: 131px;">
+                                                <li class="list-group-item">
+                                                    <a id="clickBt" class="btn btn-link">Computacion e Informatica</a></li>
+                                                <li class="list-group-item">
+
+                                                    <a id="clickBt" class="btn btn-link">Ingenieria Civil</a></li>                    
+                                                <li class="list-group-item">
+
+                                                    <a id="clickBt" class="btn btn-link">Redes y Comunicaciones</a></li>
+                                                <li class="list-group-item">
+
+                                                    <a id="clickBt" class="btn btn-link">Negocios</a></li>
+                                                <li class="list-group-item">
+
+                                                    <a id="clickBt" class="btn btn-link">Derecho</a></li> 
+                                                <li class="list-group-item">
+
+                                                    <a id="clickBt" class="btn btn-link">Musica</a></li> 
+                                                <li class="list-group-item">
+
+                                                    <a id="clickBt" class="btn btn-link">Actuacion</a></li> 
+                                                <li class="list-group-item">
+
+                                                    <a id="clickBt" class="btn btn-link">Marino</a></li>                                                                        
+                                            </ul>
+                                        </div>
+                                    
+                                        <div class="form-wizard-buttons">
+                                            <button type="button"  class="btn btn-next">Siguiente</button>
+                                        </div>
+                                    </fieldset>
+                                    <!-- Form Step 1 -->
+        
+                                    <!-- Form Step 2 -->
+                                    <fieldset>
+        
+                                            
+                                            <div class="form-group">
+                                                <h4>¿En que institución te gustaria estudiar?</h4>
+                                                <input type="text" name="First Name" class="form-control required">
+                                            </div>
+                                        
+                                            <div class="form-wizard-buttons">
+                                                <button type="button" class="btn btn-next">
+                                                    Siguiente
+                                                </button>
+                                            </div>
+                                        </fieldset>
+                                    <!-- Form Step 2 -->
+        
+                                    <!-- Form Step 3 -->
+                                    <fieldset>
+        
+                                            
+                                            <div class="form-group">
+                                                <h4>¿Con que cantidad de dinero cuentas actualmente?</h4>
+                                                <input type="number" name="First Name"  class="form-control required">
+                                            </div>
+                                        
+                                            <div class="form-wizard-buttons">
+                                                <!-- <button type="submit" class="btn btn-next">Enviar</button> -->
+                                            	<a class="btn btn-next" th:href="@{/filtro}" >Enviar</a>
+                                            </div>
+                                </fieldset>
+                                    <!-- Form Step 3 -->
+                                    
+                                
+                                
+                                </form>
+                                <!-- Form Wizard -->
+                            </div>
+                        </div>
+                       
+                    </div>
+                        
+                </div>
+            </section>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	 <script th:src="@{/assets/js/jquery-3.3.1.min.js}">
+	 </script>
+	 <script th:src="@{/assets/js/bootstrap.min.js}">
+	 </script>   
+	 <script th:src="@{/assets/js/preguntas.js}">
+     </script>
+     
+<script>
+    $(function(){
+          $('.btn').click(function(){
+            $("#myUL").removeClass("block");
+            $("#myUL").addClass("none-c");                                
+          })                                                                       
+     });
+
+    $(function(){
+          $('.btn').click(function(){
+              $("#myInput").val($(this).html());                                    
+          })                                                                       
+     });
+     
+     $(function(){
+       $("#myInput").focus(function() {
+            $("#myUL").removeClass("none-c");
+            $("#myUL").addClass("block");
+        });
+    });
+     function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+        
+                }
+            }
+        }       
+        </script>
+       
+  </body>
+</html>

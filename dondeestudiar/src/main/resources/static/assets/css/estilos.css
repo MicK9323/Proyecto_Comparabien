@@ -1,0 +1,73 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.mn-nav >.nav-link{
+	transition:all 0.5s ease-in-out;
+	background-color: none;
+    
+}
+.mn-nav > .nav-link:hover{
+	transition: all 0.5s ease-in-out;
+    background:  #007bff !important;
+	color: white !important;
+}
+li.nav-item {
+    padding-right: 25px;
+}
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+    box-shadow: 0px 8px 14px 4px #0808085e;
+    background-color: white !important;
+    border-bottom: 3px solid #007bff30
+}
+a.nav-link {
+    color: #0f6b90 !important;
+}
+a.navbar-brand {
+    color: black !important;
+}
+
+.busqueda-avs{
+    /*background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);*/
+    margin-top: 57px;
+    padding: 10px;
+}
+
+.btn-login-pp{
+    border-radius: 19px !important;
+        color: #fff;
+    background-color: #dc691a;
+    border-color: #dc691a;
+}
+.busqueda-fondo{
+  position:relative;    
+ z-index:1;
+  background-repeat: no-repeat; 
+  background-attachment: scroll;
+  background-position: center top;
+  background-size: cover;
+  /*background-position-y: -260px;*/
+  background-image: linear-gradient( rgba(6, 10, 27, 0.5), rgba(158, 88, 27, 0.5) ), 
+  url(http://d1hlu93b47sp1a.cloudfront.net/media/article_image/cover/original/6610-pacaran-seru-sambil-belajar-bagian-2.jpg);
+}
+.busqueda-fondo::after{
+    content:"";
+    position:absolute;
+    background:rgba(0,0,0,0.6);
+    z-index:-1;
+}
+label {
+    color: white;
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+.titulo-inicio{
+    margin-top: 10px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: -3px 1px 12px #e0761361;
+}
+.navbar-dark .navbar-toggler {
+    background: #007bff;
+    color: rgba(175, 30, 30, 0.5);
+    border-color: rgba(197, 21, 21, 0.1);
+}

@@ -32,9 +32,12 @@
 												<div class="row">
 													<div class="col-md-8">
 														<div class="form-group">
-															<input placeholder="RUC" maxlength="11" required
+															<input placeholder="RUC" maxlength="11"
 																autofocus th:field="*{ruc}" type="text"
-																class="form-control">
+																class="form-control" th:errorclass="alert-danger">
+															<small th:if="${#fields.hasErrors('ruc')}" 
+																th:error="*{ruc}"
+																class="text-danger"></small>
 														</div>
 													</div>
 													<div class="col-md-4">
@@ -48,24 +51,34 @@
 												<div class="row">
 													<div class="col-md-12">
 														<div class="form-group">
-															<label>Nombre de Institución</label> <input
-																th:field="*{nombre}" type="text" class="form-control">
+															<label>Nombre de Institución</label> 
+															<input th:field="*{nombre}" type="text"
+																class="form-control" th:errorclass="alert-danger">
+															<span th:if="${#fields.hasErrors('nombre')}" 
+																th:error="*{nombre}"
+																class="text-danger"></span>
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
-															<label for="web">Sitio Web</label> <input
-																th:field="*{website}" type="text" class="form-control"
-																id="web">
+															<label for="web">Sitio Web</label> 
+															<input th:field="*{website}" type="text"
+																class="form-control" id="web" th:errorclass="alert-danger">
+															<small th:if="${#fields.hasErrors('website')}" 
+																th:error="*{website}"
+																class="text-danger"></small>
 														</div>
 													</div>
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
-															<label for="telf">Central Telefónica</label> <input
-																th:field="*{telf}" type="tel" class="form-control"
-																id="telf">
+															<label for="telf">Central Telefónica</label> 
+																<input th:field="*{telf}" type="tel"
+																	class="form-control" id="telf" th:errorclass="alert-danger">
+																<small th:if="${#fields.hasErrors('telf')}" 
+																th:error="*{telf}"
+																class="text-danger"></small>
 														</div>
 													</div>
 												</div>
@@ -73,7 +86,7 @@
 											<div class="col-md-12 col-lg-5">
 												<div class="row">
 													<div class="col-md-12">
-														<input type="file" name="file" id="input-file-now"
+														<input type="file" required name="file" id="input-file-now"
 															class="dropify">
 													</div>
 												</div>
@@ -94,7 +107,8 @@
 											</div>
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
-													<label>Tipo de Gestión</label> <select
+													<label>Tipo de Gestión</label> 
+													<select
 														th:field="*{tipoGestion.idParam}"
 														class="form-control custom-select">
 														<option value="">Selecciona</option>
@@ -105,7 +119,8 @@
 											</div>
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
-													<label>Cuenta con Internado</label> <select
+													<label>Cuenta con Internado</label> 
+													<select
 														th:field="*{residencial}"
 														class="form-control custom-select">
 														<option value="0">No</option>

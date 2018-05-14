@@ -1,13 +1,18 @@
 package com.dondeestudiar.models.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.dondeestudiar.models.entities.Institucion;
 import com.dondeestudiar.models.entities.Sede;
 
 public interface IInstitucionesService {
 	
+	public List<Institucion> listarInstituciones();
+	
 	public Institucion addInstitucion(Institucion obj);
+	
+	public void saveInstitucion(Institucion obj);
 	
 	public Institucion findByRuc(String ruc);
 	

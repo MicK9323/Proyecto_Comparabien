@@ -2,6 +2,7 @@ package com.dondeestudiar.models.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="tb_instituciones")
@@ -28,9 +34,21 @@ public class Institucion implements Serializable {
 	private int id;
 	
 	@Column(name="ruc")
+	@NotEmpty(message="Este campo es obligatorio")
+	@Size(min=11,max=11)
+	@Pattern(regexp="[0-9]{11}")
 	private String ruc;
 	
+	public List<Sede> getSedes() {
+		return sedes;
+	}
+
+	public void setSedes(List<Sede> sedes) {
+		this.sedes = sedes;
+	}
+
 	@Column(name="nom_institucion")
+	@NotEmpty @Size(min=10, max=100)
 	private String nombre;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -42,9 +60,12 @@ public class Institucion implements Serializable {
 	private Parametros tipoGestion;
 	
 	@Column(name="telf_institucion")
+	@NotEmpty	@Size(min=7,max=10) @Pattern(regexp="[0-9]{7,10}")
 	private String telf;
 	
 	@Column(name="dir_web")
+	@NotEmpty
+	@Pattern(regexp="(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\?=.-]*)*\\/?")
 	private String website;
 	
 	@Column(name="reputacion")
@@ -63,11 +84,18 @@ public class Institucion implements Serializable {
 	@Column(name="fec_reg")
 	private Date fecReg;
 	
+	@OneToMany(mappedBy="institucion",fetch=FetchType.LAZY)
+	List<Sede> sedes;
+	
 	@PrePersist
 	private void prePersist() {
 		this.popularidad = 0;
 		this.estado = true;
 		this.fecReg = new Date();
+	}
+	
+	public int countSedes() {
+		return sedes.size();
 	}
 	
 	public int getId() {
