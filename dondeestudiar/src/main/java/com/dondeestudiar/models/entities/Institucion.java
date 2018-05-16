@@ -59,8 +59,8 @@ public class Institucion implements Serializable {
 
 	@Column(name = "telf_institucion")
 	@NotEmpty
-	@Size(min = 7, max = 10)
-	@Pattern(regexp = "[0-9]{7,10}")
+	@Size(min = 7, max = 15)
+	@Pattern(regexp = "[0-9]{7,15}")
 	private String telf;
 
 	@Column(name = "dir_web")
@@ -84,6 +84,9 @@ public class Institucion implements Serializable {
 	@Column(name = "fec_reg")
 	private Date fecReg;
 
+	@Column(name = "admisiones_anual")
+	private int admisiones;
+
 	@OneToMany(mappedBy = "institucion", fetch = FetchType.LAZY)
 	List<Sede> sedes;
 
@@ -92,6 +95,7 @@ public class Institucion implements Serializable {
 		this.popularidad = 0;
 		this.estado = true;
 		this.fecReg = new Date();
+		this.admisiones = 2;
 	}
 
 	public int countSedes() {
@@ -205,4 +209,11 @@ public class Institucion implements Serializable {
 		this.sedes = sedes;
 	}
 
+	public int getAdmisiones() {
+		return admisiones;
+	}
+
+	public void setAdmisiones(int admisiones) {
+		this.admisiones = admisiones;
+	}
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +45,8 @@ import com.dondeestudiar.utils.UploadFiles;
 @RequestMapping("/instituciones")
 @SessionAttributes(names = { "institucion" })
 public class InstitucionesController {
+
+    protected final Log logger = LogFactory.getLog(this.getClass());
 
 	@Autowired
 	IParametrosService parametrosService;
@@ -141,10 +145,9 @@ public class InstitucionesController {
 				model.put("listaSedes", sedes);
 			}
 			List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
-			// List<Parametros> tipoGestion =
-			// parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
+			List<Parametros> tipoGestion = parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
 			model.put("tipoInstitucion", tipoInstitucion);
-			// model.put("tipoGestion", tipoGestion);
+			model.put("tipoGestion", tipoGestion);
 			model.put("titulo", "Nueva Institución");
 			return "admin/regInstitucion";
 		}
@@ -153,34 +156,31 @@ public class InstitucionesController {
 	// Registrar una Institucion y sus sedes
 	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/nuevo")
-	public String registrar(@Valid Institucion institucion, BindingResult result, SessionStatus status,
+	public String registrar(@Valid Institucion institucion, BindingResult result, SessionStatus status, HttpServletRequest request,
 			HttpSession session, @RequestParam("file") MultipartFile file, Model model, RedirectAttributes flash) {
 
+	    if( !validarSesion(request) ){
+            model.addAttribute("error", "Inicie sesion antes de continuar");
+            return "redirect:/admin/login";
+        }
+
+        List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
+        List<Parametros> tipoGestion = parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
+        model.addAttribute("tipoInstitucion", tipoInstitucion);
+        model.addAttribute("tipoGestion", tipoGestion);
+        model.addAttribute("listaSedes",(ArrayList<Sede>)session.getAttribute("sedes"));
+        model.addAttribute("titulo", "Nueva Institución");
+
 		if (result.hasErrors()) {
-			List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
-			List<Parametros> tipoGestion = parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
-			model.addAttribute("tipoInstitucion", tipoInstitucion);
-			model.addAttribute("tipoGestion", tipoGestion);
-			model.addAttribute("titulo", "Nueva Institución");
 			return "admin/regInstitucion";
 		}
 
 		if (session.getAttribute("sedes") == null) {
-			List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
-			List<Parametros> tipoGestion = parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
-			model.addAttribute("tipoInstitucion", tipoInstitucion);
-			model.addAttribute("tipoGestion", tipoGestion);
-			model.addAttribute("titulo", "Nueva Institución");
 			model.addAttribute("warning", "No ha ingresado sedes para la institución");
 			return "admin/regInstitucion";
 		}
 
 		if (file.isEmpty() || file.getName().equals("")) {
-			List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
-			List<Parametros> tipoGestion = parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
-			model.addAttribute("tipoInstitucion", tipoInstitucion);
-			model.addAttribute("tipoGestion", tipoGestion);
-			model.addAttribute("titulo", "Nueva Institución");
 			model.addAttribute("warning", "Debe seleccionar una imagen");
 			return "admin/regInstitucion";
 		}
@@ -216,6 +216,7 @@ public class InstitucionesController {
 	public String cargarSedes(@PathVariable String data, Map<String, Object> model, HttpServletRequest request) {
 		List<Sede> sedes = null;
 		String[] array = new G().formarArray(data, ",");
+		System.out.println(array);
 		Sede sede = new Sede();
 		if (request.getSession().getAttribute("sedes") == null) {
 			sedes = new ArrayList<Sede>();
@@ -263,7 +264,12 @@ public class InstitucionesController {
 			return "admin/editInstitucion";
 		}
 
-		if (file.getOriginalFilename() != institucion.getLogo()) {
+		logger.info("NOmbre de archivo: "+file.getOriginalFilename());
+        logger.info("Logo de objeto: "+institucion.getLogo());
+
+		if ( !file.isEmpty() ) {
+		    logger.info("Entra a cambiar imagen");
+		    logger.info(!file.isEmpty() || file != null);
 			String foto = "";
 			try {
 				foto = new UploadFiles().subirFoto(file, Constantes.UPLOADS_INSTITUCIONES);
