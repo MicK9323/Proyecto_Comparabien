@@ -264,15 +264,11 @@ public class InstitucionesController {
 			return "admin/editInstitucion";
 		}
 
-		logger.info("NOmbre de archivo: "+file.getOriginalFilename());
-        logger.info("Logo de objeto: "+institucion.getLogo());
-
 		if ( !file.isEmpty() ) {
-		    logger.info("Entra a cambiar imagen");
-		    logger.info(!file.isEmpty() || file != null);
 			String foto = "";
 			try {
-				foto = new UploadFiles().subirFoto(file, Constantes.UPLOADS_INSTITUCIONES);
+			    if( new UploadFiles().eliminarImagen(institucion.getLogo(), Constantes.UPLOADS_INSTITUCIONES) )
+				    foto = new UploadFiles().subirFoto(file, Constantes.UPLOADS_INSTITUCIONES);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
