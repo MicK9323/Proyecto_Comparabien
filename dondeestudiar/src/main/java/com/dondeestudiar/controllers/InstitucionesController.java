@@ -159,7 +159,7 @@ public class InstitucionesController {
 	public String registrar(@Valid Institucion institucion, BindingResult result, SessionStatus status, HttpServletRequest request,
 			HttpSession session, @RequestParam("file") MultipartFile file, Model model, RedirectAttributes flash) {
 
-	    if( !validarSesion(request) ){
+	    if( validarSesion(request) == false ){
             model.addAttribute("error", "Inicie sesion antes de continuar");
             return "redirect:/admin/login";
         }

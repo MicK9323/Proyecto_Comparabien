@@ -87,7 +87,7 @@ xmlns:th="http://www.thymeleaf.org">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="table-responsive m-t-20">
+                                    <div class="table-responsive m-t-20 color-bordered-table inverse-bordered-table">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -101,12 +101,10 @@ xmlns:th="http://www.thymeleaf.org">
                                                     <td class="text-left" th:text="${sede.nomSede}">Nom Sede</td>
                                                     <td class="text-left" th:text="${sede.ubicacion.descDep}">Lima</td>
                                                     <td class="text-center">
-                                                        <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="top" data-original-title="Ver Sede">
+                                                        <a class="btn btn-outline-info" th:href="@{'/sedes/ver/'+${sede.id}}"
+                                                           data-toggle="tooltip" data-placement="top" data-original-title="Ver Sede">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" data-original-title="Editar Sede">
-                                                                <i class="fa fa-edit"></i>
-                                                            </a>
                                                         <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" data-original-title="Deshabilitar Sede">
                                                             <i class="fa fa-minus-circle"></i>
                                                         </a>
