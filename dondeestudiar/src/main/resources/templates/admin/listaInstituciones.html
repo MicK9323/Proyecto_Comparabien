@@ -4,7 +4,7 @@ xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/admin/layout/layout :: head" ></head>
 <body class="fix-header card-no-border fix-sidebar">
 	
-    <!-- <div th:replace="admin/layout/layout :: preloader"></div> -->
+    <div th:replace="admin/layout/layout :: preloader"></div>
     
     <div id="main-wrapper">
     
@@ -14,7 +14,8 @@ xmlns:th="http://www.thymeleaf.org">
     	
     	<div class="page-wrapper">
 			<div class="container-fluid">
-                <div class="row">
+			<div th:replace="/admin/layout/layout :: mensajes"></div>
+                <div class="row" th:if="!${mostrar} == true">
                     <div class="col-md-12">
                         <div class="card bg-info text-white">
                             <div class="card-body">
@@ -41,16 +42,30 @@ xmlns:th="http://www.thymeleaf.org">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6 col-lg-7">
-                                        <div class="form-group row">
-                                            <div class="col-md-7">
-                                                <input type="text" id="demo-input-search2" placeholder="Buscar Institucion" class="form-control">
-                                            </div>
-                                            <div class="col-md-5">
-                                                <a href="" class="btn btn-outline-primary">Buscar</a>
-                                            </div>
-                                        </div>
+                                    	<form th:action="@{/instituciones/buscar}" method="post">
+                                    		<div class="form-group row">
+	                                            <div class="col-md-7">
+	                                                <input type="text" name="nombre" required autocomplete="off"
+	                                                	placeholder="Buscar Institucion" class="form-control">
+	                                            </div>
+	                                            <div class="col-md-5">                                            	
+	                                                <button type="submit" class="btn btn-outline-primary">
+	                                                	<i class="fa fa-search"></i> Buscar
+	                                                </button>
+	                                            </div>
+                                        	</div>
+                                    	</form>                                        
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-5">
+                                    <div class="col-sm-12 col-md-6 col-lg-5" th:if="${mostrar} == true">
+                                		<div class="form-group row">
+                                			<div class="col-md-5">
+                                				<a th:href="@{/instituciones/listar}" class="btn btn-outline-info">
+                                					<i class="fa fa-arrow-circle-left"></i> Regresar
+                                				</a>
+                                			</div>
+                                		</div>
+                                	</div>
+                                    <!-- <div class="col-sm-12 col-md-6 col-lg-5">
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <select class="custom-select col-md-5 b-0">
@@ -61,7 +76,7 @@ xmlns:th="http://www.thymeleaf.org">
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="table-responsive m-t-20">
                                     <table class="table color-bordered-table inverse-bordered-table vm no-th-brd pro-of-month">
@@ -73,9 +88,9 @@ xmlns:th="http://www.thymeleaf.org">
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="institucion: ${listado}">
+                                            <tr th:class="${institucion.estado == false? 'table-active' : ''}"  th:each="institucion: ${listado}">
                                                 <td class="text-left">
-                                                    <img th:alt="institucion.nombre" width="50" class="img-thumbnail rounded float-left"
+                                                    <img th:alt=${institucion.nombre} width="50" class="img-thumbnail rounded float-left"
                                                        th:src="@{'/instituciones/cargarFoto/'+${institucion.logo}}">
                                                 </td>
                                                 <td class="text-left" th:text="${institucion.nombre}"></td>
@@ -84,9 +99,13 @@ xmlns:th="http://www.thymeleaf.org">
                                                     	th:href="@{'/instituciones/ver/'+${institucion.ruc}}" data-original-title="Ver Institucion">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-                                                    <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top"
-                                                           href="javascript:void(0)" data-original-title="Deshabilitar Institucion">
+                                                    <a th:if="${institucion.estado} == true" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top"
+                                                           th:href="@{'/instituciones/disabled/'+${institucion.id}}" data-original-title="Deshabilitar Institucion">
                                                         <i class="fa fa-minus-circle"></i>
+                                                    </a>
+                                                    <a th:if="${institucion.estado}  == false" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top"
+                                                           th:href="@{'/instituciones/enabled/'+${institucion.id}}" data-original-title="Habilitar Institucion">
+                                                        <i class="fa  fa-check"></i>
                                                     </a>
                                                 </td>
                                             </tr>

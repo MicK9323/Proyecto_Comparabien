@@ -4,7 +4,7 @@ xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/admin/layout/layout :: head" ></head>
 <body class="fix-header card-no-border fix-sidebar">
 	
-    <!-- <div th:replace="admin/layout/layout :: preloader"></div> -->
+    <div th:replace="admin/layout/layout :: preloader"></div>
     
     <div id="main-wrapper">
     
@@ -20,7 +20,7 @@ xmlns:th="http://www.thymeleaf.org">
                             <div class="card-header">
                                 <h4 class="m-b-0 text-white">Perfil de Institución</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <div class="m-t-30">
                                     <img th:src="@{'/instituciones/cargarFoto/'+${institucion.logo}}" class="img-thumbnail" width="220">
                                     <h4 class="card-title m-t-10" th:text="${institucion.nombre}">Nombre de la institucion</h4>

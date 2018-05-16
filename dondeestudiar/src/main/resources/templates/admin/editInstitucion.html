@@ -3,7 +3,7 @@
 <head th:replace="/admin/layout/layout :: head"></head>
 <body class="fix-header card-no-border fix-sidebar">
 
-	<!-- <div th:replace="admin/layout/layout :: preloader"></div> -->
+	<div th:replace="admin/layout/layout :: preloader"></div>
 
 	<div id="main-wrapper">
 
@@ -32,8 +32,7 @@
 												<div class="row">
 													<div class="col-md-8">
 														<div class="form-group">
-															<input type="hidden" th:field="*{id}">
-															<input type="hidden" th:field="*{fecReg}">
+															<label for="telf">RUC</label>
 															<input readonly="readonly" placeholder="RUC"
 																maxlength="11" required autofocus th:field="*{ruc}"
 																type="text" class="form-control"

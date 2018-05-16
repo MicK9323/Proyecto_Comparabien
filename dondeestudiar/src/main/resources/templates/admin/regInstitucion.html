@@ -3,7 +3,7 @@
 <head th:replace="/admin/layout/layout :: head"></head>
 <body class="fix-header card-no-border fix-sidebar">
 
-	<!-- <div th:replace="admin/layout/layout :: preloader"></div> -->
+	<div th:replace="admin/layout/layout :: preloader"></div>
 
 	<div id="main-wrapper">
 
@@ -32,11 +32,11 @@
 												<div class="row">
 													<div class="col-md-8">
 														<div class="form-group">
-															<input placeholder="RUC" maxlength="11"
+															<input placeholder="RUC" maxlength="11" autocomplete="off"
 																autofocus th:field="*{ruc}" type="text"
-																class="form-control" th:errorclass="alert-danger">
+																class="form-control" th:errorclass="border-danger">
 															<small th:if="${#fields.hasErrors('ruc')}" 
-																th:error="*{ruc}"
+																th:errors="*{ruc}"
 																class="text-danger"></small>
 														</div>
 													</div>
@@ -52,11 +52,11 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label>Nombre de Institución</label> 
-															<input th:field="*{nombre}" type="text"
-																class="form-control" th:errorclass="alert-danger">
-															<span th:if="${#fields.hasErrors('nombre')}" 
-																th:error="*{nombre}"
-																class="text-danger"></span>
+															<input th:field="*{nombre}" type="text" autocomplete="off"
+																class="form-control" th:errorclass="border-danger">
+															<small th:if="${#fields.hasErrors('nombre')}" 
+																th:errors="*{nombre}"
+																class="text-danger"></small>
 														</div>
 													</div>
 												</div>
@@ -64,20 +64,20 @@
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
 															<label for="web">Sitio Web</label> 
-															<input th:field="*{website}" type="text"
-																class="form-control" id="web" th:errorclass="alert-danger">
+															<input th:field="*{website}" type="text" autocomplete="off"
+																class="form-control" id="web" th:errorclass="border-danger">
 															<small th:if="${#fields.hasErrors('website')}" 
-																th:error="*{website}"
+																th:errors="*{website}"
 																class="text-danger"></small>
 														</div>
 													</div>
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
 															<label for="telf">Central Telefónica</label> 
-																<input th:field="*{telf}" type="tel"
-																	class="form-control" id="telf" th:errorclass="alert-danger">
+																<input th:field="*{telf}" type="tel" autocomplete="off"
+																	class="form-control" id="telf" th:errorclass="border-danger">
 																<small th:if="${#fields.hasErrors('telf')}" 
-																th:error="*{telf}"
+																th:errors="*{telf}"
 																class="text-danger"></small>
 														</div>
 													</div>
@@ -96,10 +96,11 @@
 										<div class="row">
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
-													<label>Tipo de Institución</label> <select
+													<label>Tipo de Institución</label> 
+													<select required
 														th:field="*{tipoInstitucion.idParam}"
 														class="form-control custom-select">
-														<option value="">Selecciona</option>
+														<option th:value="${null}">Selecciona</option>
 														<option th:each="item:${tipoInstitucion}"
 															th:value="${item.idParam}" th:text="${item.desc}"></option>
 													</select>
@@ -108,10 +109,10 @@
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
 													<label>Tipo de Gestión</label> 
-													<select
+													<select required
 														th:field="*{tipoGestion.idParam}"
 														class="form-control custom-select">
-														<option value="">Selecciona</option>
+														<option th:value="${null}">Selecciona</option>
 														<option th:each="item:${tipoGestion}"
 															th:value="${item.idParam}" th:text="${item.desc}"></option>
 													</select>
@@ -152,13 +153,14 @@
 																	<div class="col-sm-12 col-md-12 col-lg-6">
 																		<div class="form-group">
 																			<label class="text-info"><strong>Nombre
-																					de Sede</strong></label> <input id="nomSede" type="text"
-																				class="form-control">
+																					de Sede</strong></label> 
+																					<input id="nomSede" type="text"
+																				class="form-control" autocomplete="off">
 																		</div>
 																		<div class="form-group">
 																			<label class="text-info"><strong>Ubicación</strong></label>
 																			<input id="ubiSede" placeholder="Ubicacion"
-																				type="text" class="form-control">
+																				type="text" class="form-control" autocomplete="off">
 																		</div>
 																		<div class="form-group">
 																			<div id="listaUbigueos">
@@ -177,12 +179,13 @@
 																		<div class="form-group">
 																			<label class="text-info"><strong>Dirección
 																					de Sede</strong></label> <input id="dirSede" type="text"
-																				class="form-control">
+																				class="form-control" autocomplete="off">
 																		</div>
 																		<div class="form-group">
 																			<label class="text-info"><strong>Teléfono
-																					de Sede</strong></label> <input id="telfSede" type="tel"
-																				class="form-control">
+																					de Sede</strong></label> 
+																					<input id="telfSede" type="tel"
+																				class="form-control" autocomplete="off">
 																		</div>
 																	</div>
 																</div>
@@ -223,7 +226,7 @@
 												<br>
 												<div class="row">
 													<div class="col-md-12" id="detSedes">
-														<table class="table">
+														<table class="table color-bordered-table inverse-bordered-table vm no-th-brd pro-of-month">
 															<thead>
 																<tr>
 																	<th>Sede</th>

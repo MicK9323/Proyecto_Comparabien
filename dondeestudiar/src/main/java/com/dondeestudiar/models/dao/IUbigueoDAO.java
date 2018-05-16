@@ -11,7 +11,7 @@ import com.dondeestudiar.models.entities.Ubigueo;
 @Repository("ubigueoDAO")
 public interface IUbigueoDAO extends JpaRepository<Ubigueo, String> {
 	
-	@Query(value = "{call sp_Ubigueo(:vUbicacion)}", nativeQuery = true)
+	@Query(value = "{call sp_ubigeo(:vUbicacion)}", nativeQuery = true)
 	public List<Ubigueo> execSpUbigueo( @Param("vUbicacion") String ubicacion );
 	
 	public Ubigueo findByCodUbigueo(String codUbigueo);

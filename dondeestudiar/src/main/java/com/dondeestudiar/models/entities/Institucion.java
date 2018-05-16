@@ -13,91 +13,91 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+
+import com.dondeestudiar.utils.Constantes;
+
 @Entity
-@Table(name="tb_instituciones")
+@Table(name = "tb_instituciones")
 public class Institucion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_institucion")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_institucion")
 	private int id;
-	
-	@Column(name="ruc")
-	@NotEmpty(message="Este campo es obligatorio")
-	@Size(min=11,max=11)
-	@Pattern(regexp="[0-9]{11}")
-	private String ruc;
-	
-	public List<Sede> getSedes() {
-		return sedes;
-	}
 
-	public void setSedes(List<Sede> sedes) {
-		this.sedes = sedes;
-	}
-
-	@Column(name="nom_institucion")
-	@NotEmpty @Size(min=10, max=100)
-	private String nombre;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tipo_institucion")
-	private Parametros tipoInstitucion;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tipo_gestion")
-	private Parametros tipoGestion;
-	
-	@Column(name="telf_institucion")
-	@NotEmpty	@Size(min=7,max=10) @Pattern(regexp="[0-9]{7,10}")
-	private String telf;
-	
-	@Column(name="dir_web")
+	@Column(name = "ruc")
 	@NotEmpty
-	@Pattern(regexp="(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\?=.-]*)*\\/?")
+	@Size(min = 11, max = 11)
+	@Pattern(regexp = "[0-9]{11}")
+	private String ruc;
+
+	@Column(name = "nom_institucion")
+	@NotEmpty
+	@Size(min = 10, max = 100)
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚñáéíóúÑ\\s?]{10,100}")
+	private String nombre;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tipo_institucion")
+	private Parametros tipoInstitucion;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tipo_gestion")
+	private Parametros tipoGestion;
+
+	@Column(name = "telf_institucion")
+	@NotEmpty
+	@Size(min = 7, max = 10)
+	@Pattern(regexp = "[0-9]{7,10}")
+	private String telf;
+
+	@Column(name = "dir_web")
+	@NotEmpty
+	@Pattern(regexp = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\?=.-]*)*\\/?")
 	private String website;
-	
-	@Column(name="reputacion")
+
+	@Column(name = "reputacion")
 	private int popularidad;
-	
-	@Column(name="residencial")
+
+	@Column(name = "residencial")
 	private boolean residencial;
-	
-	@Column(name="logo")
+
+	@Column(name = "logo")
 	private String logo;
-	
-	@Column(name="estado")
+
+	@Column(name = "estado")
 	private boolean estado;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="fec_reg")
+	@Column(name = "fec_reg")
 	private Date fecReg;
-	
-	@OneToMany(mappedBy="institucion",fetch=FetchType.LAZY)
+
+	@OneToMany(mappedBy = "institucion", fetch = FetchType.LAZY)
 	List<Sede> sedes;
-	
+
 	@PrePersist
 	private void prePersist() {
 		this.popularidad = 0;
 		this.estado = true;
 		this.fecReg = new Date();
 	}
-	
+
 	public int countSedes() {
 		return sedes.size();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -171,7 +171,10 @@ public class Institucion implements Serializable {
 	}
 
 	public String getLogo() {
-		return logo;
+		if (this.logo.isEmpty() || this.logo == "")
+			return Constantes.NOT_FOUND;
+		else
+			return logo;
 	}
 
 	public void setLogo(String logo) {
@@ -194,6 +197,12 @@ public class Institucion implements Serializable {
 		this.fecReg = fecReg;
 	}
 	
-	
-	
+	public List<Sede> getSedes() {
+		return sedes;
+	}
+
+	public void setSedes(List<Sede> sedes) {
+		this.sedes = sedes;
+	}
+
 }

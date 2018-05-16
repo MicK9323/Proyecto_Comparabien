@@ -45,6 +45,21 @@ public class InstitucionServiceImpl implements IInstitucionesService {
 	public void saveInstitucion(Institucion obj) {
 		institucionesDAO.save(obj);
 	}
+
+	@Override
+	public List<Institucion> findByNombre(String nombre) {
+		return institucionesDAO.findByNombreLikeIgnoreCase(nombre);
+	}
+
+	@Override
+	public void disabledInstitucion(int id) {
+		institucionesDAO.sp_disabledInstitucion(id);
+	}
+
+	@Override
+	public void enabledInstitucion(int id) {
+		institucionesDAO.sp_enabledInstitucion(id);
+	}
 		
 	
 	

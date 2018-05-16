@@ -18,7 +18,7 @@ $(document).ready(function() {
 	}
 	
 	$('#ubiSede').keyup(function(){
-        var term = $('#ubiSede').val();
+        var term = $('#ubiSede').val().trim().split(" ").join("_");        
         if( term.length >= 3 ){
         	console.info('termino de busqueda: '+term);
         	$('#listaUbigueos').load("/instituciones/cargar-ubigueo/"+term)

@@ -17,6 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFiles {
 	
+//	public String codificarNombre(MultipartFile file) {
+//		String filename = UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+//		return filename;
+//	}
+	
 	public String subirFoto(MultipartFile file, String ruta) throws IOException {
 		String filename = "";
 		if(!file.isEmpty()) {
