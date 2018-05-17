@@ -91,7 +91,7 @@ xmlns:th="http://www.thymeleaf.org">
                                             <tr th:class="${institucion.estado == false? 'table-active' : ''}"  th:each="institucion: ${listado}">
                                                 <td class="text-left">
                                                     <img th:alt="${institucion.nombre}" width="50" class="img-thumbnail rounded float-left"
-                                                       th:src="@{'/instituciones/cargarFoto/'+${institucion.logo}}">
+                                                       th:src="@{${institucion.rutaLogo}}">
                                                 </td>
                                                 <td class="text-left" th:text="${institucion.nombre}"></td>
                                                 <td class="text-center">

@@ -38,6 +38,9 @@ public class Usuario implements Serializable {
 	@NotEmpty
 	private String clave;
 
+	@Column(name = "ruta_foto")
+	private String rutaFoto;
+
 	private String foto;
 
 	@NotNull
@@ -126,4 +129,11 @@ public class Usuario implements Serializable {
 		this.fec_reg = fec_reg;
 	}
 
+	public String getRutaFoto() {
+		return rutaFoto;
+	}
+
+	public void setRutaFoto(String rutaFoto) {
+		this.rutaFoto = rutaFoto;
+	}
 }

@@ -22,7 +22,7 @@ xmlns:th="http://www.thymeleaf.org">
                             </div>
                             <div class="card-body text-center">
                                 <div class="m-t-30">
-                                    <img th:src="@{'/instituciones/cargarFoto/'+${institucion.logo}}" class="img-thumbnail" width="220">
+                                    <img th:src="@{${institucion.rutaLogo}}" class="img-thumbnail" width="220">
                                     <h4 class="card-title m-t-10" th:text="${institucion.nombre}">Nombre de la institucion</h4>
                                     <div class="row text-center justify-content-md-center">
                                         <div class="col-6">

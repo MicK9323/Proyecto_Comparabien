@@ -74,6 +74,9 @@ public class Institucion implements Serializable {
 	@Column(name = "residencial")
 	private boolean residencial;
 
+	@Column(name = "ruta_logo")
+	private String rutaLogo;
+
 	@Column(name = "logo")
 	private String logo;
 
@@ -175,10 +178,7 @@ public class Institucion implements Serializable {
 	}
 
 	public String getLogo() {
-		if (this.logo.isEmpty() || this.logo == "")
-			return Constantes.NOT_FOUND;
-		else
-			return logo;
+		return logo;
 	}
 
 	public void setLogo(String logo) {
@@ -216,4 +216,15 @@ public class Institucion implements Serializable {
 	public void setAdmisiones(int admisiones) {
 		this.admisiones = admisiones;
 	}
+
+    public String getRutaLogo() {
+	    if( this.rutaLogo.isEmpty() || this.rutaLogo == "" )
+            return Constantes.URL_ENDPOINT+Constantes.FILE_ERROR+Constantes.NOT_FOUND;
+	    else
+	        return rutaLogo;
+    }
+
+    public void setRutaLogo(String rutaLogo) {
+        this.rutaLogo = rutaLogo;
+    }
 }

@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -45,8 +43,6 @@ import com.dondeestudiar.utils.UploadFiles;
 @RequestMapping("/instituciones")
 @SessionAttributes(names = { "institucion" })
 public class InstitucionesController {
-
-    protected final Log logger = LogFactory.getLog(this.getClass());
 
 	@Autowired
 	IParametrosService parametrosService;
@@ -188,7 +184,8 @@ public class InstitucionesController {
 		String foto = "";
 		if (!file.isEmpty()) {
 			try {
-				foto = new UploadFiles().subirFoto(file, Constantes.UPLOADS_INSTITUCIONES);
+				foto = new UploadFiles().subirImagenFTP(file, Constantes.UPLOADS_INSTITUCIONES);
+				institucion.setRutaLogo(Constantes.URL_ENDPOINT+Constantes.UPLOADS_INSTITUCIONES+foto);
 				institucion.setLogo(foto);
 				Institucion persistObj = institucionesService.addInstitucion(institucion);
 				if (persistObj != null) {
@@ -267,11 +264,16 @@ public class InstitucionesController {
 		if ( !file.isEmpty() ) {
 			String foto = "";
 			try {
-			    if( new UploadFiles().eliminarImagen(institucion.getLogo(), Constantes.UPLOADS_INSTITUCIONES) )
-				    foto = new UploadFiles().subirFoto(file, Constantes.UPLOADS_INSTITUCIONES);
+			    if( institucion.getLogo().isEmpty() ){
+					foto = new UploadFiles().subirImagenFTP(file, Constantes.UPLOADS_INSTITUCIONES);
+				}else {
+					if( new UploadFiles().eliminarImagenFTP(Constantes.UPLOADS_INSTITUCIONES, institucion.getLogo()) )
+						foto = new UploadFiles().subirImagenFTP(file, Constantes.UPLOADS_INSTITUCIONES);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			institucion.setRutaLogo(Constantes.URL_ENDPOINT+Constantes.UPLOADS_INSTITUCIONES+foto);
 			institucion.setLogo(foto);
 		}
 
