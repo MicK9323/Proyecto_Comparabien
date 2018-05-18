@@ -1,5 +1,8 @@
 package com.dondeestudiar.models.entities;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +18,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="tb_sedes")
@@ -28,6 +34,8 @@ public class Sede implements Serializable {
 	private int id;
 	
 	@Column(name="nom_sede")
+	@NotEmpty @Size(min = 10, max = 100)
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚñáéíóúÑ\\s?]{10,100}")
 	private String nomSede;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -35,9 +43,14 @@ public class Sede implements Serializable {
 	private Ubigueo ubicacion;
 	
 	@Column(name="direccion")
+	@NotEmpty
+	@Size(min = 10, max = 120)
 	private String direccion;
 	
 	@Column(name="telf")
+	@NotEmpty
+	@Size(min = 7, max = 15)
+	@Pattern(regexp = "[0-9]{7,15}")
 	private String telf;
 	
 	@Column(name="coordenada_x")
@@ -53,7 +66,8 @@ public class Sede implements Serializable {
 	@Column(name="fec_reg")
 	private Date fecReg;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY )
+	@LazyToOne(LazyToOneOption.FALSE)
 	@JoinColumn(name="id_institucion")
 	private Institucion institucion;
 	

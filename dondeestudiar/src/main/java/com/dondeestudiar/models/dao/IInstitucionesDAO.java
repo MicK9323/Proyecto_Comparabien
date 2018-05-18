@@ -20,14 +20,6 @@ public interface IInstitucionesDAO extends JpaRepository<Institucion, Integer> {
 		
 		public List<Institucion> findByNombreLikeIgnoreCase(String nombre);
 		
-//		@Modifying
-//		@Query(value = "{call sp_disabledInstitucion(:vId)}", nativeQuery = true)
-//		public void disabledInstitucion( @Param("vId") int id );
-//		
-//		@Modifying
-//		@Query(value = "{call sp_enabledInstitucion(:vId)}", nativeQuery = true)
-//		public void enabledInstitucion( @Param("vId") int id );
-		
 		@Procedure
 		public void sp_disabledInstitucion( @Param("id") int id );
 		

@@ -252,18 +252,19 @@
 													<div class="card-body">
 														<div class="row">
 															<div class="col-md-12 col-lg-6">
-																<button type="submit" class="btn btn-block btn-success">
-																	<i class="fa fa-check"></i> Guardar
+																<button type="submit" class="btn btn-block btn-outline-success">
+																	<i class="fa fa-save"></i> Guardar
 																</button>
 															</div>
 															<div class="hidden-lg-up">
 																<br /> <br />
 															</div>
-															<div class="col-md-12 col-lg-6">
-																<button type="button" class="btn btn-block btn-inverse">Cancelar</button>
-															</div>
+															<a class="col-md-12 col-lg-6" th:href="@{/instituciones/listar}">
+																<button type="button" class="btn btn-block btn-outline-dark">
+																	<i class="fa fa-home"></i> Cancelar
+																</button>
+															</a>
 														</div>
-														<!-- <div class="row button-group"></div> -->
 													</div>
 												</div>
 											</div>

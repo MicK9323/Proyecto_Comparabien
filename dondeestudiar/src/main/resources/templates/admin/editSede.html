@@ -28,8 +28,11 @@
                                         <div class="form-group">
                                             <label class="text-info"><strong>Nombre
                                                 de Sede</strong></label>
-                                            <input id="nomSede" type="text"
+                                            <input id="nomSede" type="text" th:errorclass="border-danger"
                                                    th:field="*{nomSede}" class="form-control" autocomplete="off">
+                                            <small th:if="${#fields.hasErrors('nomSede')}"
+                                                   th:errors="*{nomSede}"
+                                                   class="text-danger"></small>
                                         </div>
                                         <div class="form-group">
                                             <label class="text-info"><strong>Ubicación</strong></label>
@@ -42,21 +45,27 @@
                                             <label class="text-info">
                                                 <strong>Dirección de Sede</strong>
                                             </label>
-                                            <input id="dirSede" th:field="*{direccion}" type="text"
-                                                   class="form-control" autocomplete="off">
+                                            <input id="direccion" th:field="*{direccion}" type="text"
+                                                   class="form-control" autocomplete="off" th:errorclass="border-danger">
+                                            <small th:if="${#fields.hasErrors('direccion')}"
+                                                   th:errors="*{direccion}"
+                                                   class="text-danger"></small>
                                         </div>
                                         <div class="form-group">
                                             <label class="text-info">
                                                 <strong>Teléfono de Sede</strong>
                                             </label>
-                                            <input id="telfSede" type="tel" th:field="*{telf}"
+                                            <input id="telf" type="tel" th:field="*{telf}" th:errosclass="border-danger"
                                                    class="form-control" autocomplete="off">
+                                            <small th:if="${#fields.hasErrors('telf')}"
+                                                   th:errors="*{telf}"
+                                                   class="text-danger"></small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <div id="btnLocalizar" class="btn btn-outline-success">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div id="btnLocalizar" class="btn btn-outline-primary">
                                             <i class="fa fa-map-marker"></i> Localizar
                                         </div>
                                     </div>
@@ -64,11 +73,34 @@
                                 <br/>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="hidden" th:value="${sede.cx}" id="cx" >
-                                        <input type="hidden" th:value="${sede.cy}" id="cy" >
+                                        <input type="hidden" th:field="*{cx}" id="cx" >
+                                        <input type="hidden" th:field="*{cy}" id="cy" >
                                         <h4 class="text-info">Ubicación Geografica</h4>
                                         <div id="map" class="gmaps" style="height: 200px;"></div>
                                         <input type="hidden" id="coordenadas"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-6">
+                                                        <button type="submit" class="btn btn-block btn-success">
+                                                            <i class="fa fa-check"></i> Guardar
+                                                        </button>
+                                                    </div>
+                                                    <div class="hidden-lg-up">
+                                                        <br /> <br />
+                                                    </div>
+                                                    <div class="col-md-12 col-lg-6">
+                                                        <a th:href="@{'/instituciones/ver/'+${sede.institucion.ruc}}" class="btn btn-block btn-inverse">
+                                                            <i class="fa fa-backward"></i> Regresar
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +121,7 @@
     console.log(cx+" "+cy);
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 24,
+            zoom: 16,
             center: {
                 lat: cx,
                 lng: cy
@@ -114,7 +146,7 @@
 
     function geocodeAddress(geocoder, resultsMap) {
         var region = $('#ubiSede').val().trim();
-        var direccion = $('#dirSede').val().trim();
+        var direccion = $('#direccion').val().trim();
         var buscado = direccion + ", " + region;
         console.log("Direccion buscada: " + buscado);
         if (region == "" || direccion == "") {
@@ -136,8 +168,10 @@
                                     map: resultsMap,
                                     position: results[0].geometry.location
                                 });
-                            document.getElementById("coordenadas").value = marker.getPosition().toString();
-                            console.log($('#coordenadas').val());
+                            document.getElementById("cx").value = marker.getPosition().lat().toString();
+                            document.getElementById("cy").value = marker.getPosition().lng().toString();
+                            console.log($('#cx').val());
+                            console.log($('#cy').val());
                         } else {
                             alertify
                                 .alert('No se pudo encontrar la ubicacion ingresada ' + status);

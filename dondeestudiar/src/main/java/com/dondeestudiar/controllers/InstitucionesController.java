@@ -69,7 +69,7 @@ public class InstitucionesController {
 				recurso = new UploadFiles().cargarImagen(filename, Constantes.UPLOADS_INSTITUCIONES);
 			}
 		} catch (MalformedURLException e) {
-			flash.addAttribute("Error ", e.getClass() + " " + e.getMessage());
+			flash.addFlashAttribute("Error ", e.getClass() + " " + e.getMessage());
 			e.printStackTrace();
 		}
 		return ResponseEntity.ok()
@@ -131,19 +131,21 @@ public class InstitucionesController {
 	// LLamar a vista de registrar Institucion
 	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/nuevo")
-	public String nuevo(HttpServletRequest request, Map<String, Object> model) {
+	public String nuevo(HttpServletRequest request, Map<String, Object> model, RedirectAttributes flash) {
 		if (request.getSession().getAttribute("usuario") == null) {
-			model.put("error", "Inicie sesion antes de continuar");
+			flash.addFlashAttribute("error", "Inicie sesion antes de continuar");
 			return "redirect:/admin/login";
 		} else {
 			if (request.getSession().getAttribute("sedes") != null) {
 				ArrayList<Sede> sedes = (ArrayList<Sede>) request.getSession().getAttribute("sedes");
 				model.put("listaSedes", sedes);
 			}
+			Institucion institucion = new Institucion();
 			List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
 			List<Parametros> tipoGestion = parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
 			model.put("tipoInstitucion", tipoInstitucion);
 			model.put("tipoGestion", tipoGestion);
+			model.put("institucion",institucion);
 			model.put("titulo", "Nueva Institución");
 			return "admin/regInstitucion";
 		}
@@ -156,7 +158,7 @@ public class InstitucionesController {
 			HttpSession session, @RequestParam("file") MultipartFile file, Model model, RedirectAttributes flash) {
 
 	    if( validarSesion(request) == false ){
-            model.addAttribute("error", "Inicie sesion antes de continuar");
+            flash.addFlashAttribute("error", "Inicie sesion antes de continuar");
             return "redirect:/admin/login";
         }
 
@@ -182,7 +184,7 @@ public class InstitucionesController {
 		}
 
 		String foto = "";
-		if (!file.isEmpty()) {
+		if (!file.isEmpty() ) {
 			try {
 				foto = new UploadFiles().subirImagenFTP(file, Constantes.UPLOADS_INSTITUCIONES);
 				institucion.setRutaLogo(Constantes.URL_ENDPOINT+Constantes.UPLOADS_INSTITUCIONES+foto);
@@ -235,9 +237,10 @@ public class InstitucionesController {
 
 	// Llamar a vista Editar Institucion
 	@GetMapping(value = "/editar/{ruc}")
-	public String editarInstitucion(@PathVariable String ruc, Map<String, Object> model, HttpServletRequest request) {
+	public String editarInstitucion(@PathVariable String ruc, Map<String, Object> model, HttpServletRequest request,
+									RedirectAttributes flash) {
 		if (validarSesion(request) == false) {
-			model.put("error", "Inicie sesion antes de continuar");
+			flash.addFlashAttribute("error", "Inicie sesion antes de continuar");
 			return "redirect:/admin/login";
 		}
 		Institucion institucion = institucionesService.findByRuc(ruc);
@@ -249,8 +252,7 @@ public class InstitucionesController {
 	// Editar institucion
 	@PostMapping(value = "/editar")
 	public String mergeInstitucion(@Valid Institucion institucion, BindingResult result, HttpServletRequest request,
-			SessionStatus status, @RequestParam("file") MultipartFile file, Map<String, Object> model,
-			RedirectAttributes flash) {
+			SessionStatus status, @RequestParam("file") MultipartFile file, Map<String, Object> model, RedirectAttributes flash) {
 		if (validarSesion(request) == false) {
 			flash.addFlashAttribute("error", "Inicie sesion antes de continuar");
 			return "redirect:/admin/login";
@@ -280,24 +282,25 @@ public class InstitucionesController {
 		institucionesService.saveInstitucion(institucion);
 		String ruc = institucion.getRuc();
 		status.setComplete();
+		flash.addFlashAttribute("success","Institución editada correctamente");
 		return "redirect:/instituciones/ver/" + ruc;
 	}
 	
 //	Deshabilitar institucion
 	@GetMapping(value="/disabled/{id}")
-	public String disabled( @PathVariable String id, Map<String, Object> model ) {
+	public String disabled( @PathVariable String id, RedirectAttributes flash ) {
 		int ID = Integer.parseInt(id);
 		institucionesService.disabledInstitucion(ID);
-		model.put("success", "Institucion deshabilitada");
+		flash.addFlashAttribute("success", "Institucion deshabilitada");
 		return "redirect:/instituciones/listar";
 	}
 
 //	Habilitar institucion
 	@GetMapping(value="/enabled/{id}")
-	public String enabled( @PathVariable String id, Map<String, Object> model ) {
+	public String enabled( @PathVariable String id, RedirectAttributes flash ) {
 		int ID = Integer.parseInt(id);
 		institucionesService.enabledInstitucion(ID);
-		model.put("success", "Institucion habilitada");
+		flash.addFlashAttribute("success", "Institucion habilitada");
 		return "redirect:/instituciones/listar";
 	}
 	

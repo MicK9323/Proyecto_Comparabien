@@ -6,4 +6,10 @@ public interface ISedeService {
 
     public Sede buscarSede(int id);
 
+    public void saveSede(Sede obj);
+
+    public void disabledSede(int id);
+
+    public void enabledSede(int id);
+
 }

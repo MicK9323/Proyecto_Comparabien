@@ -15,6 +15,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	IUsuarioDAO usuarioDAO;
 
 	@Override
+	@Transactional(readOnly = true)
 	public Usuario login(String usuario, String clave) {
 		Usuario user = null;
 		try {

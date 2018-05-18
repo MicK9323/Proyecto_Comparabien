@@ -36,7 +36,7 @@
 															<input readonly="readonly" placeholder="RUC"
 																maxlength="11" required autofocus th:field="*{ruc}"
 																type="text" class="form-control"
-																th:errorclass="alert-danger"> <small
+																th:errorclass="border-danger"> <small
 																th:if="${#fields.hasErrors('ruc')}" th:error="*{ruc}"
 																class="text-danger"></small>
 														</div>
@@ -46,8 +46,8 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label>Nombre de Institución</label> <input
-																th:field="*{nombre}" type="text" required
-																class="form-control" th:errorclass="alert-danger">
+																th:field="*{nombre}" type="text"
+																class="form-control" th:errorclass="border-danger">
 															<span th:if="${#fields.hasErrors('nombre')}"
 																th:error="*{nombre}" class="text-danger"></span>
 														</div>
@@ -57,19 +57,20 @@
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
 															<label for="web">Sitio Web</label> <input
-																th:field="*{website}" type="text" required
+																th:field="*{website}" type="text"
 																class="form-control" id="web"
-																th:errorclass="alert-danger"> <small
+																th:errorclass="border-danger"> <small
 																th:if="${#fields.hasErrors('website')}"
 																th:error="*{website}" class="text-danger"></small>
 														</div>
 													</div>
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
-															<label for="telf">Central Telefónica</label> <input
-																th:field="*{telf}" type="tel" required
+															<label for="telf">Central Telefónica</label>
+															<input
+																th:field="*{telf}" type="tel"
 																class="form-control" id="telf"
-																th:errorclass="alert-danger"> <small
+																th:errorclass="border-danger"> <small
 																th:if="${#fields.hasErrors('telf')}" th:error="*{telf}"
 																class="text-danger"></small>
 														</div>
