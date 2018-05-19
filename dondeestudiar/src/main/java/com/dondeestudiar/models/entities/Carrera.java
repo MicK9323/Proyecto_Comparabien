@@ -1,5 +1,153 @@
 package com.dondeestudiar.models.entities;
 
+import com.dondeestudiar.utils.Constantes;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "tb_carreras")
 public class Carrera {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_carrera")
+    private int id;
+
+    @Column(name = "nom_carrera")
+    private String nombre;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_area")
+    private Area area;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_carrera")
+    private Parametros tipoCarrera;
+
+    @Column(name = "duracion")
+    private int duracion;
+
+    @Column(name = "popularidad")
+    private int popularidad;
+
+    @Column(name = "remuneracion_prom")
+    private double remuneracion;
+
+    @Column(name = "ruta_img")
+    private String rutaImagen;
+
+    @Column(name = "img_carrera")
+    private String imagen;
+
+    @Column(name = "estado")
+    private boolean estado;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fec_reg")
+    private Date fecReg;
+
+    @PrePersist
+    private void prePersist(){
+        this.setEstado(true);
+        this.setFecReg(new Date());
+    }
+
+    public String getSemestres(){
+        return String.format("%s Semestres",this.duracion);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public Parametros getTipoCarrera() {
+        return tipoCarrera;
+    }
+
+    public void setTipoCarrera(Parametros tipoCarrera) {
+        this.tipoCarrera = tipoCarrera;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public int getPopularidad() {
+        return popularidad;
+    }
+
+    public void setPopularidad(int popularidad) {
+        this.popularidad = popularidad;
+    }
+
+    public double getRemuneracion() {
+        return remuneracion;
+    }
+
+    public void setRemuneracion(double remuneracion) {
+        this.remuneracion = remuneracion;
+    }
+
+    public String getRutaImagen() {
+        if( this.rutaImagen.isEmpty() || this.rutaImagen == "" ){
+            return Constantes.URL_ENDPOINT+Constantes.FILE_ERROR+Constantes.NOT_FOUND;
+        }else{
+            return rutaImagen;
+        }
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public Date getFecReg() {
+        return fecReg;
+    }
+
+    public void setFecReg(Date fecReg) {
+        this.fecReg = fecReg;
+    }
 }

@@ -22,5 +22,11 @@ public class Constantes {
     public final static String TIPO_GESTION = "TGEST";
     public final static String TIPO_CARRERA = "TCARR";
 
+    //    Mensajes
+    public final static String SESSION_EXPIRED = "Inicie sesión antes de continuar";
+    public final static String INVALID_DATA = "Verifique los datos ingresados";
+    public final static String NO_IMAGE_SELECTED = "Debe seleccionar una imagen";
+    public final static String CHANGES_SUCCESSFULL = "Cambios guardados correctamente";
+    public final static String SAVE_SUCCESSFULL = "Registro agregado correctamente";
 
 }
