@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -17,29 +18,40 @@ public class Carrera {
     private int id;
 
     @Column(name = "nom_carrera")
+    @NotEmpty
+    @Size(min = 10, max = 100)
+    @Pattern(regexp = "[A-Za-zÁÉÍÓÚñáéíóúÑ\\s?]{10,100}")
     private String nombre;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_area")
+    @NotNull
     private Area area;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_carrera")
+    @NotNull
     private Parametros tipoCarrera;
 
     @Column(name = "duracion")
+    @NotNull
+    @Min(value = 6) @Max(value = 24)
     private int duracion;
 
     @Column(name = "popularidad")
+    @NotNull @Min(value = 1)
     private int popularidad;
 
     @Column(name = "remuneracion_prom")
+    @NotNull @Min(value = 950)
     private double remuneracion;
 
     @Column(name = "ruta_img")
+    @NotNull @NotEmpty
     private String rutaImagen;
 
     @Column(name = "img_carrera")
+    @NotNull @NotEmpty
     private String imagen;
 
     @Column(name = "estado")

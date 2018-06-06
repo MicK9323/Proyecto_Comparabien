@@ -9,5 +9,6 @@ public interface ICarreraService {
     public List<Carrera> listarCarreras();
     public void guardar(Carrera obj);
     public Carrera buscar(int id);
+    public Carrera SaveAndVerify(Carrera obj);
 
 }

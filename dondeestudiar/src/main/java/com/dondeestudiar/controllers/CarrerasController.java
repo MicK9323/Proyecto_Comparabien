@@ -37,10 +37,10 @@ public class CarrerasController {
     @Autowired
     IParametrosService parametrosService;
 
-//    @ModelAttribute
-//    public  Carrera setCarrera(){
-//        return  new Carrera();
-//    }
+    @ModelAttribute
+    public  Carrera setCarrera(){
+        return  new Carrera();
+    }
 
     //    Listar Carreras
     @GetMapping(value = "/listar")

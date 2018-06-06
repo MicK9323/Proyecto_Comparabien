@@ -28,4 +28,9 @@ public class CarreraServiceImpl implements ICarreraService {
     public Carrera buscar(int id) {
         return carreraDAO.findById(id).orElse(null);
     }
+
+    @Override
+    public Carrera SaveAndVerify(Carrera obj) {
+        return carreraDAO.saveAndFlush(obj);
+    }
 }
