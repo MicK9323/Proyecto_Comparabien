@@ -2,6 +2,7 @@ package com.dondeestudiar.models.services;
 
 import com.dondeestudiar.models.entities.Carrera;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface ICarreraService {

@@ -25,12 +25,10 @@ public class Carrera {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_area")
-    @NotNull
     private Area area;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_carrera")
-    @NotNull
     private Parametros tipoCarrera;
 
     @Column(name = "duracion")
@@ -128,7 +126,7 @@ public class Carrera {
     }
 
     public String getRutaImagen() {
-        if( this.rutaImagen.isEmpty() || this.rutaImagen == "" ){
+        if( this.rutaImagen.isEmpty() || this.rutaImagen.equals("") ){
             return Constantes.URL_ENDPOINT+Constantes.FILE_ERROR+Constantes.NOT_FOUND;
         }else{
             return rutaImagen;
