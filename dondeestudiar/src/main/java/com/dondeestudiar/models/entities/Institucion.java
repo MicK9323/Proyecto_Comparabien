@@ -218,8 +218,8 @@ public class Institucion implements Serializable {
 	}
 
     public String getRutaLogo() {
-	    if( this.rutaLogo.isEmpty() || this.rutaLogo == "" )
-            return Constantes.URL_ENDPOINT+Constantes.FILE_ERROR+Constantes.NOT_FOUND;
+	    if( this.rutaLogo.isEmpty() || this.rutaLogo.equals("") )
+            return Constantes.NOT_FOUND;
 	    else
 	        return rutaLogo;
     }

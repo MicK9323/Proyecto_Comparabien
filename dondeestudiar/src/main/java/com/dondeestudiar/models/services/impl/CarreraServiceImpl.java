@@ -31,7 +31,11 @@ public class CarreraServiceImpl implements ICarreraService {
     }
 
     @Override
-    public Carrera SaveAndVerify(Carrera obj) {
-        return carreraDAO.saveAndFlush(obj);
+    public boolean SaveAndVerify(Carrera obj) {
+        if(carreraDAO.saveAndFlush(obj).equals(obj)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

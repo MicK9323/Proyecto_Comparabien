@@ -43,9 +43,7 @@ public class CarreraServiceImplTest {
         obj.setRutaImagen("Test");
         obj.setImagen("Test");
         obj.setEstado(true);
-
-        assertEquals(obj, carreraService.SaveAndVerify(obj));
-
+        assertTrue(carreraService.SaveAndVerify(obj));
     }
 
     @Test
@@ -67,7 +65,7 @@ public class CarreraServiceImplTest {
         obj.setRutaImagen("Test");
         obj.setImagen("Test");
         obj.setEstado(true);
-
+        assertFalse(carreraService.SaveAndVerify(obj));
 
     }
 

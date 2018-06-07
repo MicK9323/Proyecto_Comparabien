@@ -65,6 +65,26 @@ public class Carrera {
         this.setFecReg(new Date());
     }
 
+    public boolean validar(Carrera obj){
+        boolean flag = false;
+        if(!obj.getNombre().matches("[A-Za-zÁÉÍÓÚñáéíóúÑ\\s?]{10,100}")){
+            flag = false;
+        }else if(!(obj.getArea().getId() > 1)){
+            flag = false;
+        }else if(!(obj.getTipoCarrera().getIdParam().matches("[TC]{1}[0-9]{3}"))){
+            flag = false;
+        }else if(!(obj.getDuracion() >= 6 && obj.getDuracion() <=24)){
+            flag = false;
+        }else if(!(obj.getPopularidad() >= 1)){
+            flag = false;
+        }else if(!(obj.getRemuneracion() >= 950)){
+            flag = false;
+        }else{
+            flag = true;
+        }
+        return flag;
+    }
+
     public String getSemestres(){
         return String.format("%s Semestres",this.duracion);
     }
@@ -127,7 +147,7 @@ public class Carrera {
 
     public String getRutaImagen() {
         if( this.rutaImagen.isEmpty() || this.rutaImagen.equals("") ){
-            return Constantes.URL_ENDPOINT+Constantes.FILE_ERROR+Constantes.NOT_FOUND;
+            return Constantes.NOT_FOUND;
         }else{
             return rutaImagen;
         }
