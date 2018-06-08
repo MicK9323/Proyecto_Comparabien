@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dondeestudiar.models.dao.IInstitucionesDAO;
 import com.dondeestudiar.models.dao.ISedeDAO;
+import com.dondeestudiar.models.entities.Carrera;
 import com.dondeestudiar.models.entities.Institucion;
 import com.dondeestudiar.models.entities.Sede;
 import com.dondeestudiar.models.services.IInstitucionesService;
@@ -70,7 +71,14 @@ public class InstitucionServiceImpl implements IInstitucionesService {
 		institucionesDAO.sp_enabledInstitucion(id);
 	}
 		
-	
+	@Override
+	public boolean SaveAndVerify(Institucion obj) {
+		if (institucionesDAO.saveAndFlush(obj).equals(obj)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 
 }

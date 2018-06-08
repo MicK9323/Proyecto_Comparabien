@@ -23,5 +23,7 @@ public interface IInstitucionesService {
 	public void disabledInstitucion( int id );
 	
 	public void enabledInstitucion( int id );
+
+	boolean SaveAndVerify(Institucion obj);
 	
 }

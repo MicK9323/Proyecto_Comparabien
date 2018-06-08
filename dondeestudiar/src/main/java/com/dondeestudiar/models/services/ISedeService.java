@@ -12,4 +12,6 @@ public interface ISedeService {
 
     public void enabledSede(int id);
 
+	boolean SaveAndVerify(Sede obj);
+
 }
