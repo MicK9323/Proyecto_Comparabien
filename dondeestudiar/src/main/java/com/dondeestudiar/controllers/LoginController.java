@@ -57,7 +57,7 @@ public class LoginController {
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:/admin/login";
+		return "redirect:/index";
 	}
 	
 	

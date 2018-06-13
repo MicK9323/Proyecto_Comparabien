@@ -44,7 +44,7 @@ public class InstitucionServiceImpl implements IInstitucionesService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Institucion> listarInstituciones() {
-		return institucionesDAO.findAll();
+		return institucionesDAO.findAllByOrderByNombreAsc();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class InstitucionServiceImpl implements IInstitucionesService {
 	public void enabledInstitucion(int id) {
 		institucionesDAO.sp_enabledInstitucion(id);
 	}
-		
+
 	@Override
 	public boolean SaveAndVerify(Institucion obj) {
 		if (institucionesDAO.saveAndFlush(obj).equals(obj)) {

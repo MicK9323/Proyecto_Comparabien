@@ -5,19 +5,9 @@ import org.hibernate.annotations.LazyToOneOption;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -70,7 +60,10 @@ public class Sede implements Serializable {
 	@LazyToOne(LazyToOneOption.FALSE)
 	@JoinColumn(name="id_institucion")
 	private Institucion institucion;
-	
+
+	@OneToMany(mappedBy = "sede", fetch = FetchType.LAZY)
+	private List<CarreraSede> carreras;
+
 	@PrePersist
 	private void prePersist() {
 		this.estado = true;

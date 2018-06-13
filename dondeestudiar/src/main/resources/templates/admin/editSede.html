@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/admin/layout/layout :: head"></head>
+<head th:replace="admin/layout/layout :: head"></head>
 
 <body class="fix-header card-no-border fix-sidebar">
 <!-- Preloader -->
-<!--<div th:replace="admin/layout/layout :: preloader"></div>-->
+<div th:replace="admin/layout/layout :: preloader"></div>
 
 <div id="main-wrapper">
 
-    <header th:replace="/admin/layout/layout :: header"></header>
+    <header th:replace="admin/layout/layout :: header"></header>
 
-    <aside th:replace="/admin/layout/layout :: sidebar"></aside>
+    <aside th:replace="admin/layout/layout :: sidebar"></aside>
 
     <div class="page-wrapper">
         <div class="container-fluid">
-            <div th:replace="/admin/layout/layout :: mensajes"></div>
+            <div th:replace="admin/layout/layout :: mensajes"></div>
             <form th:action="@{/sedes/editar}" th:object="${sede}" method="post">
                 <div class="row">
                     <div class="col-md-12">
@@ -111,7 +111,7 @@
         </div>
     </div>
 </div>
-<div th:replace="/admin/layout/layout :: scripts"></div>
+<div th:replace="admin/layout/layout :: scripts"></div>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyAgE-Gb6TvJTxMt1MMAKPFGJyEIVxgp4aA"></script>
 <script type="text/javascript">
 

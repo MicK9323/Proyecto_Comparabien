@@ -77,19 +77,6 @@ public class InstitucionesController {
 				.body(recurso);
 	}
 
-	// Buscar institucion por nombre
-	@PostMapping(value = "/buscar")
-	public String buscar(@RequestParam String nombre, Map<String, Object> model) {
-		List<Institucion> listado = institucionesService.findByNombre("%" + nombre + "%");
-		if (!listado.isEmpty()) {
-			model.put("listado", listado);
-		} else {
-			model.put("info", "No se encontraron coincidencias");
-		}
-		model.put("mostrar", true);
-		return "admin/listaInstituciones";
-	}
-
 	// Autocompletar ubigueos
 	@GetMapping(value = "/cargar-ubigueo/{term}")
 	public String cargarUbigueo(@PathVariable String term, Map<String, Object> model) {

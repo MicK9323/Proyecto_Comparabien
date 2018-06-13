@@ -15,7 +15,7 @@
     <div class="page-wrapper">
         <div class="container-fluid">
             <div th:replace="admin/layout/layout :: mensajes"></div>
-            <form th:object="${carrera}" th:action="@{/carreras/edit}" enctype="multipart/form-data" method="post">
+            <form th:object="${carrera}" th:action="@{/carreras/nuevo}" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-outline-inverse">
@@ -43,26 +43,21 @@
                                         <div class="row">
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <label>Area</label>
-                                                <input autocomplete="off" readonly th:value="${carrera.area.nombre}"
-                                                       type="text" class="form-control">
-                                                <!--<select required th:field="*{area.id}"-->
-                                                <!--class="form-control custom-select">-->
-                                                <!--<option th:value="NULL">Selecciona</option>-->
-                                                <!--<option th:each="item:${areas}"-->
-                                                <!--th:value="${item.id}" th:text="${item.nombre}"></option>-->
-                                                <!--</select>-->
+                                                <select required th:field="*{area}"
+                                                        class="form-control custom-select">
+                                                    <option value="">[Selecciona]</option>
+                                                    <option th:each="item:${areas}"
+                                                            th:value="${item.id}" th:text="${item.nombre}"></option>
+                                                </select>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <label>Tipo de Carrera</label>
-                                                <input autocomplete="off" readonly
-                                                       th:value="${carrera.tipoCarrera.desc}"
-                                                       type="text" class="form-control">
-                                                <!--<select required th:field="*{tipoCarrera.idParam}"-->
-                                                <!--class="form-control custom-select">-->
-                                                <!--<option th:value="NULL">Selecciona</option>-->
-                                                <!--<option th:each="item:${tipoCarrera}"-->
-                                                <!--th:value="${item.idParam}" th:text="${item.desc}"></option>-->
-                                                <!--</select>-->
+                                                <select required th:field="*{tipoCarrera}"
+                                                        class="form-control custom-select">
+                                                    <option value="">Selecciona</option>
+                                                    <option th:each="item:${tipoCarrera}"
+                                                            th:value="${item.idParam}" th:text="${item.desc}"></option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row mt-2">
@@ -113,9 +108,8 @@
                                     <div class="col-md-12 col-lg-5">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <input type="file" id="input-file-now-custom-1"
-                                                       class="dropify" name="file"
-                                                       th:data-default-file="${carrera.rutaImagen}">
+                                                <input required type="file" id="input-file-now-custom-1"
+                                                       class="dropify" name="file">
                                             </div>
                                         </div>
                                     </div>

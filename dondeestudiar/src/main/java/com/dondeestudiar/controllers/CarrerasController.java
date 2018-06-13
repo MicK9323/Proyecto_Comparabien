@@ -68,7 +68,7 @@ public class CarrerasController {
         List<Parametros> tipoCarrera = parametrosService.findByIdGrupo(Constantes.TIPO_CARRERA);
         model.put("areas", areas);
         model.put("tipoCarrera", tipoCarrera);
-        model.put("titulo", "Editar Carrera");
+        model.put("titulo", "Registrar Carrera");
         Carrera carrera = new Carrera();
         model.put("carrera", carrera);
         return "admin/regCarrera";

@@ -17,7 +17,7 @@ public class CarreraServiceImpl implements ICarreraService {
 
     @Override
     public List<Carrera> listarCarreras() {
-        return carreraDAO.findAll();
+        return carreraDAO.findAllByOrderByNombreAsc();
     }
 
     @Override
@@ -37,5 +37,10 @@ public class CarreraServiceImpl implements ICarreraService {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public List<Carrera> sp_carrerasInstitucion(int id) {
+        return carreraDAO.sp_carrerasInstitucion(id);
     }
 }

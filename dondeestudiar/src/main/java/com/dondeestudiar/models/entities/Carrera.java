@@ -45,11 +45,9 @@ public class Carrera {
     private double remuneracion;
 
     @Column(name = "ruta_img")
-    @NotNull @NotEmpty
     private String rutaImagen;
 
     @Column(name = "img_carrera")
-    @NotNull @NotEmpty
     private String imagen;
 
     @Column(name = "estado")
@@ -102,7 +100,7 @@ public class Carrera {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase().trim();
     }
 
     public Area getArea() {
