@@ -40,11 +40,11 @@ public class LoginController {
 		Usuario usuario = usuarioService.login( user.getUsuario(), user.getClave());
 		if( usuario == null  ) {
 			model.put("error", "Error: Usuario o Contraseña incorrecta");
-			return "/login";
+			return "redirect: /index";
 		}else {
 			if( !usuario.isEstado() ) {
 				model.put("error", "Error: Su usuario no está habilitado para iniciar sesión");
-				return "/login";
+				return "redirect: /index";
 			}else {
 				session.setAttribute("usuario", usuario);
 				model.put("titulo", "Principal");
