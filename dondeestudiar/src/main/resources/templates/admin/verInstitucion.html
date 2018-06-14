@@ -34,7 +34,8 @@ xmlns:th="http://www.thymeleaf.org">
                                     <h4 class="card-title m-t-10" th:text="${institucion.nombre}">Nombre de la institucion</h4>
                                     <div class="row text-center justify-content-md-center">
                                         <div class="col-6">
-                                            <a th:href="@{'/carreras/mostrar/'+${institucion.id}}" class="btn btn-block btn-outline-dark">
+                                            <a th:href="@{'/carreras/mostrar/'+${institucion.id}}"
+                                               class="btn btn-block btn-outline-dark" target="_blank">
                                                 <font class="font-medium"><i class="mdi mdi-school"></i> Carreras</font>
                                             </a>
                                         </div>
