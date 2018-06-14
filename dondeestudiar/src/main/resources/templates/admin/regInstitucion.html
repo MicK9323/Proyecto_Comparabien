@@ -130,129 +130,14 @@
 												</div>
 											</div>
 										</div>
-										<h3 class="box-title">Sedes</h3>
-										<hr />
-										<div class="row">
-											<div class="col-md-12">
-												<!-- ventana modal -->
-												<div class="modal fade bs-example-modal-lg" id="modalSede"
-													tabindex="-1" role="dialog"
-													aria-labelledby="myLargeModalLabel" style="display: none;"
-													aria-hidden="true">
-													<div class="modal-dialog modal-lg">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h4 class="modal-title text-info" id="myLargeModalLabel">
-																	<strong>Datos de Sede</strong>
-																</h4>
-																<button type="button" class="close" data-dismiss="modal"
-																	aria-hidden="true">x</button>
-															</div>
-															<div class="modal-body">
-																<div class="row">
-																	<div class="col-sm-12 col-md-12 col-lg-6">
-																		<div class="form-group">
-																			<label class="text-info"><strong>Nombre
-																					de Sede</strong></label> 
-																					<input id="nomSede" type="text"
-																				class="form-control" autocomplete="off">
-																		</div>
-																		<div class="form-group">
-																			<label class="text-info"><strong>Ubicación</strong></label>
-																			<input id="ubiSede" placeholder="Ubicacion"
-																				type="text" class="form-control" autocomplete="off">
-																		</div>
-																		<div class="form-group">
-																			<div id="listaUbigueos">
-																				<table class="table table-hover">
-																					<tr class="ubicacion" th:each="item: ${ubigueos}">
-																						<td class="desc"
-																							th:text="${item.getDescripcion()}"></td>
-																						<td><input type="hidden" class="codUbigueo"
-																							th:value="${item.codUbigueo}" /></td>
-																					</tr>
-																				</table>
-																			</div>
-																		</div>
-																	</div>
-																	<div id="ubigueo" class="col-sm-12 col-md-12 col-lg-6">
-																		<div class="form-group">
-																			<label class="text-info"><strong>Dirección
-																					de Sede</strong></label> <input id="dirSede" type="text"
-																				class="form-control" autocomplete="off">
-																		</div>
-																		<div class="form-group">
-																			<label class="text-info"><strong>Teléfono
-																					de Sede</strong></label> 
-																					<input id="telfSede" type="tel"
-																				class="form-control" autocomplete="off">
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-4">
-																		<div id="btnLocalizar" class="btn btn-outline-success">
-																			<i class="fa fa-map-marker"></i> Localizar
-																		</div>
-																	</div>
-																</div>
-																<br />
-																<div class="row">
-																	<div class="col-md-12">
-																		<h4 class="text-info">Ubicación Geografica</h4>
-																		<div id="map" class="gmaps" style="height: 200px;"></div>
-																		<input type="hidden" id="coordenadas" />
-																	</div>
-																</div>
-															</div>
-															<div class="modal-footer">
-																<div id="agregarSede"
-																	class="btn btn-outline-success waves-effect">Agregar</div>
-																<div
-																	class="btn btn-outline-danger waves-effect text-left"
-																	data-dismiss="modal">Close</div>
-															</div>
-														</div>
-														<!-- /.modal-content -->
-													</div>
-													<!-- /.modal-dialog -->
-												</div>
-												<div class="row">
-													<div class="col-md-4">
-														<div class="btn btn-outline-dark" data-toggle="modal"
-															data-target="#modalSede">Agregar Sede</div>
-													</div>
-												</div>
-												<br>
-												<div class="row">
-													<div class="col-md-12" id="detSedes">
-														<table class="table color-bordered-table inverse-bordered-table vm no-th-brd pro-of-month">
-															<thead>
-																<tr>
-																	<th>Sede</th>
-																	<th>Dirección</th>
-																	<th>Teléfono</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr th:each="item: ${listaSedes}">
-																	<td class="col-md-6" th:text="${item.nomSede}"></td>
-																	<td class="col-md-6" th:text="${item.direccion}"></td>
-																	<td class="col-md-6" th:text="${item.telf}"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="card">
 													<div class="card-body">
 														<div class="row">
 															<div class="col-md-12 col-lg-6">
-																<button type="submit" class="btn btn-block btn-outline-success">
+																<button type="submit"
+																		class="btn btn-block btn-outline-success">
 																	<i class="fa fa-save"></i> Guardar
 																</button>
 															</div>
@@ -290,7 +175,11 @@
 	<!-- <script th:src="@{/tema/assets/plugins/gmaps/gmaps.min.js}"></script>
 	<script th:src="@{/tema/assets/plugins/gmaps/jquery.gmaps.js}"></script> -->
 	<script type="text/javascript">
-
+		/*function confirmar(e) {
+			if(!confirm('¿Esta seguro de registrar esta institución?')){
+			    e.preventDefault();
+			}
+        }*/
         function initMap() {
 			var map = new google.maps.Map(document.getElementById('map'), {
 				zoom : 12,

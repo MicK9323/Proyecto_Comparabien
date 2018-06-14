@@ -102,6 +102,13 @@ xmlns:th="http://www.thymeleaf.org">
                             </div>
                             <div class="card-body">
                                 <div class="row">
+                                    <form th:action="@{'/sedes/'+${institucion.ruc}+'/nuevo'}" method="get">
+                                        <button class="btn btn-primary">
+                                            <i class="fa fa-plus"></i> Registrar Sede
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="row" th:if="${!institucion.sedes.isEmpty()}">
                                     <div class="table-responsive m-t-20">
                                         <table id="tbSedes" class="table full-color-table full-inverse-table hover-table">
                                             <thead>

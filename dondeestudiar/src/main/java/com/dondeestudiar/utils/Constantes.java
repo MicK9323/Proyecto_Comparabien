@@ -28,5 +28,6 @@ public class Constantes {
     public final static String NO_IMAGE_SELECTED = "Debe seleccionar una imagen";
     public final static String CHANGES_SUCCESSFULL = "Cambios guardados correctamente";
     public final static String SAVE_SUCCESSFULL = "Registro agregado correctamente";
+    public final static String NO_FOUND_SEDES = "Aún no hay sedes registradas";
 
 }
