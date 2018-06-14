@@ -185,7 +185,6 @@ public class CarrerasController {
         return "redirect:/carreras/listar";
     }
 
-
     //    Validar Session
     public boolean validarSession(HttpServletRequest request) {
         if (request.getSession().getAttribute("usuario") == null) {

@@ -24,7 +24,7 @@ public class LoginController {
 	public Usuario setUsuario() {
 		return new Usuario();
 	}
-		
+
 	@GetMapping(value={"/admin/login","/index",""})
 	public String login(HttpServletRequest request) {
 		if( request.getSession().getAttribute("usuario") == null ) {

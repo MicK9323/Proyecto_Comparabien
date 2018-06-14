@@ -36,6 +36,11 @@ public class InstitucionServiceImpl implements IInstitucionesService {
 	}
 
 	@Override
+	public Institucion findById(int id) {
+		return institucionesDAO.findById(id).orElse(null);
+	}
+
+	@Override
 	@Transactional
 	public void addSedes(ArrayList<Sede> sedes) {
 		sedeDAO.saveAll(sedes);		

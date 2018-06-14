@@ -8,6 +8,7 @@
         <link th:href="@{/tema/assets/plugins/bootstrap/css/bootstrap.min.css}"
               rel="stylesheet">
         <link rel="stylesheet" th:href="@{/tema/css/pages/card-page.css}">
+        <link th:href="@{/tema/css/pages/tab-page.css}" rel="stylesheet">
         <link th:href="@{/tema/css/pages/google-vector-map.css}"
               rel="stylesheet">
         <link th:href="@{/tema/assets/plugins/alertify/alertify.min.css}"
@@ -48,7 +49,7 @@
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#"> <!-- Logo icon -->
+                        <a class="navbar-brand" th:href="@{/index}"> <!-- Logo icon -->
                             <b> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                                 <!-- Dark Logo icon -->
                                 <img

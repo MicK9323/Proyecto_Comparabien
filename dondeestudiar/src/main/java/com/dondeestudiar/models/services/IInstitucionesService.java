@@ -16,6 +16,8 @@ public interface IInstitucionesService {
 	public void saveInstitucion(Institucion obj);
 	
 	public Institucion findByRuc(String ruc);
+
+	public Institucion findById(int id);
 	
 	public void addSedes(ArrayList<Sede> sedes);
 	
