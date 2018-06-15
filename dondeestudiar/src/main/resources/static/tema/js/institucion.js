@@ -36,7 +36,48 @@ $(document).ready(function() {
 		console.info('Ubicacion: '+$('#ubiSede').val());
 		console.info('Codigo: '+ubigueo);
 	});
-	
+
+	function populateTable(data){
+        $('#detSedes tbody').html("");
+        if(data.length >= 1){
+            for(i = 0; i < data.length; i++){
+                var item = i+1;
+                $('#detSedes tbody').append(
+                    '<tr>'+
+                    '<td class="text-center index">'+item+'</td>'+
+                    '<td class="text-left">'+data[i]['nomSede']+'</td>'+
+                    '<td class="text-left">'+data[i]['direccion']+'</td>'+
+                    '<td>' +
+                    '<div class="btn btn-outline-danger btnEliminar">' +
+                    '<i class="fa fa-trash-o"></i>' +
+                    '</div>' +
+                    '</td>'+
+                    '</tr>'
+                );
+            }
+		}
+	}
+
+	$('#detSedes').on('click','.btnEliminar',function () {
+		var index = $(this).parent().parent().find('.index').text();
+		console.log(index);
+		alertify.confirm("Está seguro de retirar esta sede",
+			function () {
+                $.ajax({
+                    type: "GET",
+                    url: "/instituciones/delsede/"+index,
+                    timeout: 600000,
+                    success: function (result) {
+                        console.log(result);
+                        populateTable(result);
+                        alertify.message('Sede retirada!');
+                    }
+                });
+        	},function () {
+                alertify.message('Cancelado por el usuario');
+            });
+		return false;
+    });
 	
 	$('#agregarSede').click(function(){
 		console.info("click");
@@ -47,9 +88,12 @@ $(document).ready(function() {
 		cy = $('#cy').val().trim();
 		console.info("Latitud: "+cx);
 		console.info("Longitud: "+cy);
-		if( nomSede == "" || direccion == "" || telf == "" || ubigueo == "" || cx == "" || cy == "" ){
+		if( nomSede == "" || direccion == "" || telf == "" || ubigueo == ""){
 			alertify
-			  .alert("Porfavor ingrese todos los campos");
+			  .alert("Debe ingresar todos los campos!");
+		}
+		if(cx == "" || cy == "" ){
+			alertify.alert("Debe localizar su sede antes de agregarla!");
 		}else {
 			alertify.confirm("Esta seguro de agregar esta sede?",
 					  function(){
@@ -63,16 +107,7 @@ $(document).ready(function() {
 							success: function (result) {
                                 limpiarCampos();
                                 console.log(result);
-                                $('#detSedes tbody').html("");
-                                for(i = 0; i < result.length; i++){
-                                	$('#detSedes tbody').append(
-                                    	'<tr>'+
-											'<td class="col-md-6">'+result[i]['nomSede']+'</td>'+
-											'<td class="col-md-6">'+result[i]['direccion']+'</td>'+
-											'<td class="col-md-6">'+result[i]['telf']+'</td>'+
-                                        '</tr>'
-									);
-								}
+                                populateTable(result);
                                 $('#agregarSede').prop("disabled",false);
                                 alertify.success('Sede Agregada');
                             },

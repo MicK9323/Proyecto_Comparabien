@@ -145,17 +145,14 @@ public class InstitucionesController {
         }
     }
 
-    /*@GetMapping(value = "/refresh")
-    public String RefreshData(Map<String, Object> model, HttpServletRequest request, RedirectAttributes flash){
-        if (validarSesion(request) == false) {
-            flash.addFlashAttribute("error", Constantes.SESSION_EXPIRED);
-            return "redirect:/admin/login";
-        }
-
+    @GetMapping(value = "/delsede/{index}")
+    @ResponseBody
+    public List<Sede> RetirarSede(@PathVariable String index, HttpServletRequest request){
         List<Sede> sedes = (List<Sede>) request.getSession().getAttribute("sedes");
-        model.put("sedes",sedes);
-        return "admin/regInstitucion :: #detSedes";
-    }*/
+        int indice = Integer.parseInt(index)-1;
+        sedes.remove(indice);
+        return sedes;
+    }
 
     // Registrar una Institucion y sus sedes
     @SuppressWarnings("unchecked")
