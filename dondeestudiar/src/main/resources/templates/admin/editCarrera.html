@@ -34,8 +34,12 @@
 													<div class="form-group">
 														<label>Nombre</label> <input
 															placeholder="Nombre de carrera" autocomplete="off"
-															autofocus th:field="*{nombre}" type="text" ng-model="nombreCarrera" letters-only
-															class="form-control" th:errorclass="border-danger">
+															autofocus th:field="*{nombre}" type="text" letters-only
+															class="form-control" th:errorclass="border-danger"
+	                                                        class="form-control" th:errorclass="border-danger"
+	                                                        data-ng-model="txtNombre.text"
+															data-ng-show="txtNombre.visible"
+															maxlength={{txtNombre.length}}>
 														<small th:if="${#fields.hasErrors('nombre')}"
 															th:errors="*{nombre}" class="text-danger"></small>
 													</div>
@@ -72,9 +76,12 @@
 															class="fa fa-info-circle text-info"></i> Duración <span
 															class="tooltip-content3"> Duración de la carrera
 																en semestres. </span>
-														</a> <input th:field="*{duracion}" type="number" ng-model="duracionCarrera" numbers-only
+														</a> <input th:field="*{duracion}" type="text" ng-model="duracionCarrera"
 															autocomplete="off" class="form-control" id="duracion"
-															th:errorclass="border-danger"> <small
+															th:errorclass="border-danger"
+															data-ng-model="txtDuracion.text"
+														    data-ng-show="txtDuracion.visible" 
+														    maxlength={{txtDuracion.length}} numbers-only> <small
 															th:if="${#fields.hasErrors('duracion')}"
 															th:errors="*{duracion}" class="text-danger"></small>
 													</div>
@@ -85,9 +92,12 @@
 															class="fa fa-info-circle text-info"></i> Popularidad <span
 															class="tooltip-content3"> Se incrementa segun
 																realizen consultas </span>
-														</a> <input th:field="*{popularidad}" type="number"
+														</a> <input th:field="*{popularidad}" type="text"
 															autocomplete="off" class="form-control" id="popularidad"
-															th:errorclass="border-danger"> <small
+															th:errorclass="border-danger"
+															data-ng-model="txtPopularidad.text"
+														    data-ng-show="txtPopularidad.visible"
+														    maxlength={{txtPopularidad.length}} numbers-only> <small
 															th:if="${#fields.hasErrors('popularidad')}"
 															th:errors="*{popularidad}" class="text-danger"></small>
 													</div>
@@ -98,7 +108,10 @@
 													<label>Remuneración Promedio</label> <input
 														th:field="*{remuneracion}" type="number"
 														autocomplete="off" class="form-control" id="remuneracion"
-														th:errorclass="border-danger"> <small
+														th:errorclass="border-danger"
+														data-ng-model="txtRemuneracion.text"
+													    data-ng-show="txtRemuneracion.visible"
+													    maxlength={{txtRemuneracion.length}}> <small
 														th:if="${#fields.hasErrors('remuneracion')}"
 														th:errors="*{remuneracion}" class="text-danger"></small>
 												</div>

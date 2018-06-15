@@ -1,7 +1,7 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/layout/layout :: head"></head>
-<body class="fix-header card-no-border fix-sidebar">
+<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="InstitucionApp" ng-controller="InstitucionController" ng-init="init()">
 
 	<div th:replace="admin/layout/layout :: preloader"></div>
 
@@ -18,14 +18,14 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-header bg-info">
-								<h4 class="m-b-0 text-white">Editar InstituciÃ³n</h4>
+								<h4 class="m-b-0 text-white">Editar Institución</h4>
 							</div>
 							<div class="card-body">
 								<form th:action="@{/instituciones/editar}"
 									th:object="${institucion}" method="post"
 									enctype="multipart/form-data">
 									<div class="form-body">
-										<h3 class="card-title">Datos de la InstituciÃ³n</h3>
+										<h3 class="card-title">Datos de la Institución</h3>
 										<hr />
 										<div class="row">
 											<div class="col-md-12 col-lg-7">
@@ -45,7 +45,7 @@
 												<div class="row">
 													<div class="col-md-12">
 														<div class="form-group">
-															<label>Nombre de InstituciÃ³n</label> <input
+															<label>Nombre de Institución</label> <input
 																th:field="*{nombre}" type="text"
 																class="form-control" th:errorclass="border-danger">
 															<span th:if="${#fields.hasErrors('nombre')}"
@@ -66,7 +66,7 @@
 													</div>
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
-															<label for="telf">Central TelefÃ³nica</label>
+															<label for="telf">Central Telefónica</label>
 															<input
 																th:field="*{telf}" type="tel"
 																class="form-control" id="telf"
@@ -92,7 +92,7 @@
 										<div class="row">
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
-													<label>Tipo de InstituciÃ³n</label>
+													<label>Tipo de Institución</label>
 													<input type="hidden" th:field="*{tipoInstitucion.idParam}" >
 													<input th:field="*{tipoInstitucion.desc}" type="text"
 														readonly="readonly" class="form-control">
@@ -100,7 +100,7 @@
 											</div>
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
-													<label>Tipo de GestiÃ³n</label>
+													<label>Tipo de Gestión</label>
 													<input type="hidden" th:field="*{tipoGestion.idParam}" >
 													<input th:field="*{tipoGestion.desc}" type="text"
 														readonly="readonly" class="form-control">

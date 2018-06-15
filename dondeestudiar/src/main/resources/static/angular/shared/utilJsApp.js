@@ -207,7 +207,8 @@ utiljsApp.directive('lettersOnly', function () {
       require: 'ngModel',
       link: function(scope, element, attr, ngModelCtrl) {
 	        function fromUser(text) {
-	          var transformedInput = text.replace(/[^a-zA-Z]/g, '');
+	          var transformedInput = text.replace(/[^A-Za-zÁÉÍÓÚñáéíóúÑ\s?]/g, '');
+	          transformedInput = transformedInput.replace(/\s{2,}/g, ' ');
 	          var capitalized = transformedInput.toUpperCase();// CONVIRTIENDO A
 																// MAYUSCULA
 	          if (capitalized !== text) {
