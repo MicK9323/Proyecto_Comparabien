@@ -142,6 +142,130 @@
 												</div>
 											</div>
 										</div>
+										<h3 class="box-title">Sedes</h3>
+										<hr />
+										<div class="row">
+											<div class="col-md-12">
+												<!-- ventana modal -->
+												<div class="modal fade bs-example-modal-lg" id="modalSede"
+														 tabindex="-1" role="dialog"
+														 aria-labelledby="myLargeModalLabel" style="display: none;"
+														 aria-hidden="true">
+														<div class="modal-dialog modal-lg">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title text-info" id="myLargeModalLabel">
+																		<strong>Datos de Sede</strong>
+																	</h4>
+																	<button type="button" class="close" data-dismiss="modal"
+																			aria-hidden="true">x</button>
+																</div>
+																<div class="modal-body">
+																	<div id="error" class="alert alert-danger alert-dismissible fade show"
+																		 role="alert" th:if="${sedeError != null}">
+																		<strong th:text="${sedeError}"></strong>
+																		<button type="button" class="close" data-dismiss="alert"
+																				aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="row">
+																		<div class="col-sm-12 col-md-12 col-lg-6">
+																			<div class="form-group">
+																				<label class="text-info"><strong>Nombre de Sede</strong></label>
+																				<input id="nomSede" type="text" class="form-control" autocomplete="off">
+																			</div>
+																			<div class="form-group">
+																				<label class="text-info"><strong>Ubicación</strong></label>
+																				<input id="ubiSede" placeholder="Ubicacion"
+																					   type="text" class="form-control" autocomplete="off">
+																			</div>
+																			<div class="form-group">
+																				<div id="listaUbigueos">
+																					<table class="table table-hover">
+																						<tr class="ubicacion" th:each="item: ${ubigueos}">
+																							<td class="desc" th:text="${item.getDescripcion()}"></td>
+																							<td>
+																								<input type="hidden" class="codUbigueo"
+																									   th:value="${item.codUbigueo}" />
+																							</td>
+																						</tr>
+																					</table>
+																				</div>
+																			</div>
+																		</div>
+																		<div id="ubigueo" class="col-sm-12 col-md-12 col-lg-6">
+																			<div class="form-group">
+																				<label class="text-info"><strong>Dirección de Sede</strong></label>
+																				<input id="direccion" type="text" class="form-control" autocomplete="off">
+																			</div>
+																			<div class="form-group">
+																				<label class="text-info"><strong>Teléfono
+																					de Sede</strong></label>
+																				<input id="telfSede" type="tel"
+																					   class="form-control" autocomplete="off">
+																			</div>
+																			<input type="hidden" id="cx" >
+																			<input type="hidden" id="cy" >
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-md-4">
+																			<div id="btnLocalizar" class="btn btn-outline-success">
+																				<i class="fa fa-map-marker"></i> Localizar
+																			</div>
+																		</div>
+																	</div>
+																	<br />
+																	<div class="row">
+																		<div class="col-md-12">
+																			<h4 class="text-info">Ubicación Geografica</h4>
+																			<div id="map" class="gmaps" style="height: 200px;"></div>
+																			<input type="hidden" id="coordenadas" />
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																	<div id="agregarSede"
+																		 class="btn btn-outline-success waves-effect">Agregar</div>
+																	<div
+																			class="btn btn-outline-danger waves-effect text-left"
+																			data-dismiss="modal">Cerrar</div>
+																</div>
+															</div>
+															<!-- /.modal-content -->
+														</div>
+														<!-- /.modal-dialog -->
+													</div>
+												<div class="row">
+													<div class="col-md-4">
+														<div class="btn btn-outline-dark" data-toggle="modal"
+															 data-target="#modalSede">Agregar Sede</div>
+													</div>
+												</div>
+												<br>
+												<div class="row">
+													<div class="col-md-12">
+														<table id="detSedes" class="table color-bordered-table inverse-bordered-table vm no-th-brd pro-of-month">
+															<thead>
+															<tr>
+																<th>Sede</th>
+																<th>Dirección</th>
+																<th>Teléfono</th>
+															</tr>
+															</thead>
+															<tbody>
+															<!--<tr th:each="item: ${sedes}">
+																<td class="col-md-6" th:text="${item.nomSede}"></td>
+																<td class="col-md-6" th:text="${item.direccion}"></td>
+																<td class="col-md-6" th:text="${item.telf}"></td>
+															</tr>-->
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="card">
@@ -216,7 +340,7 @@
 
 		function geocodeAddress(geocoder, resultsMap) {
 			var region = $('#ubiSede').val().trim();
-			var direccion = $('#dirSede').val().trim();
+			var direccion = $('#direccion').val().trim();
 			var buscado = direccion + ", " + region;
 			console.log("Direccion buscada: "+buscado);
 			if (region == "" || direccion == "") {
@@ -238,8 +362,12 @@
 													map : resultsMap,
 													position : results[0].geometry.location
 												});
-										document.getElementById("coordenadas").value = marker.getPosition().toString();
-										console.log($('#coordenadas').val());
+                                        document.getElementById("cx").value = marker.getPosition().lat().toString();
+                                        document.getElementById("cy").value = marker.getPosition().lng().toString();
+                                        console.log($('#cx').val());
+                                        console.log($('#cy').val());
+										/*document.getElementById("coordenadas").value = marker.getPosition().toString();
+										console.log($('#coordenadas').val());*/
 									} else {
 										alertify
 										  .alert('No se pudo encontrar la ubicacion ingresada '+ status);

@@ -17,13 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -58,23 +52,13 @@ public class InstitucionesController {
         return new Institucion();
     }
 
-    // Cargar foto de institucion
-    @GetMapping(value = "/cargarFoto/{filename:.+}")
-    public ResponseEntity<Resource> verFoto(@PathVariable String filename, RedirectAttributes flash) {
-        Resource recurso = null;
-        try {
-            if (filename.equals(Constantes.NOT_FOUND)) {
-                recurso = new UploadFiles().cargarImagen(filename, Constantes.FILE_ERROR);
-            } else {
-                recurso = new UploadFiles().cargarImagen(filename, Constantes.UPLOADS_INSTITUCIONES);
-            }
-        } catch (MalformedURLException e) {
-            flash.addFlashAttribute("Error ", e.getClass() + " " + e.getMessage());
-            e.printStackTrace();
-        }
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachement; filename=\"" + recurso.getFilename() + "\"")
-                .body(recurso);
+    // Autocompletar ubigueos
+    @GetMapping(value = "/cargar-ubigueo/{term}")
+    public String cargarUbigueo(@PathVariable String term, Map<String, Object> model) {
+        term = term.replaceAll("_", " ");
+        List<Ubigueo> ubigueos = ubigueoService.execSpUbigueo(term);
+        model.put("ubigueos", ubigueos);
+        return "admin/regInstitucion :: #listaUbigueos";
     }
 
     // Listado de instituciones
@@ -117,6 +101,9 @@ public class InstitucionesController {
             flash.addFlashAttribute("error", "Inicie sesion antes de continuar");
             return "redirect:/admin/login";
         }
+        if(request.getSession().getAttribute("sedes") != null) {
+            request.getSession().removeAttribute("sedes");
+        }
         Institucion institucion = new Institucion();
         List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
         List<Parametros> tipoGestion = parametrosService.findByIdGrupo(Constantes.TIPO_GESTION);
@@ -127,14 +114,57 @@ public class InstitucionesController {
         return "admin/regInstitucion";
     }
 
-    // Registrar una Institucion
+    @PostMapping(value = "/agregarsede")
+    @ResponseBody
+    public List<Sede> AgregarSede(@RequestParam String nomSede, @RequestParam String ubigueo,
+                              @RequestParam String direccion, @RequestParam String telf,
+                              @RequestParam String cx, @RequestParam String cy, HttpServletRequest request,
+                              Map<String,Object> model, RedirectAttributes flash){
+        List<Sede> sedes = null;
+        if(request.getSession().getAttribute("sedes") == null){
+            sedes = new ArrayList<Sede>();
+            request.getSession().setAttribute("sedes",sedes);
+        }else {
+            sedes = (ArrayList<Sede>) request.getSession().getAttribute("sedes");
+        }
+        try{
+            Sede sede = new Sede();
+            Ubigueo ubicacion = new Ubigueo();
+            ubicacion.setCodUbigueo(ubigueo);
+            sede.setNomSede(nomSede);
+            sede.setUbicacion(ubicacion);
+            sede.setDireccion(direccion);
+            sede.setTelf(telf);
+            sede.setCx(cx);
+            sede.setCy(cy);
+            sedes.add(sede);
+            return sedes;
+        }catch(Exception e){
+            model.put("sedeError",String.format("Error: %s \n Mensaje: %s",e.getCause().toString(),e.getMessage()));
+            return null;
+        }
+    }
+
+    /*@GetMapping(value = "/refresh")
+    public String RefreshData(Map<String, Object> model, HttpServletRequest request, RedirectAttributes flash){
+        if (validarSesion(request) == false) {
+            flash.addFlashAttribute("error", Constantes.SESSION_EXPIRED);
+            return "redirect:/admin/login";
+        }
+
+        List<Sede> sedes = (List<Sede>) request.getSession().getAttribute("sedes");
+        model.put("sedes",sedes);
+        return "admin/regInstitucion :: #detSedes";
+    }*/
+
+    // Registrar una Institucion y sus sedes
     @SuppressWarnings("unchecked")
     @PostMapping(value = "/nuevo")
     public String registrar(@Valid Institucion institucion, BindingResult result, SessionStatus status, HttpServletRequest request,
                             HttpSession session, @RequestParam("file") MultipartFile file, Model model, RedirectAttributes flash) {
 
         if (validarSesion(request) == false) {
-            flash.addFlashAttribute("error", "Inicie sesion antes de continuar");
+            flash.addFlashAttribute("error", Constantes.SESSION_EXPIRED);
             return "redirect:/admin/login";
         }
         List<Parametros> tipoInstitucion = parametrosService.findByIdGrupo(Constantes.TIPO_INSTITUCION);
@@ -148,8 +178,13 @@ public class InstitucionesController {
             return "admin/regInstitucion";
         }
 
+        if (session.getAttribute("sedes") == null) {
+            model.addAttribute("warning", Constantes.NO_FOUND_SEDES);
+            return "admin/regInstitucion";
+        }
+
         if (file.isEmpty() || file.getName().equals("")) {
-            model.addAttribute("warning", "Debe seleccionar una imagen");
+            model.addAttribute("warning", Constantes.NO_IMAGE_SELECTED);
             return "admin/regInstitucion";
         }
 
@@ -161,8 +196,17 @@ public class InstitucionesController {
                 institucion.setRutaLogo(Constantes.URL_ENDPOINT + Constantes.UPLOADS_INSTITUCIONES + foto);
                 institucion.setLogo(foto);
                 persistObj = institucionesService.addInstitucion(institucion);
+                if (persistObj != null) {
+                    ArrayList<Sede> sedes = (ArrayList<Sede>) session.getAttribute("sedes");
+                    for (Sede obj : sedes) {
+                        obj.setInstitucion(persistObj);
+                    }
+                    institucionesService.addSedes(sedes);
+                }
+                session.removeAttribute("sedes");
+                flash.addFlashAttribute("success", Constantes.SAVE_SUCCESSFULL);
             } catch (IOException e) {
-                flash.addFlashAttribute("error", e.getClass() + " " + e.getCause().toString());
+                model.addAttribute("error", e.getClass() + " " + e.getCause().toString());
                 e.printStackTrace();
                 return "admin/regInstitucion";
             }

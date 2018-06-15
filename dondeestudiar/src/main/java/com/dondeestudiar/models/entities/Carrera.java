@@ -33,7 +33,7 @@ public class Carrera {
 
     @Column(name = "duracion")
     @NotNull
-    @Min(value = 6) @Max(value = 24)
+    @Min(value = 1) @Max(value = 18)
     private int duracion;
 
     @Column(name = "popularidad")

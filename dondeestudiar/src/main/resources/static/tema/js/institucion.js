@@ -2,18 +2,20 @@ $(document).ready(function() {
 	$('#listaUbigueos').hide();
 	var nomSede = "";
 	var ubigueo = "";
-	var dirSede = "";
-	var telfSede = "";
-	var coordenadas = "";
-	
+	var direccion = "";
+	var telf = "";
+	var cx = "";
+	var cy = "";
+
 	function limpiarCampos(){
 		nomSede="";
 		ubigueo="";
-		dirSede="";
-		telfSede="";
+		direccion="";
+		telf="";
 		$('#nomSede').val("");
-		$('#dirSede').val("");
+		$('#direccion').val("");
 		$('#telfSede').val("");
+		$('#ubiSede').val("");
 		$('#listaUbigueos').hide();
 	}
 	
@@ -38,27 +40,47 @@ $(document).ready(function() {
 	
 	$('#agregarSede').click(function(){
 		console.info("click");
-		nomSede = $('#nomSede').val().trim().split(" ").join("_");
-		dirSede = $('#dirSede').val().trim().split(" ").join("_");
-		telfSede = $('#telfSede').val().trim().split(" ").join("_");
-		var array = [];
-		array = $('#coordenadas').val().trim().split(",");
-		coordx = array[0].replace("(","").trim();
-		coordy = array[1].replace(")","").trim();
-		console.info("Latitud: "+coordx);
-		console.info("Longitud: "+coordy);
-		if( nomSede == "" || dirSede == "" || telfSede == "" || ubigueo == "" ){
+		nomSede = $('#nomSede').val().trim();
+		direccion = $('#direccion').val().trim();
+		telf = $('#telfSede').val().trim();
+		cx = $('#cx').val().trim();
+		cy = $('#cy').val().trim();
+		console.info("Latitud: "+cx);
+		console.info("Longitud: "+cy);
+		if( nomSede == "" || direccion == "" || telf == "" || ubigueo == "" || cx == "" || cy == "" ){
 			alertify
 			  .alert("Porfavor ingrese todos los campos");
 		}else {
-			var data = [];
-			data.push(nomSede,ubigueo,dirSede,telfSede,coordx,coordy);
 			alertify.confirm("Esta seguro de agregar esta sede?",
 					  function(){
-						console.info("data: "+data);
-						$('#detSedes').load('/instituciones/cargar-sedes/'+data);
-						  limpiarCampos();
-					    alertify.success('Sede Agregada');
+						$('#agregarSede').prop("disabled",true);
+						$.ajax({
+							type: "POST",
+							url: "/instituciones/agregarsede",
+							data: {nomSede: nomSede, ubigueo: ubigueo, direccion: direccion,
+									telf: telf, cx: cx, cy: cy},
+							timeout: 600000,
+							success: function (result) {
+                                limpiarCampos();
+                                console.log(result);
+                                $('#detSedes tbody').html("");
+                                for(i = 0; i < result.length; i++){
+                                	$('#detSedes tbody').append(
+                                    	'<tr>'+
+											'<td class="col-md-6">'+result[i]['nomSede']+'</td>'+
+											'<td class="col-md-6">'+result[i]['direccion']+'</td>'+
+											'<td class="col-md-6">'+result[i]['telf']+'</td>'+
+                                        '</tr>'
+									);
+								}
+                                $('#agregarSede').prop("disabled",false);
+                                alertify.success('Sede Agregada');
+                            },
+							error: function (error) {
+                                $('#agregarSede').prop("disabled",false);
+								alertify.alert("Error: "+error);
+                            }
+						});
 					  },
 					  function(){
 					    alertify.message('Cancelado por el usuario');
