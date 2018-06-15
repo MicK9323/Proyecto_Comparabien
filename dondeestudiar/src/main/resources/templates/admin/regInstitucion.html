@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/layout/layout :: head"></head>
-<body class="fix-header card-no-border fix-sidebar">
+<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="InstitucionApp" ng-controller="InstitucionController" ng-init="init()">>
 
 	<div th:replace="admin/layout/layout :: preloader"></div>
 
@@ -33,8 +33,11 @@
 													<div class="col-md-8">
 														<div class="form-group">
 															<input placeholder="RUC" maxlength="11" autocomplete="off"
-																autofocus th:field="*{ruc}" type="text"
-																class="form-control" th:errorclass="border-danger">
+																autofocus th:field="*{ruc}" type="text" numbers-only
+																class="form-control" th:errorclass="border-danger"
+																data-ng-model="txtRuc.text"
+																data-ng-show="txtRuc.visible"
+																data-maxlength={{txtRuc.length}}>
 															<small th:if="${#fields.hasErrors('ruc')}" 
 																th:errors="*{ruc}"
 																class="text-danger"></small>
@@ -53,7 +56,10 @@
 														<div class="form-group">
 															<label>Nombre de Institución</label> 
 															<input th:field="*{nombre}" type="text" autocomplete="off"
-																class="form-control" th:errorclass="border-danger">
+																class="form-control" th:errorclass="border-danger" letters-only
+																data-ng-model="txtNombre.text"
+																data-ng-show="txtNombre.visible"
+																data-maxlength={{txtNombre.length}}>
 															<small th:if="${#fields.hasErrors('nombre')}" 
 																th:errors="*{nombre}"
 																class="text-danger"></small>
@@ -65,7 +71,10 @@
 														<div class="form-group">
 															<label for="web">Sitio Web</label> 
 															<input th:field="*{website}" type="text" autocomplete="off"
-																class="form-control" id="web" th:errorclass="border-danger">
+																class="form-control" id="web" th:errorclass="border-danger"
+																data-ng-model="txtSitioWeb.text"
+																data-ng-show="txtSitioWeb.visible"
+																data-maxlength={{txtSitioWeb.length}}>
 															<small th:if="${#fields.hasErrors('website')}" 
 																th:errors="*{website}"
 																class="text-danger"></small>
@@ -74,8 +83,11 @@
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
 															<label for="telf">Central Telefónica</label> 
-																<input th:field="*{telf}" type="tel" autocomplete="off"
-																	class="form-control" id="telf" th:errorclass="border-danger">
+																<input th:field="*{telf}" type="tel" autocomplete="off" numbers-only
+																	class="form-control" id="telf" th:errorclass="border-danger"
+																	data-ng-model="txtCentralTelf.text"
+																	data-ng-show="txtCentralTelf.visible"
+																	data-maxlength={{txtCentralTelf.length}}>
 																<small th:if="${#fields.hasErrors('telf')}" 
 																th:errors="*{telf}"
 																class="text-danger"></small>
@@ -174,6 +186,10 @@
 	<!-- google maps api -->
 	<!-- <script th:src="@{/tema/assets/plugins/gmaps/gmaps.min.js}"></script>
 	<script th:src="@{/tema/assets/plugins/gmaps/jquery.gmaps.js}"></script> -->
+	<script th:src="@{/angular/angular.js}"></script>
+	<script th:src="@{/angular/app/institucion-app.js}"></script>
+	<script th:src="@{/angular/app/controllers/institucion-controller.js}"></script>
+	<script th:src="@{/angular/shared/utilJsApp.js}"></script>
 	<script type="text/javascript">
 		/*function confirmar(e) {
 			if(!confirm('¿Esta seguro de registrar esta institución?')){
