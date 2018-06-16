@@ -7,6 +7,7 @@ import com.dondeestudiar.models.services.IInstitucionesService;
 import com.dondeestudiar.models.services.ISedeService;
 import com.dondeestudiar.utils.Constantes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -76,6 +77,9 @@ public class CarreraSedeController {
             flash.addFlashAttribute("error",Constantes.SESSION_EXPIRED);
             return "redirect:/admin/login";
         }
+        if(request.getSession().getAttribute("helpers") != null) {
+            request.getSession().removeAttribute("helpers");
+        }
         List<Sede> sedes = institucion.getSedes();
         model.put("titulo","Asignar Carreras");
         model.put("institucion",institucion);
@@ -84,7 +88,8 @@ public class CarreraSedeController {
     }
 
     // Cargar lista de helpers
-    @PostMapping(value = "/cargar")
+    @PostMapping(value = "/cargar",
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<HelperView> CargarLista(@RequestBody HelperView helper, HttpServletRequest request){
         List<HelperView> helpers = null;

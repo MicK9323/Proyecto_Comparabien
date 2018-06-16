@@ -44,11 +44,14 @@
                                     <div class="form-group">
                                         <label class="control-label font-bold">Nombre de Carrera</label>
                                         <input type="text" class="form-control" id="nomCarrera" readonly>
-                                        <input type="hidden" id="codCarrera">
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label font-bold">Costo Anual</label>
                                         <input id="costo" type="text" placeholder="S/. 0000.0" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label font-bold">% Ingresantes</label>
+                                        <input id="ingresantes" type="text" placeholder="%" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-lg-6">
@@ -61,26 +64,25 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label font-bold">Nombre de Sede</label>
+                                        <input type="text" class="form-control" id="nomSede" readonly>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label font-bold">Acreditado</label>
                                         <select id="acreditado" class="form-control custom-select">
                                             <option value="1">Si</option>
                                             <option value="0">No</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label font-bold">% Ingresantes</label>
-                                        <input id="ingresantes" type="text" placeholder="%" class="form-control">
-                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <button id="btnAsignar" class="btn btn-outline-success">
+                                    <button id="btnAsignar" class="btn btn-block btn-outline-success">
                                         <i class="mdi mdi-arrow-down-bold-hexagon-outline"></i> Asignar Carrera
                                     </button>
                                 </div>
                             </div>
-                            <hr/>
                             <div class="row p-5">
                                 <div class="col-md-12">
                                     <table id="tbDetalle" class="table full-color-table full-inverse-table hover-table">
@@ -128,18 +130,33 @@
     $(document).ready(function () {
         $('#listaCarreras').hide();
 
+        var idCarrera = "";
+        var nomCarrera = "";
+        var idSede = "";
+        var nomSede = "";
+        var acreditado = "";
+        var costo = "";
+        var ingresantes = "";
+
         function Model(idCarrera, nomCarrera, idSede, nomSede, acreditado, costo, ingresantes) {
-            this.idCarrera = idCarrera;
+            this.idCarrera = parseInt(idCarrera);
             this.nomCarrera = nomCarrera;
-            this.idSede = idSede;
+            this.idSede = parseInt(idSede);
             this.nomSede = nomSede;
-            this.acreditado = acreditado;
-            this.costo = costo;
-            this.ingresantes = ingresantes;
+            if(acreditado == "1"){
+            this.acreditado = true;
+            }else{
+                this.acreditado = false;
+            }
+            this.costo = parseFloat(costo);
+            this.ingresantes = parseInt(ingresantes);
         }
 
         $('#carrera').keyup(function () {
             var term = $(this).val().trim().split(" ").join("_");
+            if(term == ""){
+                $('#listaCarreras').hide();
+            }
             if(term.length > 5){
                 $('#spinner').toggleClass('d-none');
                 console.info('Busqueda: '+term);
@@ -151,12 +168,61 @@
         });
 
         $('#listaCarreras').on('click','.carrera', function(){
-            $('#codCarrera').val($(this).find('.idCarrera').val());
-            $('#nomCarrera').val($(this).find('.desc').text());
+            idCarrera = $(this).find('.idCarrera').val();
+            nomCarrera = $(this).find('.desc').text();
+            $('#nomCarrera').val(nomCarrera);
             $('#listaCarreras').hide();
-            console.info('Carrera: '+$('#nomCarrera').val());
-            console.info('Codigo: '+$('#codCarrera').val());
+            console.info('Carrera: '+nomCarrera);
+            console.info('Codigo: '+idCarrera);
         });
+
+        $('#sede').change(function () {
+            idSede = $(this).val();
+            nomSede = $('#sede option:selected').text();
+            $('#nomSede').val(nomSede);
+            console.log("Id Sede: "+idSede);
+            console.log("Sede: "+nomSede);
+        })
+
+        function validar(){
+            nomCarrera = $('#nomCarrera').val();
+            nomSede = $('#nomSede').val();
+            acreditado = $('#acreditado').val();
+            costo = $('#costo').val();
+            ingresantes = $('#ingresantes').val();
+
+            if(idCarrera == "" || nomCarrera == ""){
+                alertify.alert("Debe seleccionar una carrera!");
+                return false;
+            } else if(idSede == "" || nomSede == ""){
+                alertify.alert("Debe Seleccionar una sede!");
+                return false;
+            }else if(costo == "" ){
+                alertify.alert("Debe ingresar el costo de la carrera!");
+                return false;
+            }else if(ingresantes == ""){
+                alertify.alert("Debe ingresar el procentaje de ingresantes!");
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        $('#btnAsignar').click(function () {
+            if(validar()){
+                var model = new Model(idCarrera,nomCarrera,idSede,nomSede,acreditado,costo,ingresantes);
+                $.ajax({
+                    type:"POST",
+                    url: "/carreras/cargar",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(model),
+                    success: function (result) {
+                        console.log(result);
+                    }
+                })
+            }
+        })
 
     })
 </script>
