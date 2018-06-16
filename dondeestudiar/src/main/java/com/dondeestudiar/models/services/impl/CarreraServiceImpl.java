@@ -44,8 +44,8 @@ public class CarreraServiceImpl implements ICarreraService {
         return carreraDAO.sp_carrerasInstitucion(id);
     }
 
-    @Override
+    /*@Override
     public List<Carrera> sp_carrerasSede(int id) {
         return carreraDAO.sp_carrerasSede(id);
-    }
+    }*/
 }

@@ -1,5 +1,7 @@
 package com.dondeestudiar.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;

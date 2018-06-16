@@ -1,16 +1,21 @@
 package com.dondeestudiar.models.entities;
 
 import com.dondeestudiar.utils.Constantes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "tb_carreras")
-public class Carrera {
+public class Carrera implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +30,12 @@ public class Carrera {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_area")
+    @JsonIgnore
     private Area area;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_carrera")
+    @JsonIgnore
     private Parametros tipoCarrera;
 
     @Column(name = "duracion")

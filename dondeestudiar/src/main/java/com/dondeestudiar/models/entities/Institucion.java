@@ -25,6 +25,7 @@ import javax.validation.constraints.Size;
 
 
 import com.dondeestudiar.utils.Constantes;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_instituciones")

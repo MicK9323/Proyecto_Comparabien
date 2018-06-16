@@ -1,10 +1,16 @@
 package com.dondeestudiar.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "det_sede_carrera")
-public class CarreraSede {
+public class CarreraSede implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @EmbeddedId
     private CarreraSedePK id;
@@ -12,18 +18,19 @@ public class CarreraSede {
     @Column(name = "acreditado")
     private boolean acreditado;
 
-    @Column(name = "costoAnual")
+    @Column(name = "costo_anual")
     private double costoAnual;
 
     @Column(name = "rel_ingresantes_postulantes")
     private int ingresantes;
 
     @ManyToOne
-    @JoinColumn(name = "id_carrera", insertable = false, updatable = false)
+    @JoinColumn(name = "id_carrera",insertable=false, updatable = false)
     private Carrera carrera;
 
-    @ManyToOne
-    @JoinColumn(name = "id_sede",insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_sede", insertable=false, updatable = false)
+    @JsonIgnore
     private Sede sede;
 
     public CarreraSedePK getId() {

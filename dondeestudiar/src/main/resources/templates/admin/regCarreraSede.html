@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/layout/layout :: head" ></head>
+<body class="fix-header card-no-border fix-sidebar">
+	
+    <div th:replace="admin/layout/layout :: preloader"></div>
+    
+    <div id="main-wrapper">
+    
+    	<header th:replace="admin/layout/layout :: header"></header>
+    	
+    	<aside th:replace="admin/layout/layout :: sidebar"></aside>
+    	
+    	<div class="page-wrapper">
+			<div class="container-fluid">
+				<div th:replace="admin/layout/layout :: mensajes"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card card-outline-inverse">
+							<div class="card-header">
+								<h4 class="m-b-0 text-white">Asignar Carreras</h4></div>
+							<div class="card-body">
+								<div class="form-group row">
+									<div class="col-md-6">
+										<label class="control-label">Carrera</label>
+										<input type="text" id="carrera" class="form-control" placeholder="Carrera">
+									</div>
+									<div class="col-md-6">
+										<label>Area</label>
+										<select class="form-control custom-select">
+											<option value="">[Seleccionar Sede]</option>
+											<!--<option th:each="item:${areas}"
+													th:value="${item.id}" th:text="${item.nombre}"></option>-->
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-md-6">
+										<input type="text" class="form-control" id="nomCarrera" readonly>
+										<input type="hidden" id="codCarrera">
+									</div>
+									<div class="col-md-6">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    
+    </div>
+    
+    <div th:replace="admin/layout/layout :: scripts"></div>
+    
+</body>
+
+</html>

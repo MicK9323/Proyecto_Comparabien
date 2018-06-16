@@ -35,7 +35,7 @@ xmlns:th="http://www.thymeleaf.org">
                                     <div class="row text-center justify-content-md-center">
                                         <div class="col-6">
                                             <a th:href="@{'/carreras/mostrar/'+${institucion.id}}"
-                                               class="btn btn-block btn-outline-dark" target="_blank">
+                                               class="btn btn-block btn-outline-dark">
                                                 <font class="font-medium"><i class="mdi mdi-school"></i> Carreras</font>
                                             </a>
                                         </div>
@@ -115,7 +115,9 @@ xmlns:th="http://www.thymeleaf.org">
                                                 <tr>
                                                     <th class="text-left">Sede</th>
                                                     <th class="text-left">Departamento</th>
-                                                    <th class="text-center">Opciones</th>
+                                                    <th class="text-center"></th>
+                                                    <th class="text-center"></th>
+                                                    <th class="text-center"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -127,13 +129,23 @@ xmlns:th="http://www.thymeleaf.org">
                                                            data-toggle="tooltip" data-placement="top" data-original-title="Editar Sede">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" data-original-title="Deshabilitar Sede"
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top"
+                                                           data-original-title="Deshabilitar Sede"
                                                            th:if="${sede.estado}==true" th:href="@{'/sedes/disabled/'+${sede.id}+'/'+${institucion.ruc}}">
                                                             <i class="fa fa-minus-circle"></i>
                                                         </a>
-                                                        <a class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" data-original-title="Habilitar Sede"
+                                                        <a class="btn btn-outline-success" data-toggle="tooltip" data-placement="top"
+                                                           data-original-title="Habilitar Sede"
                                                             th:if="${sede.estado}==false" th:href="@{'/sedes/enabled/'+${sede.id}+'/'+${institucion.ruc}}">
                                                             <i class="fa fa-check"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-outline-success" data-toggle="tooltip" data-placement="top"
+                                                           data-original-title="Ver Carreras" th:href="@{'/carreras/sede/'+${sede.id}+'/mostrar'}">
+                                                            <i class="mdi mdi-school"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -149,7 +161,7 @@ xmlns:th="http://www.thymeleaf.org">
 		</div>
     
     </div>
-    
+
     <div th:replace="admin/layout/layout :: scripts"></div>
     <script>
         $(document).ready(function() {

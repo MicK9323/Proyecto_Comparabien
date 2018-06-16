@@ -17,6 +17,6 @@ public interface ICarreraService {
 
     public List<Carrera> sp_carrerasInstitucion(int id);
 
-    public List<Carrera> sp_carrerasSede(int id);
+//    public List<Carrera> sp_carrerasSede(int id);
 
 }
