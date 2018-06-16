@@ -91,7 +91,7 @@ public class Institucion implements Serializable {
 	@Column(name = "admisiones_anual")
 	private int admisiones;
 
-	@OneToMany(mappedBy = "institucion", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "institucion", fetch = FetchType.EAGER)
 	List<Sede> sedes;
 
 	@PrePersist

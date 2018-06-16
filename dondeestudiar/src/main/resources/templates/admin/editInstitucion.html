@@ -18,14 +18,14 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-header bg-info">
-								<h4 class="m-b-0 text-white">Editar Instituci髇</h4>
+								<h4 class="m-b-0 text-white">Editar Instituci贸n</h4>
 							</div>
 							<div class="card-body">
 								<form th:action="@{/instituciones/editar}"
 									th:object="${institucion}" method="post"
 									enctype="multipart/form-data">
 									<div class="form-body">
-										<h3 class="card-title">Datos de la Instituci髇</h3>
+										<h3 class="card-title">Datos de la Instituci贸n</h3>
 										<hr />
 										<div class="row">
 											<div class="col-md-12 col-lg-7">
@@ -45,7 +45,7 @@
 												<div class="row">
 													<div class="col-md-12">
 														<div class="form-group">
-															<label>Nombre de Instituci髇</label> <input
+															<label>Nombre de Instituci贸n</label> <input
 																th:field="*{nombre}" type="text"
 																class="form-control" th:errorclass="border-danger">
 															<span th:if="${#fields.hasErrors('nombre')}"
@@ -66,7 +66,7 @@
 													</div>
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
-															<label for="telf">Central Telef髇ica</label>
+															<label for="telf">Central Telef贸nica</label>
 															<input
 																th:field="*{telf}" type="tel"
 																class="form-control" id="telf"
@@ -92,7 +92,7 @@
 										<div class="row">
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
-													<label>Tipo de Instituci髇</label>
+													<label>Tipo de Instituci贸n</label>
 													<input type="hidden" th:field="*{tipoInstitucion.idParam}" >
 													<input th:field="*{tipoInstitucion.desc}" type="text"
 														readonly="readonly" class="form-control">
@@ -100,7 +100,7 @@
 											</div>
 											<div class="col-sm-12 col-md-4 col-lg-4">
 												<div class="form-group">
-													<label>Tipo de Gesti髇</label>
+													<label>Tipo de Gesti贸n</label>
 													<input type="hidden" th:field="*{tipoGestion.idParam}" >
 													<input th:field="*{tipoGestion.desc}" type="text"
 														readonly="readonly" class="form-control">

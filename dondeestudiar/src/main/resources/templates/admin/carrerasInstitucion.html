@@ -30,9 +30,11 @@
             <div th:replace="admin/layout/layout :: mensajes"></div>
             <div class="row m-b-5">
                 <div class="col-md-6">
-                    <button role="button" class="btn btn-outline-info">
-                        <i class="mdi mdi-school"></i> Agregar Carrera
-                    </button>
+                    <form th:action="@{/carreras/institucion/asignar}">
+                        <button role="button" class="btn btn-outline-info">
+                            <i class="mdi mdi-school"></i> Agregar Carrera
+                        </button>
+                    </form>
                 </div>
                 <div class="col-md-6 text-right">
                     <form th:action="@{'/instituciones/ver/'+${institucion.ruc}}">

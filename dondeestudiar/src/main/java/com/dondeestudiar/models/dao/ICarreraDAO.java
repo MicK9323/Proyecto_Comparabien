@@ -17,10 +17,7 @@ public interface ICarreraDAO extends JpaRepository<Carrera, Integer> {
     @Query(nativeQuery = true, value = "execute sp_carrerasInstitucion :id")
     public List<Carrera> sp_carrerasInstitucion( @Param("id") int id );
 
-    /*@Query(nativeQuery = true, value = "execute sp_carrerasSede :id")
-    public List<Carrera> sp_carrerasSede( @Param("id") int id );*/
-
-    /*@Procedure
-    public List<Carrera> sp_carrerasInstitucion( @Param("id") int id );*/
+    @Query(nativeQuery = true, value = "execute sp_cargarCarreras :term")
+    public List<Carrera> sp_cargarCarreras( @Param("term") String term );
 
 }
