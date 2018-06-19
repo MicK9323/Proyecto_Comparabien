@@ -84,7 +84,7 @@ public class CarreraSedeController {
         model.put("titulo","Asignar Carreras");
         model.put("institucion",institucion);
         model.put("sedes",sedes);
-        return "admin/regCarreraSede";
+        return "admin/regCarreraSede2";
     }
 
     // Cargar lista de helpers
