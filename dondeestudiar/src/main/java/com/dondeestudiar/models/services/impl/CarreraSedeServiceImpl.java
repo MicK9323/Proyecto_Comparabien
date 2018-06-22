@@ -19,4 +19,18 @@ public class CarreraSedeServiceImpl implements ICarreraSedeService {
         return carreraSedeDAO.sp_carrerasSede(id);
     }
 
+    @Override
+    public boolean sp_validarAsignacion(int idCarrera, int idSede) {
+       int flag = carreraSedeDAO.sp_validarAsignacion(idCarrera,idSede);
+       if(flag == 1)
+           return true;
+       else
+           return false;
+    }
+
+    @Override
+    public void RegistrarDetalle(List<CarreraSede> detalle) {
+        carreraSedeDAO.saveAll(detalle);
+    }
+
 }

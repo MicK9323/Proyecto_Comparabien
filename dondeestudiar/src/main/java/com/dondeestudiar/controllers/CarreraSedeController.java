@@ -69,6 +69,14 @@ public class CarreraSedeController {
         return "admin/verCarrerasSede";
     }
 
+    // Validar asignacion
+    @PostMapping(value = "/validar")
+    @ResponseBody
+    public boolean ValidarAsignacion(@RequestParam int idCarrera, @RequestParam int idSede){
+        boolean valida = carreraSedeService.sp_validarAsignacion(idCarrera,idSede);
+        return valida;
+    }
+
     // Agregar carrera a institucion
     @GetMapping(value = "/institucion/asignar")
     public String AsignarCarreras(HttpServletRequest request, Map<String,Object> model,
@@ -77,18 +85,39 @@ public class CarreraSedeController {
             flash.addFlashAttribute("error",Constantes.SESSION_EXPIRED);
             return "redirect:/admin/login";
         }
-        if(request.getSession().getAttribute("helpers") != null) {
-            request.getSession().removeAttribute("helpers");
-        }
         List<Sede> sedes = institucion.getSedes();
         model.put("titulo","Asignar Carreras");
         model.put("institucion",institucion);
         model.put("sedes",sedes);
-        return "admin/regCarreraSede2";
+        return "admin/regCarreraSede";
+    }
+
+    // Registrar Detalle de Carreras y Sedes
+    @PostMapping(value = "/detalle/guardar",
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String RegistrarDetalle(@RequestBody List<HelperView> helpers, HttpServletRequest request
+            , @SessionAttribute Institucion institucion){
+        List<CarreraSede> detalles = new ArrayList<>();
+        CarreraSede detalle = null;
+        CarreraSedePK key = null;
+        for(HelperView view : helpers){
+            key = new CarreraSedePK();
+            key.setIdCarrera(view.getIdCarrera());
+            key.setIdSede(view.getIdSede());
+            detalle = new CarreraSede();
+            detalle.setId(key);
+            detalle.setAcreditado(view.isAcreditado());
+            detalle.setCostoAnual(view.getCosto());
+            detalle.setIngresantes(view.getIngresantes());
+            detalles.add(detalle);
+        }
+        carreraSedeService.RegistrarDetalle(detalles);
+        return "/carreras/mostrar/"+institucion.getId();
     }
 
     // Cargar lista de helpers
-    @PostMapping(value = "/cargar",
+/*    @PostMapping(value = "/cargar",
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<HelperView> CargarLista(@RequestBody HelperView helper, HttpServletRequest request){
@@ -105,7 +134,7 @@ public class CarreraSedeController {
         }catch(Exception e){
             return null;
         }
-    }
+    }*/
 
     // Autocompletar carreras
     @GetMapping(value = "/autocompletar/{term}")

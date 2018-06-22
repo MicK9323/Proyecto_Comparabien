@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface ICarreraSedeService {
 
-    public List<CarreraSede> sp_carrerasSede(int id);
+    List<CarreraSede> sp_carrerasSede(int id);
 
+    boolean sp_validarAsignacion(int idCarrera, int idSede);
+
+    void RegistrarDetalle(List<CarreraSede> detalle);
 }
