@@ -34,7 +34,7 @@
                                                     <input placeholder="Nombre de carrera" autocomplete="off"
                                                            autofocus th:field="*{nombre}" type="text" letters-only
                                                            class="form-control" th:errorclass="border-danger"
-                                                           data-ng-model="txtNombre.text"
+                                                           data-ng-model="txtNombre.text" required
 														   data-ng-show="txtNombre.visible"
 														   maxlength={{txtNombre.length}}>
                                                     <small th:if="${#fields.hasErrors('nombre')}"

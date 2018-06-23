@@ -17,14 +17,42 @@ institucionApp.controller("InstitucionController", function($scope) {
 
 	$scope.txtSitioWeb = {
 		text : "",
-		length : 80,
+		length : 70,
 		enabled : false,
 		visible : true
 	};
 
 	$scope.txtCentralTelf = {
 		text : "",
-		length : 15,
+		length : 12,
+		enabled : false,
+		visible : true
+	};
+	
+	$scope.txtNomSede = {
+		text : "",
+		length : 50,
+		enabled : false,
+		visible : true
+	};
+	
+	$scope.txtDirSede = {
+		text : "",
+		length : 70,
+		enabled : false,
+		visible : true
+	};
+	
+	$scope.txtTefSede = {
+		text : "",
+		length : 10,
+		enabled : false,
+		visible : true
+	};
+	
+	$scope.Ubicacion = {
+		text : "",
+		length : 50,
 		enabled : false,
 		visible : true
 	};

@@ -7,9 +7,7 @@
         cursor: pointer;
     }
 </style>
-<body class="fix-header card-no-border fix-sidebar">
-<!-- id="ng-app" ng-app="CarreraSedeApp" ng-controller="CarreraSedeController" ng-init="init()" -->
-
+<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="CarreraApp" ng-controller="CarreraController" ng-init="init()">
 <div th:replace="admin/layout/layout :: preloader"></div>
 
 <div id="main-wrapper">
@@ -34,7 +32,10 @@
                                         <label class="control-label font-bold">Carrera</label>
                                         <span id="spinner" class="d-none">  <i class="fa fa-refresh fa-spin"></i></span>
                                         <input type="text" id="carrera" class="form-control"
-                                               placeholder="Buscar Carrera" autocomplete="off">
+                                               placeholder="Buscar Carrera" autocomplete="off"
+                                               data-ng-model="txtNomCarrera.text"
+											   data-ng-show="txtNomCarrera.visible"
+											   data-maxlength={{txtNomCarrera.length}} letters-only />
                                         <div id="listaCarreras">
                                             <table class="table table-hover">
                                                 <tr class="carrera" th:each="item: ${carreras}">
@@ -186,8 +187,8 @@
 
 <div th:replace="admin/layout/layout :: scripts"></div>
 <script th:src="@{/tema/js/carreras.js}"></script>
-<!-- <script th:src="@{/angular/app/carrerasede-app.js}"></script> -->
-<!-- <script th:src="@{/angular/app/controllers/carrerasede-controller.js}"></script> -->
+<script th:src="@{/angular/app/carrera-app.js}"></script>
+<script th:src="@{/angular/app/controllers/carrera-controller.js}"></script>
 </body>
 
 </html>

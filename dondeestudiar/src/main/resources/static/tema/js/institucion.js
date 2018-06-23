@@ -93,9 +93,9 @@ $(document).ready(function() {
 			  .alert("Debe ingresar todos los campos!");
 		}
 		if(cx == "" || cy == "" ){
-			alertify.alert("Debe localizar su sede antes de agregarla!");
+			alertify.alert("¡Debe localizar su sede antes de agregarla!");
 		}else {
-			alertify.confirm("Esta seguro de agregar esta sede?",
+			alertify.confirm("¿Esta seguro de agregar esta sede?",
 					  function(){
 						$('#agregarSede').prop("disabled",true);
 						$.ajax({

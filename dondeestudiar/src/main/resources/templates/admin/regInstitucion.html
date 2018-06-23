@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/layout/layout :: head"></head>
-<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="InstitucionApp" ng-controller="InstitucionController" ng-init="init()">>
+<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="InstitucionApp" ng-controller="InstitucionController" ng-init="init()">
 
 	<div th:replace="admin/layout/layout :: preloader"></div>
 
@@ -56,10 +56,10 @@
 														<div class="form-group">
 															<label>Nombre de Institución</label> 
 															<input th:field="*{nombre}" type="text" autocomplete="off"
-																class="form-control" th:errorclass="border-danger" letters-only
-																data-ng-model="txtNombre.text" required
-																data-ng-show="txtNombre.visible"
-																data-maxlength={{txtNombre.length}}>
+																class="form-control" th:errorclass="border-danger" 
+																data-ng-model="txtNombre.text" 
+																data-ng-show="txtNombre.visible" required
+																maxlength={{txtNombre.length}} letters-only />
 															<small th:if="${#fields.hasErrors('nombre')}" 
 																th:errors="*{nombre}"
 																class="text-danger"></small>
@@ -72,9 +72,9 @@
 															<label for="web">Sitio Web</label> 
 															<input th:field="*{website}" type="text" autocomplete="off"
 																class="form-control" id="web" th:errorclass="border-danger"
-																data-ng-model="txtSitioWeb.text" required
-																data-ng-show="txtSitioWeb.visible"
-																data-maxlength={{txtSitioWeb.length}}>
+																data-ng-model="txtSitioWeb.text" 
+																data-ng-show="txtSitioWeb.visible" required
+																maxlength={{txtSitioWeb.length}} normal-text />
 															<small th:if="${#fields.hasErrors('website')}" 
 																th:errors="*{website}"
 																class="text-danger"></small>
@@ -83,11 +83,11 @@
 													<div class="col-sm-12 col-md-6">
 														<div class="form-group">
 															<label for="telf">Central Telefónica</label> 
-																<input th:field="*{telf}" type="tel" autocomplete="off" numbers-only
+																<input th:field="*{telf}" type="tel" autocomplete="off" 
 																	class="form-control" id="telf" th:errorclass="border-danger"
-																	data-ng-model="txtCentralTelf.text" required
-																	data-ng-show="txtCentralTelf.visible"
-																	data-maxlength={{txtCentralTelf.length}}>
+																	data-ng-model="txtCentralTelf.text"  
+																	data-ng-show="txtCentralTelf.visible" required 
+																	maxlength={{txtCentralTelf.length}} numbers-only />
 																<small th:if="${#fields.hasErrors('telf')}" 
 																th:errors="*{telf}"
 																class="text-danger"></small>
@@ -98,8 +98,8 @@
 											<div class="col-md-12 col-lg-5">
 												<div class="row">
 													<div class="col-md-12">
-														<input type="file" required name="file" id="input-file-now"
-															class="dropify">
+														<input type="file" data-ng-model="image" required name="file" id="input-file-now"
+															accept=".png, .jpg, .jpeg" class="dropify">
 													</div>
 												</div>
 											</div>
@@ -173,12 +173,17 @@
 																		<div class="col-sm-12 col-md-12 col-lg-6">
 																			<div class="form-group">
 																				<label class="text-info"><strong>Nombre de Sede</strong></label>
-																				<input id="nomSede" type="text" class="form-control" autocomplete="off">
+																				<input id="nomSede" type="text" class="form-control" autocomplete="off"
+																				data-ng-model="txtNomSede.text" 
+																			    data-ng-show="txtNomSede.visible"
+																			    maxlength={{txtNomSede.length}} letters-only />
 																			</div>
 																			<div class="form-group">
 																				<label class="text-info"><strong>Ubicación</strong></label>
-																				<input id="ubiSede" placeholder="Ubicacion"
-																					   type="text" class="form-control" autocomplete="off">
+																				<input id="ubiSede" placeholder="Distrito, Provincia, Departamento"
+																					   type="text" class="form-control" autocomplete="off"
+																					   data-ng-model="txtUbicacion.text"
+												   									   maxlength={{txtUbicacion.length}} normal-text />
 																			</div>
 																			<div class="form-group">
 																				<div id="listaUbigueos">
@@ -197,16 +202,22 @@
 																		<div id="ubigueo" class="col-sm-12 col-md-12 col-lg-6">
 																			<div class="form-group">
 																				<label class="text-info"><strong>Dirección de Sede</strong></label>
-																				<input id="direccion" type="text" class="form-control" autocomplete="off">
+																				<input id="direccion" type="text" class="form-control" autocomplete="off"
+																				data-ng-model="txtDirSede.text" 
+																			    data-ng-show="txtDirSede.visible" 
+																			    maxlength={{txtDirSede.length}} normal-text />
 																			</div>
 																			<div class="form-group">
 																				<label class="text-info"><strong>Teléfono
 																					de Sede</strong></label>
 																				<input id="telfSede" type="tel"
-																					   class="form-control" autocomplete="off">
+																					   class="form-control" autocomplete="off"
+																					   data-ng-model="txtTefSede.text" 
+																				       data-ng-show="txtTefSede.visible" 
+																				       maxlength={{txtTefSede.length}} numbers-only />
 																			</div>
-																			<input type="hidden" id="cx" >
-																			<input type="hidden" id="cy" >
+																			<input type="hidden" id="cx" />
+																			<input type="hidden" id="cy" />
 																		</div>
 																	</div>
 																	<div class="row">
