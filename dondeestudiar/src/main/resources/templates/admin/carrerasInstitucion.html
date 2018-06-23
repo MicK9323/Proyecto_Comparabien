@@ -15,7 +15,7 @@
         color: #ffffff;
     }
 </style>
-<body class="fix-header card-no-border fix-sidebar">
+<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="CarreraApp" ng-controller="CarreraController" ng-init="init()">
 
 <div th:replace="admin/layout/layout :: preloader"></div>
 
@@ -92,6 +92,8 @@
 </div>
 
 <div th:replace="admin/layout/layout :: scripts"></div>
+<script th:src="@{/angular/app/carrera-app.js}"></script>
+<script th:src="@{/angular/app/controllers/carrera-controller.js}"></script>
 <script>
     $(document).ready(function () {
         $('#tbGeneral').DataTable({

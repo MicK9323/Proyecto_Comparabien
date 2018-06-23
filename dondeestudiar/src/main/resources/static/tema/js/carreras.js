@@ -17,12 +17,8 @@ $(document).ready(function () {
         this.nomCarrera = nomCarrera;
         this.idSede = parseInt(idSede);
         this.nomSede = nomSede;
-        if (acreditado == "1") {
-            this.acreditado = true;
-        } else {
-            this.acreditado = false;
-        }
-        this.costo = parseFloat(costo);
+		this.acreditado = acreditado == "1" ? true : false;
+		this.costo = parseFloat(costo);
         this.ingresantes = parseInt(ingresantes);
     }
 

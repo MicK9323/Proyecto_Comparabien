@@ -32,6 +32,13 @@ carreraApp.controller("CarreraController", function($scope) {
 		enabled : false,
 		visible : true
 	};
+	
+	$scope.txtBuscar = {
+		text : "",
+		length : 6,
+		enabled : false,
+		visible : true
+	};
 
 });
 
