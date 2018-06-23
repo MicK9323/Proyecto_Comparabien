@@ -7,7 +7,8 @@
         cursor: pointer;
     }
 </style>
-<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="CarreraSedeApp" ng-controller="CarreraSedeController" ng-init="init()">
+<body class="fix-header card-no-border fix-sidebar">
+<!-- id="ng-app" ng-app="CarreraSedeApp" ng-controller="CarreraSedeController" ng-init="init()" -->
 
 <div th:replace="admin/layout/layout :: preloader"></div>
 
@@ -185,8 +186,8 @@
 
 <div th:replace="admin/layout/layout :: scripts"></div>
 <script th:src="@{/tema/js/carreras.js}"></script>
-<script th:src="@{/angular/app/carrerasede-app.js}"></script>
-<script th:src="@{/angular/app/controllers/carrerasede-controller.js}"></script>
+<!-- <script th:src="@{/angular/app/carrerasede-app.js}"></script> -->
+<!-- <script th:src="@{/angular/app/controllers/carrerasede-controller.js}"></script> -->
 </body>
 
 </html>

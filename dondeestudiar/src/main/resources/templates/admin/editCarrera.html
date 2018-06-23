@@ -38,7 +38,7 @@
 															class="form-control" th:errorclass="border-danger"
 	                                                        data-ng-model="txtNombre.text"
 															data-ng-show="txtNombre.visible"
-															maxlength={{txtNombre.length}}>
+															data-maxlength={{txtNombre.length}}>
 														<small th:if="${#fields.hasErrors('nombre')}"
 															th:errors="*{nombre}" class="text-danger"></small>
 													</div>
