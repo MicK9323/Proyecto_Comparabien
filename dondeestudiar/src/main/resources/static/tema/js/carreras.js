@@ -280,25 +280,30 @@ $(document).ready(function () {
     });
 
     $('#btnRegistrar').click(function () {
-        alertify.confirm('Esta seguro registrar todos los registros ingresados?',
-            function () {
-                 $.ajax({
-                    type: "POST",
-                    url: '/carreras/detalle/guardar',
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(models),
-                    success: function (redirect) {
-                        console.log(redirect);
-                        $(location).attr("href",redirect);
-                    },
-                    error: function (error) {
-                        alertify.alert("Error: "+error)
-                    }
-                 });
-            },function () {
-                // TODO
-            });
+        if(models.length == 0){
+            alertify.alert('No ha ingresado ningun registro');
+        }else{
+            alertify.confirm('Esta seguro registrar todos los registros ingresados?',
+                function () {
+                    $.ajax({
+                        type: "POST",
+                        url: '/carreras/detalle/guardar',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(models),
+                        success: function (data) {
+                            console.log(data.responseText);
+                        },
+                        error: function (error) {
+                            var url = error.responseText;
+                            console.log(error.responseText);
+                            $(location).attr("href",url);
+                        }
+                    });
+                },function () {
+                    // TODO
+                });
+        }
     });
 
 })
