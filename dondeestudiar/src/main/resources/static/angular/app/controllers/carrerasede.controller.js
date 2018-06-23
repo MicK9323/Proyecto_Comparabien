@@ -1,4 +1,4 @@
-carreraApp.controller("CarreraSedeController", function($scope) {
+carrerasedeApp.controller("CarreraSedeController", function($scope) {
     $scope.title = "";
 
     $scope.init = function() {

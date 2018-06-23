@@ -32,7 +32,7 @@
 											<div class="row">
 												<div class="col-md-8">
 													<div class="form-group">
-														<label>Nombre</label> <input
+														<label>Nombre</label> <input required
 															placeholder="Nombre de carrera" autocomplete="off"
 															autofocus th:field="*{nombre}" type="text" letters-only
 															class="form-control" th:errorclass="border-danger"
@@ -76,7 +76,7 @@
 															class="tooltip-content3"> Duración de la carrera
 																en semestres. </span>
 														</a> <input th:field="*{duracion}" type="text" ng-model="duracionCarrera"
-															autocomplete="off" class="form-control" id="duracion"
+															autocomplete="off" class="form-control" id="duracion" required
 															th:errorclass="border-danger"
 															data-ng-model="txtDuracion.text"
 														    data-ng-show="txtDuracion.visible" 
@@ -93,7 +93,7 @@
 																realizen consultas </span>
 														</a> <input th:field="*{popularidad}" type="text"
 															autocomplete="off" class="form-control" id="popularidad"
-															th:errorclass="border-danger"
+															th:errorclass="border-danger" required
 															data-ng-model="txtPopularidad.text"
 														    data-ng-show="txtPopularidad.visible"
 														    maxlength={{txtPopularidad.length}} numbers-only> <small
@@ -105,7 +105,7 @@
 											<div class="row">
 												<div class="col-sm-12 col-md-6 col-lg-6">
 													<label>Remuneración Promedio</label> <input
-														th:field="*{remuneracion}" type="number"
+														th:field="*{remuneracion}" type="number" required
 														autocomplete="off" class="form-control" id="remuneracion"
 														th:errorclass="border-danger"
 														data-ng-model="txtRemuneracion.text"

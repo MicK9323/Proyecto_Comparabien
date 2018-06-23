@@ -72,7 +72,7 @@
 															Duración de la carrera en semestres.
                                                         </span>
                                                     </a>
-                                                    <input th:field="*{duracion}" type="text" autocomplete="off" 
+                                                    <input th:field="*{duracion}" type="text" autocomplete="off" required
                                                            class="form-control" id="duracion" th:errorclass="border-danger"
                                                            data-ng-model="txtDuracion.text"
 														   data-ng-show="txtDuracion.visible" 
@@ -91,7 +91,7 @@
 														</span>
                                                     </a>
                                                     <input th:field="*{popularidad}" type="text" autocomplete="off"
-                                                           class="form-control" id="popularidad" 
+                                                           class="form-control" id="popularidad" required
                                                            th:errorclass="border-danger"
                                                            data-ng-model="txtPopularidad.text"
 														   data-ng-show="txtPopularidad.visible"
@@ -106,7 +106,7 @@
                                             <div class="col-sm-12 col-md-6 col-lg-6">
                                                 <label>Remuneración Promedio</label>
                                                 <input th:field="*{remuneracion}" type="text" autocomplete="off"
-                                                       class="form-control" id="remuneracion"
+                                                       class="form-control" id="remuneracion" required
                                                        th:errorclass="border-danger"
                                                        data-ng-model="txtRemuneracion.text"
 													   data-ng-show="txtRemuneracion.visible"
