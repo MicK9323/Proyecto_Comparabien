@@ -21,6 +21,7 @@ public class Constantes {
     public final static String TIPO_INSTITUCION = "TINST";
     public final static String TIPO_GESTION = "TGEST";
     public final static String TIPO_CARRERA = "TCARR";
+    public final static int MAX_UPLOAD_SIZE = 1024*1024;
 
     //    Mensajes
     public final static String SESSION_EXPIRED = "Inicie sesión antes de continuar";
@@ -29,5 +30,7 @@ public class Constantes {
     public final static String CHANGES_SUCCESSFULL = "Cambios guardados correctamente";
     public final static String SAVE_SUCCESSFULL = "Registro agregado correctamente";
     public final static String NO_FOUND_SEDES = "Aún no hay sedes registradas";
+    public final static String FILE_SIZE = "El tamaño de la imagen no debe exceder a 1MB";
+    public final static String PROLILE_UPDATED = "Vuelva a iniciar sesión para continuar";
 
 }

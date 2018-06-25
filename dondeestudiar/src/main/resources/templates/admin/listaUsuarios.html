@@ -3,7 +3,7 @@
 xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/layout/layout :: head" ></head>
 <style>
-    #tbInstituciones thead tr {
+    #tbUsuarios thead tr {
         background: #2f3d4a;
         border-color: #2f3d4a;
         color: #ffffff;
@@ -29,10 +29,10 @@ xmlns:th="http://www.thymeleaf.org">
                                 <div class="d-flex">
                                     <div class="stats">
                                         <h3 class="text-white">
-                                            <strong>Instituciones Educativas Registradas</strong>
+                                            <strong>Usuarios Registrados</strong>
                                         </h3>
                                         <!-- <h6 class="text-white">Cantidad</h6> -->
-                                        <a th:href="@{/instituciones/nuevo}" 
+                                        <a th:href="@{/usuarios/nuevo}"
                                         	class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Agregar</a>
                                     </div>
                                     <div class="stats-icon text-right ml-auto">
@@ -48,32 +48,34 @@ xmlns:th="http://www.thymeleaf.org">
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive m-t-20">
-                                    <table id="tbInstituciones" class="table full-color-table full-inverse-table hover-table">
+                                    <table id="tbUsuarios" class="table full-color-table full-inverse-table hover-table">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Logo</th>
+                                                <th class="text-left">Foto</th>
                                                 <th class="text-left">Nombre</th>
+                                                <th class="text-left">Rol</th>
                                                 <th class="text-center">Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:class="${institucion.estado == false? 'table-active' : ''}"  th:each="institucion: ${listado}">
-                                                <td class="text-left">
-                                                    <img th:alt="${institucion.nombre}" width="50" class="img-thumbnail rounded float-left"
-                                                       th:src="@{${institucion.rutaLogo}}">
+                                            <tr th:class="${usuario.estado == false? 'table-active' : ''}"  th:each="usuario: ${usuarios}">
+                                                <td class="text-center}">
+                                                    <img width="50" class="img-thumbnail rounded float-left"
+                                                       th:src="@{${usuario.rutaFoto}}">
                                                 </td>
-                                                <td class="text-left" th:text="${institucion.nombre}"></td>
+                                                <td class="text-left" th:text="${usuario.getNombres()}"></td>
+                                                <td class="text-center" th:text="${usuario.rol.role}"></td>
                                                 <td class="text-center">
                                                     <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="top"
-                                                    	th:href="@{'/instituciones/ver/'+${institucion.ruc}}" data-original-title="Ver Institucion">
+                                                    	th:href="@{'/usuario/ver'+${usuario.dni_user}}" data-original-title="Editar Usuario">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-                                                    <a th:if="${institucion.estado} == true" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top"
-                                                           th:href="@{'/instituciones/disabled/'+${institucion.id}}" data-original-title="Deshabilitar Institucion">
+                                                    <a th:if="${usuario.estado} == true" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top"
+                                                           th:href="@{'/usuario/disabled/'+${usuario.dni_user}}" data-original-title="Deshabilitar Usuario">
                                                         <i class="fa fa-minus-circle"></i>
                                                     </a>
-                                                    <a th:if="${institucion.estado}  == false" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top"
-                                                           th:href="@{'/instituciones/enabled/'+${institucion.id}}" data-original-title="Habilitar Institucion">
+                                                    <a th:if="${usuario.estado}  == false" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top"
+                                                           th:href="@{'/instituciones/enabled/'+${usuario.dni_user}}" data-original-title="Habilitar Usuario">
                                                         <i class="fa  fa-check"></i>
                                                     </a>
                                                 </td>
@@ -93,7 +95,7 @@ xmlns:th="http://www.thymeleaf.org">
     <div th:replace="admin/layout/layout :: scripts"></div>
     <script>
         $(document).ready(function() {
-            $('#tbInstituciones').DataTable({
+            $('#tbUsuarios').DataTable({
                 "lengthMenu": [5,10,15,20],
                 "language": {"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"}
             });

@@ -1,5 +1,6 @@
 package com.dondeestudiar.models.entities;
 
+import com.dondeestudiar.utils.Constantes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -132,6 +133,9 @@ public class Usuario implements Serializable {
 	}
 
 	public String getRutaFoto() {
+		if(this.rutaFoto.isEmpty() || this.rutaFoto.equals("") || this.rutaFoto == null){
+			return Constantes.NOT_USER_IMAGE;
+		}
 		return rutaFoto;
 	}
 

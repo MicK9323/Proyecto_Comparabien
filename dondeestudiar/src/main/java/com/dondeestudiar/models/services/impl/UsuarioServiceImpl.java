@@ -8,6 +8,8 @@ import com.dondeestudiar.models.dao.IUsuarioDAO;
 import com.dondeestudiar.models.entities.Usuario;
 import com.dondeestudiar.models.services.IUsuarioService;
 
+import java.util.List;
+
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
 	
@@ -26,10 +28,21 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		}
 		return user;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	@Transactional
+	public void mergeUsuario(Usuario user) {
+		try{
+		    usuarioDAO.save(user);
+		}catch(Exception e){
+		    e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Usuario> listAll() {
+		return usuarioDAO.findAll();
+	}
+
+
 }
