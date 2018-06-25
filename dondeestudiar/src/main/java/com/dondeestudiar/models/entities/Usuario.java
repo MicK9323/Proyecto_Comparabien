@@ -6,18 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_usuarios")
@@ -26,19 +19,23 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Pattern(regexp = "[1-9]{1}[0-9]{7}")
 	private String dni_user;
 
 	@NotEmpty
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚñáéíóúÑ\\s?]{3,30}")
 	private String nom_user;
 
 	@NotEmpty
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚñáéíóúÑ\\s?]{3,30}")
 	private String ape_user;
 
 	@NotEmpty
+	@Pattern(regexp = "[0-9A-Za-zÁÉÍÓÚñáéíóúÑ]{5,8}")
 	private String usuario;
 
-	@NotEmpty
+	@Size(min = 5, max = 8)
+	@Pattern(regexp = "[0-9A-Za-zÁÉÍÓÚñáéíóúÑ]{5,8}")
 	private String clave;
 
 	@Column(name = "ruta_foto")
@@ -55,7 +52,17 @@ public class Usuario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_rol")
 	private Rol rol;
-	
+
+	@PrePersist
+	private void PrePersist(){
+		Rol role = new Rol();
+		role.setId_rol(1);
+		this.fec_reg = new Date();
+		this.rol = role;
+		this.clave = this.dni_user;
+		this.estado = true;
+	}
+
 	public String getNombres() {
 		return String.format("%s %s", this.nom_user, this.ape_user);
 	}
@@ -93,11 +100,14 @@ public class Usuario implements Serializable {
 	}
 
 	public String getUsuario() {
-		return usuario;
+		if(this.usuario == null)
+			return usuario;
+		else
+			return usuario.trim();
 	}
 
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		this.usuario = usuario.trim();
 	}
 
 	public String getClave() {

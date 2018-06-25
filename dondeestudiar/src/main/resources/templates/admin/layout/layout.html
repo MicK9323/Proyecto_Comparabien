@@ -97,7 +97,7 @@
                         <a
                                 class="nav-link dropdown-toggle waves-effect waves-dark" href=""
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img th:src="@{${session.usuario.rutaFoto}}" alt="user"
+                            <img th:src="@{${session.logedusuario.rutaFoto}}" alt="user"
                                  class="profile-pic"/>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right animated flipInY">
@@ -105,11 +105,11 @@
                                 <li>
                                     <div class="dw-user-box">
                                         <div class="u-img">
-                                            <img th:src="@{${session.usuario.rutaFoto}}" alt="user">
+                                            <img th:src="@{${session.logedusuario.rutaFoto}}" alt="user">
                                         </div>
                                         <div class="u-text">
-                                            <h4 th:text="${session.usuario.getNombres()}">Usuario</h4>
-                                            <p class="text-muted" th:text="${session.usuario.rol.role}">Rol
+                                            <h4 th:text="${session.logedusuario.getNombres()}">Usuario</h4>
+                                            <p class="text-muted" th:text="${session.logedusuario.rol.role}">Rol
                                                 de Usuario
                                             </p>
                                             <a th:href="@{/usuarios/perfil}"
@@ -151,7 +151,7 @@
                     <li class="user-profile">
                         <a th:href="@{/usuarios/perfil}">
                             <i class="fa fa-user-o"></i>
-                            <span class="hide-menu" th:text="${session.usuario.nom_user}">Nombre
+                            <span class="hide-menu" th:text="${session.logedusuario.nom_user}">Nombre
                                         de Usuario
                                     </span>
                         </a>
@@ -193,7 +193,7 @@
                     <li>
                         <a class="has-arrow waves-effect waves-dark" href="#"
                            aria-expanded="false">
-                            <i class="mdi mdi-school"></i>
+                            <i class="fa fa-user-circle-o"></i>
                             <span class="hide-menu">Usuarios</span>
                         </a>
                         <ul aria-expanded="false" class="collapse">

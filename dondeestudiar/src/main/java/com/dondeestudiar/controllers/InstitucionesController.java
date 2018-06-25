@@ -97,8 +97,8 @@ public class InstitucionesController {
     @SuppressWarnings("unchecked")
     @GetMapping(value = "/nuevo")
     public String nuevo(HttpServletRequest request, Map<String, Object> model, RedirectAttributes flash) {
-        if (request.getSession().getAttribute("usuario") == null) {
-            flash.addFlashAttribute("error", "Inicie sesion antes de continuar");
+        if(!validarSesion(request)){
+            flash.addFlashAttribute("error",Constantes.SESSION_EXPIRED);
             return "redirect:/admin/login";
         }
         if(request.getSession().getAttribute("sedes") != null) {
@@ -283,7 +283,7 @@ public class InstitucionesController {
 
     // Validar si existe sesion
     private boolean validarSesion(HttpServletRequest request) {
-        if (request.getSession().getAttribute("usuario") == null) {
+        if (request.getSession().getAttribute("logedusuario") == null) {
             return false;
         } else {
             return true;

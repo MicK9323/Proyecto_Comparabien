@@ -27,7 +27,7 @@ public class LoginController {
 
 	@GetMapping(value={"/admin/login","/index",""})
 	public String login(HttpServletRequest request) {
-		if( request.getSession().getAttribute("usuario") == null ) {
+		if( request.getSession().getAttribute("logedusuario") == null ) {
 			return "login";
 		}else {
 			return "admin/main";
@@ -46,7 +46,7 @@ public class LoginController {
 				model.put("error", "Error: Su usuario no está habilitado para iniciar sesión");
 				return "login";
 			}else {
-				session.setAttribute("usuario", usuario);
+				session.setAttribute("logedusuario", usuario);
 				model.put("titulo", "Principal");
 				return "admin/main";
 			}

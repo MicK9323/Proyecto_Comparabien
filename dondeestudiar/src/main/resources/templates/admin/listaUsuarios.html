@@ -32,7 +32,7 @@ xmlns:th="http://www.thymeleaf.org">
                                             <strong>Usuarios Registrados</strong>
                                         </h3>
                                         <!-- <h6 class="text-white">Cantidad</h6> -->
-                                        <a th:href="@{/usuarios/nuevo}"
+                                        <a th:href="@{/usuarios/registrar}"
                                         	class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Agregar</a>
                                     </div>
                                     <div class="stats-icon text-right ml-auto">
@@ -67,15 +67,15 @@ xmlns:th="http://www.thymeleaf.org">
                                                 <td class="text-center" th:text="${usuario.rol.role}"></td>
                                                 <td class="text-center">
                                                     <a class="btn btn-outline-info" data-toggle="tooltip" data-placement="top"
-                                                    	th:href="@{'/usuario/ver'+${usuario.dni_user}}" data-original-title="Editar Usuario">
+                                                    	th:href="@{'/usuarios/editar/'+${usuario.dni_user}}" data-original-title="Editar Usuario">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     <a th:if="${usuario.estado} == true" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top"
-                                                           th:href="@{'/usuario/disabled/'+${usuario.dni_user}}" data-original-title="Deshabilitar Usuario">
+                                                           th:href="@{'/usuarios/disabled/'+${usuario.dni_user}}" data-original-title="Deshabilitar Usuario">
                                                         <i class="fa fa-minus-circle"></i>
                                                     </a>
                                                     <a th:if="${usuario.estado}  == false" class="btn btn-outline-success" data-toggle="tooltip" data-placement="top"
-                                                           th:href="@{'/instituciones/enabled/'+${usuario.dni_user}}" data-original-title="Habilitar Usuario">
+                                                           th:href="@{'/usuarios/enabled/'+${usuario.dni_user}}" data-original-title="Habilitar Usuario">
                                                         <i class="fa  fa-check"></i>
                                                     </a>
                                                 </td>

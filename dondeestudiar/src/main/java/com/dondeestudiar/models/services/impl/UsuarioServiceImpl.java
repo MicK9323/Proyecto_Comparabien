@@ -29,14 +29,24 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		return user;
 	}
 
-	@Override
-	@Transactional
+    @Override
+    public Usuario findByDni(String dni) {
+        return usuarioDAO.findById(dni).orElse(null);
+    }
+
+    @Override
+    public void disabledUser(String dni) {
+        usuarioDAO.sp_disabledUsuario(dni);
+    }
+
+    @Override
+    public void enabledUser(String dni) {
+        usuarioDAO.sp_enabledUsuario(dni);
+    }
+
+    @Override
 	public void mergeUsuario(Usuario user) {
-		try{
-		    usuarioDAO.save(user);
-		}catch(Exception e){
-		    e.printStackTrace();
-		}
+		usuarioDAO.save(user);
 	}
 
 	@Override

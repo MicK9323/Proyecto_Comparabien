@@ -187,7 +187,7 @@ public class CarrerasController {
 
     //    Validar Session
     public boolean validarSession(HttpServletRequest request) {
-        if (request.getSession().getAttribute("usuario") == null) {
+        if (request.getSession().getAttribute("logedusuario") == null) {
             return false;
         } else {
             return true;

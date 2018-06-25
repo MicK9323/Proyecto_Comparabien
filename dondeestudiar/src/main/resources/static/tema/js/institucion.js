@@ -22,8 +22,10 @@ $(document).ready(function() {
 	$('#ubiSede').keyup(function(){
         var term = $('#ubiSede').val().trim().split(" ").join("_");        
         if( term.length >= 3 ){
-        	console.info('termino de busqueda: '+term);
-        	$('#listaUbigueos').load("/instituciones/cargar-ubigueo/"+term)
+            $('#spinner').toggleClass('d-none');
+        	$('#listaUbigueos').load("/instituciones/cargar-ubigueo/"+term,function () {
+                $('#spinner').toggleClass('d-none');
+            })
         	$('#listaUbigueos').show()
         }        
     });
