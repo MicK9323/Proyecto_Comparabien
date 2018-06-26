@@ -155,7 +155,7 @@ public class UsuarioController {
         usuarioService.mergeUsuario(user);
         flash.addFlashAttribute("info", Constantes.PROLILE_UPDATED);
         status.setComplete();
-        return "admin/login";
+        return "redirect:/admin/login";
     }
 
     // Editar datos de usuario
