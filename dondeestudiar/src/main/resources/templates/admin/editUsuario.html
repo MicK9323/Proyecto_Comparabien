@@ -40,6 +40,12 @@
                                             <label class="control-label font-bold">Nombres</label>
                                             <input type="text" id="nombre" class="form-control"
                                                    placeholder="Nombres" th:field="*{nom_user}"
+<<<<<<< HEAD
+=======
+                                                   data-ng-model="txtNombre.text" normal-text-name
+												   data-ng-show="txtNombre.visible" required
+												   maxlength={{txtNombre.length}} 
+>>>>>>> decff22566f7ce8d8e1a18f3ee2bcaffcd1aa10b
                                                    th:errorclass="border-danger">
                                             <small th:if="${#fields.hasErrors('nom_user')}"
                                                    th:errors="*{nom_user}" class="text-danger"></small>
@@ -52,6 +58,12 @@
                                             <label class="control-label font-bold">Apellidos</label>
                                             <input type="text" id="apellido" class="form-control"
                                                    placeholder="Nombres" th:field="*{ape_user}"
+<<<<<<< HEAD
+=======
+                                                   data-ng-model="txtApellido.text" normal-text-name
+												   data-ng-show="txtApellido.visible" required
+												   maxlength={{txtApellido.length}} 
+>>>>>>> decff22566f7ce8d8e1a18f3ee2bcaffcd1aa10b
                                                    th:errorclass="border-danger">
                                             <small th:if="${#fields.hasErrors('ape_user')}"
                                                    th:errors="*{ape_user}" class="text-danger"></small>

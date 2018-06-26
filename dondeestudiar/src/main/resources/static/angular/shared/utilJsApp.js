@@ -243,6 +243,71 @@ utiljsApp.directive('normalText', function () {
     };
 });
 
+<<<<<<< HEAD
+=======
+utiljsApp.directive('normalTextUser', function () {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModelCtrl) {
+	        function fromUser(text) {
+	          var transformedInput = text.replace(/[^A-Za-zÁÉÍÓÚñáéíóúÑ?[0-9\.\]?]/g, '');
+	          transformedInput = transformedInput.replace(/\s{2,}/g, ' ');
+	          var capitalized = transformedInput.toUpperCase();// CONVIRTIENDO A
+																// MAYUSCULA
+	          if (transformedInput !== text) {
+	              ngModelCtrl.$setViewValue(transformedInput);
+	              ngModelCtrl.$render();
+	            }          
+	          return transformedInput;// convirtiendo a mayuscula
+	        }
+	        ngModelCtrl.$parsers.push(fromUser);
+	   }
+    };
+});
+
+utiljsApp.directive('normalTextName', function () {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModelCtrl) {
+	        function fromUser(text) {
+	          var transformedInput = text.replace(/[^A-Za-zÁÉÍÓÚñáéíóúÑ?[\s\]?]/g, '');
+	          transformedInput = transformedInput.replace(/\s{2,}/g, ' ');
+//	          var capitalized = transformedInput.toUpperCase();// CONVIRTIENDO A
+																// MAYUSCULA
+	          if (transformedInput !== text) {
+	              ngModelCtrl.$setViewValue(transformedInput);
+	              ngModelCtrl.$render();
+	            }          
+	          return transformedInput;// convirtiendo a mayuscula
+	        }
+	        ngModelCtrl.$parsers.push(fromUser);
+	   }
+    };
+});
+
+
+utiljsApp.directive('normalTextLimited', function () {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModelCtrl) {
+	        function fromUser(text) {
+	          var transformedInput = text.replace(/[^A-Za-zÁÉÍÓÚñáéíóúÑ?[0-9\.\-\]?]/g, '');
+	          transformedInput = transformedInput.replace(/\s{2,}/g, ' ');
+//	          var capitalized = transformedInput.toUpperCase();// CONVIRTIENDO A
+																// MAYUSCULA
+	          if (transformedInput !== text) {
+	              ngModelCtrl.$setViewValue(transformedInput);
+	              ngModelCtrl.$render();
+	            }          
+	          return transformedInput;// convirtiendo a mayuscula
+	        }
+	        ngModelCtrl.$parsers.push(fromUser);
+	   }
+    };
+});
+
+
+>>>>>>> decff22566f7ce8d8e1a18f3ee2bcaffcd1aa10b
 utiljsApp.directive('ngEnter', function() {
 	return function(scope, element, attrs) {
 		element.bind('keydown keypress', function(event) {

@@ -56,7 +56,7 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
     
     $scope.txtIngresante = {
 		text : "",
-		length : 2,
+		length : 3,
 		enabled : false,
 		visible : true
 	};
@@ -161,11 +161,11 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
                 '</td>' +
                 '<td class="input1 text-center">' +
                 '<input type="text" placeholder="Costo S/." class="costo form-control input-sm"' +
-                'data-ng-model="txtCostoAnual.text" maxlength={{txtCostoAnual.length}} numbers-only>' +
+                'data-ng-model="txtCostoAnual.text' +idCarrera + value.id + index + '" maxlength={{txtCostoAnual.length}} numbers-only>' +
                 '</td>' +
                 '<td class="input2 text-center">' +
                 '<input type="text" placeholder="%" class="ingresantes form-control input-sm" ' +
-                'data-ng-model="txtIngresante.text" maxlength={{txtIngresante.length}} numbers-only>' +
+                'data-ng-model="txtIngresante.text' + value.id + idCarrera + index + '" maxlength={{txtIngresante.length}} numbers-only>' +
                 '</td>' +
                 '<td class="text-center">' +
                 '<button class="btnEnviarFila btn btn-outline-success">' +
@@ -273,13 +273,13 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
     	$scope.seleccionar($(this));
     })
 
-    $('#btnCancelar').click(function () {
+    $scope.btnCancelar = function(){
         $scope.resetSede();
-    });
+    };
 
-    $('#btnAceptar').click(function () {
-        $scope.populateAsignar();
-    });
+    $scope.btnAceptar = function(){
+    	 $scope.populateAsignar();
+    };
 
     $('#tbAsignacion').on('click', '.btnEnviarFila', function () {
         var idCarrera = $(this).parent().parent().find('.idCarrera').text();
@@ -323,12 +323,12 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
 
     $('#tbAsignacion').on('click', '.btnBorrarFila', function () {
         var fila = $(this);
-        alertify.confirm('Seguro de eliminar este registro?',
+        alertify.confirm('¿Seguro de eliminar este registro?',
             function () {
                 $scope.eliminarFila(fila);
             },
             function () {
-                // no quiero hacer nada
+            	 // TODO
             });
     });
 
@@ -342,7 +342,7 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
                 $scope.eliminarFila(fila);
                 console.log('Luego de eliminar: '+models);
             },function () {
-                // No quiero hacer nada
+            	 // TODO
             });
     });
 
