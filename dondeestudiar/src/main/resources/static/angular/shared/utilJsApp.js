@@ -263,6 +263,26 @@ utiljsApp.directive('normalTextUser', function () {
     };
 });
 
+utiljsApp.directive('normalTextName', function () {
+    return {
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModelCtrl) {
+	        function fromUser(text) {
+	          var transformedInput = text.replace(/[^A-Za-zÁÉÍÓÚñáéíóúÑ?[\s\]?]/g, '');
+	          transformedInput = transformedInput.replace(/\s{2,}/g, ' ');
+//	          var capitalized = transformedInput.toUpperCase();// CONVIRTIENDO A
+																// MAYUSCULA
+	          if (transformedInput !== text) {
+	              ngModelCtrl.$setViewValue(transformedInput);
+	              ngModelCtrl.$render();
+	            }          
+	          return transformedInput;// convirtiendo a mayuscula
+	        }
+	        ngModelCtrl.$parsers.push(fromUser);
+	   }
+    };
+});
+
 
 utiljsApp.directive('normalTextLimited', function () {
     return {
