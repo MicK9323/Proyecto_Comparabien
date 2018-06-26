@@ -15,6 +15,9 @@ public class CarreraSede implements Serializable {
     @EmbeddedId
     private CarreraSedePK id;
 
+    @Column(name = "identificador", updatable = false)
+    private String identificador;
+
     @Column(name = "acreditado")
     private boolean acreditado;
 
@@ -32,6 +35,13 @@ public class CarreraSede implements Serializable {
     @JoinColumn(name = "id_sede", insertable=false, updatable = false)
     @JsonIgnore
     private Sede sede;
+
+    @PrePersist
+    private void prePersist(){
+        String idCarrera = ""+this.id.getIdCarrera();
+        String idSede = ""+this.id.getIdSede();
+        this.identificador = idCarrera+idSede;
+    }
 
     public CarreraSedePK getId() {
         return id;

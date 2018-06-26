@@ -33,13 +33,13 @@
 													<div class="col-md-8">
 														<div class="form-group">
 															<label for="telf">RUC</label>
-															<input readonly placeholder="RUC" id="ruc"
+															<input readonly="readonly" placeholder="RUC"
 																data-ng-model="txtRuc.text" required
 																data-ng-show="txtRuc.visible" numbers-only
 																data-maxlength={{txtRuc.length}}
 																autofocus th:field="*{ruc}"
 																type="text" class="form-control"
-																th:errorclass="border-danger" /> 
+																th:errorclass="border-danger"> 
 																<small th:if="${#fields.hasErrors('ruc')}" th:error="*{ruc}"
 																class="text-danger"></small>
 														</div>
@@ -51,7 +51,7 @@
 															<label>Nombre de Institución</label> 
 															<input th:field="*{nombre}" type="text" letters-only
 																data-ng-model="txtNombre.text" required
-																data-ng-show="txtNombre.visible" id="nombre"
+																data-ng-show="txtNombre.visible"
 																data-maxlength={{txtNombre.length}}
 																class="form-control" th:errorclass="border-danger">
 															<span th:if="${#fields.hasErrors('nombre')}"
@@ -64,13 +64,13 @@
 														<div class="form-group">
 															<label for="web">Sitio Web</label> <input
 																th:field="*{website}" type="text"
-																class="form-control" id="web" normal-text-limited
-																th:errorclass="border-danger" 
+																class="form-control" id="web"
+																th:errorclass="border-danger"> <small
+																th:if="${#fields.hasErrors('website')}"
+																th:error="*{website}" class="text-danger"
 																data-ng-model="txtSitioWeb.text" required
-																data-ng-show="txtSitioWeb.visible" 
-																maxlength={{txtSitioWeb.length}}>
-																 <small th:if="${#fields.hasErrors('website')}"
-																th:error="*{website}" class="text-danger"></small>
+																data-ng-show="txtSitioWeb.visible"
+																data-maxlength={{txtSitioWeb.length}}></small>
 														</div>
 													</div>
 													<div class="col-sm-12 col-md-6">
@@ -82,7 +82,7 @@
 																th:errorclass="border-danger" required
 																data-ng-model="txtCentralTelf.text" numbers-only
 																data-ng-show="txtCentralTelf.visible"
-																maxlength={{txtCentralTelf.length}}> <small
+																data-maxlength={{txtCentralTelf.length}}> <small
 																th:if="${#fields.hasErrors('telf')}" th:error="*{telf}"
 																class="text-danger"></small>
 														</div>

@@ -49,11 +49,23 @@
 													<label>Area</label> <input autocomplete="off" readonly
 														th:value="${carrera.area.nombre}" type="text"
 														class="form-control">
+													<!--<select required th:field="*{area.id}"-->
+													<!--class="form-control custom-select">-->
+													<!--<option th:value="NULL">Selecciona</option>-->
+													<!--<option th:each="item:${areas}"-->
+													<!--th:value="${item.id}" th:text="${item.nombre}"></option>-->
+													<!--</select>-->
 												</div>
 												<div class="col-sm-12 col-md-6 col-lg-6">
 													<label>Tipo de Carrera</label> <input autocomplete="off"
 														readonly th:value="${carrera.tipoCarrera.desc}"
 														type="text" class="form-control">
+													<!--<select required th:field="*{tipoCarrera.idParam}"-->
+													<!--class="form-control custom-select">-->
+													<!--<option th:value="NULL">Selecciona</option>-->
+													<!--<option th:each="item:${tipoCarrera}"-->
+													<!--th:value="${item.idParam}" th:text="${item.desc}"></option>-->
+													<!--</select>-->
 												</div>
 											</div>
 											<div class="row mt-2">
@@ -63,7 +75,7 @@
 															class="fa fa-info-circle text-info"></i> Duración <span
 															class="tooltip-content3"> Duración de la carrera
 																en semestres. </span>
-														</a> <input th:field="*{duracion}" type="text"
+														</a> <input th:field="*{duracion}" type="text" ng-model="duracionCarrera"
 															autocomplete="off" class="form-control" id="duracion" required
 															th:errorclass="border-danger"
 															data-ng-model="txtDuracion.text"
@@ -93,9 +105,9 @@
 											<div class="row">
 												<div class="col-sm-12 col-md-6 col-lg-6">
 													<label>Remuneración Promedio</label> <input
-														th:field="*{remuneracion}" type="text" required
+														th:field="*{remuneracion}" type="number" required
 														autocomplete="off" class="form-control" id="remuneracion"
-														th:errorclass="border-danger" 
+														th:errorclass="border-danger"
 														data-ng-model="txtRemuneracion.text"
 													    data-ng-show="txtRemuneracion.visible"
 													    maxlength={{txtRemuneracion.length}}> <small

@@ -35,7 +35,7 @@
                                                placeholder="Buscar Carrera" autocomplete="off"
                                                data-ng-model="txtNomCarrera.text"
 											   data-ng-show="txtNomCarrera.visible"
-											   maxlength={{txtNomCarrera.length}} letters-only />
+											   data-maxlength={{txtNomCarrera.length}} letters-only />
                                         <div id="listaCarreras">
                                             <table class="table table-hover">
                                                 <tr class="carrera" th:each="item: ${carreras}">

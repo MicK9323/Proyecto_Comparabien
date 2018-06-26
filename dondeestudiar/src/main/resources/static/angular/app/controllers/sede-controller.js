@@ -2,21 +2,21 @@ sedeApp.controller("SedeController", function($scope) {
 	$scope.title = "";
 
 	$scope.txtNomSede = {
-		text : $("#nomSede").val(),
+		text : "",
 		length : 50,
 		enabled : false,
 		visible : true
 	};
 	
 	$scope.txtDirSede = {
-		text :$("#direccion").val(),
+		text : "",
 		length : 70,
 		enabled : false,
 		visible : true
 	};
 	
 	$scope.txtTefSede = {
-		text :$("#telf").val(),
+		text : "",
 		length : 10,
 		enabled : false,
 		visible : true
@@ -28,11 +28,11 @@ sedeApp.controller("SedeController", function($scope) {
 		enabled : false,
 		visible : true
 	};
-
-	
+		
 	$scope.init = function() {
 		
 		
+
 	};
 
 });

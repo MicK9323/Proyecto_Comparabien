@@ -2,7 +2,7 @@
 <html
         xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/layout/layout :: head"></head>
-<body class="fix-header card-no-border fix-sidebar" id="ng-app" ng-app="UsuarioApp" ng-controller="UsuarioController" ng-init="init()">
+<body class="fix-header card-no-border fix-sidebar">
 
 <div th:replace="admin/layout/layout :: preloader"></div>
 
@@ -59,9 +59,6 @@
                                                                     <label class="control-label font-bold">Nombres</label>
                                                                     <input type="text" id="nombre" class="form-control"
                                                                            placeholder="Nombres" th:field="*{nom_user}"
-                                                                           data-ng-model="txtNombre.text" normal-text-user
-																		   data-ng-show="txtNombre.visible" required
-																		   maxlength={{txtNombre.length}} 
                                                                            th:errorclass="border-danger">
                                                                     <small th:if="${#fields.hasErrors('nom_user')}"
                                                                             th:errors="*{nom_user}" class="text-danger"></small>
@@ -74,9 +71,6 @@
                                                                     <label class="control-label font-bold">Apellidos</label>
                                                                     <input type="text" id="apellido" class="form-control"
                                                                            placeholder="Nombres" th:field="*{ape_user}"
-                                                                           data-ng-model="txtApellido.text" normal-text-user
-																		   data-ng-show="txtApellido.visible" required
-																		   maxlength={{txtApellido.length}} 
                                                                            th:errorclass="border-danger">
                                                                     <small th:if="${#fields.hasErrors('ape_user')}"
                                                                            th:errors="*{ape_user}" class="text-danger"></small>
@@ -89,9 +83,6 @@
                                                                     <label class="control-label font-bold">ID Usuario</label>
                                                                     <input type="text" id="usuario" class="form-control"
                                                                            placeholder="ID Usuario" th:field="*{usuario}"
-                                                                           data-ng-model="txtIdUsuario.text" normal-text-user
-																		   data-ng-show="txtIdUsuario.visible" required
-																		   maxlength={{txtIdUsuario.length}} 
                                                                            th:errorclass="border-danger">
                                                                     <small th:if="${#fields.hasErrors('usuario')}"
                                                                            th:errors="*{usuario}" class="text-danger"></small>
@@ -102,11 +93,8 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label class="control-label font-bold">Contraseña</label>
-                                                                    <input type="text" class="form-control key"
-                                                                           th:field="*{clave}" th:errorclass="border-danger "
-                                                                           data-ng-model="txtClave1.text"
-																		   data-ng-show="txtClave1.visible"
-																		   maxlength={{txtClave1.length}}  />
+                                                                    <input type="text" class="form-control"
+                                                                           th:field="*{clave}" th:errorclass="border-danger">
                                                                     <small th:if="${#fields.hasErrors('clave')}"
                                                                            th:errors="*{clave}" class="text-danger"></small>
                                                                 </div>
@@ -143,8 +131,6 @@
 
 <div th:replace="admin/layout/layout :: scripts"></div>
 <script th:src="@{/tema/assets/plugins/dropify/dist/js/dropify.min.js}"></script>
-<script th:src="@{/angular/app/usuario-app.js}"></script>
-<script th:src="@{/angular/app/controllers/usuario-controller.js}"></script>
 <script>
     // Basic
     $(".dropify").dropify();
