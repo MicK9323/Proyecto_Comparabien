@@ -31,7 +31,7 @@
                                                    th:field="*{nomSede}" class="form-control" autocomplete="off"
                                                    data-ng-model="txtNomSede.text" 
 												   data-ng-show="txtNomSede.visible" required
-												   maxlength={{txtNomSede.length}} letters-only>
+												   maxlength={{txtNomSede.length}} letters-only />
                                             <small th:if="${#fields.hasErrors('nomSede')}"
                                                    th:errors="*{nomSede}"
                                                    class="text-danger"></small>
@@ -64,7 +64,7 @@
                                                    class="form-control" autocomplete="off"
                                                    data-ng-model="txtTefSede.text" numbers-only
 												   data-ng-show="txtTefSede.visible" required
-												   maxlength={{txtTefSede.length}}>
+												   maxlength={{txtTefSede.length}} />
                                             <small th:if="${#fields.hasErrors('telf')}"
                                                    th:errors="*{telf}"
                                                    class="text-danger"></small>

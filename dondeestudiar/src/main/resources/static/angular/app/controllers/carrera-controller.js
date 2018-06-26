@@ -6,28 +6,28 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
 	};
 
 	$scope.txtDuracion = {
-		text : "",
+		text : $("#duracion").val(),
 		length : 2,
 		enabled : false,
 		visible : true
 	};
 
 	$scope.txtNombre = {
-		text : "",
+		text : $("#nombre").val(),
 		length : 50,
 		enabled : false,
 		visible : true
 	};
-
+	
 	$scope.txtPopularidad = {
-		text : "1",
+		text : $("#popularidad").val(),
 		length : 2,
 		enabled : false,
 		visible : true
 	};
-
+	
 	$scope.txtRemuneracion = {
-		text : "",
+		text : $("#remuneracion").val(),
 		length : 6,
 		enabled : false,
 		visible : true
@@ -193,11 +193,11 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
                 '<tr>' +
                 '<td class="text-center font-bold">' + (1 + index) + '</td>' +
                 '<td class="d-none">' + index + '</td>' +
-                '<td class="text-left font-bold">' + value.nomCarrera + '</td>' +
-                '<td class="text-left font-bold">' + value.nomSede + '</td>' +
+                '<td class="text-left font-bold">' + G.Trim(value.nomCarrera) + '</td>' +
+                '<td class="text-left font-bold">' + G.Trim(value.nomSede) + '</td>' +
                 '<td class="text-center font-bold">' + boolToString(value.acreditado) + '</td>' +
-                '<td class="text-center font-bold">' + value.costo + '</td>' +
-                '<td class="text-center font-bold">' + value.ingresantes + '</td>' +
+                '<td class="text-center font-bold">' + G.Trim(value.costo) + '</td>' +
+                '<td class="text-center font-bold">' + G.Trim(value.ingresantes) + '</td>' +
                 '<td class="text-center font-bold">' +
                 '<button class="btnBorrarModel btn btn-outline-danger">' +
                 '<i class="fa fa-trash-o"></i>' +
@@ -282,13 +282,13 @@ carreraApp.controller("CarreraController", function($scope, $compile) {
     });
 
     $('#tbAsignacion').on('click', '.btnEnviarFila', function () {
-        var idCarrera = $(this).parent().parent().find('.idCarrera').text();
-        var nomCarrera = $(this).parent().parent().find('.nomCarrera').text();
-        var idSede = $(this).parent().parent().find('.idSede').text();
-        var nomSede = $(this).parent().parent().find('.nomSede').text();
-        var acreditado = $(this).parent().parent().find('.select').find('select').val();
-        var costo = $(this).parent().parent().find('.input1').find('.costo').val();
-        var ingresantes = $(this).parent().parent().find('.input2').find('.ingresantes').val();
+        var idCarrera = G.Trim($(this).parent().parent().find('.idCarrera').text());
+        var nomCarrera = G.Trim($(this).parent().parent().find('.nomCarrera').text());
+        var idSede = G.Trim($(this).parent().parent().find('.idSede').text());
+        var nomSede = G.Trim($(this).parent().parent().find('.nomSede').text());
+        var acreditado = G.Trim($(this).parent().parent().find('.select').find('select').val());
+        var costo = G.Trim($(this).parent().parent().find('.input1').find('.costo').val());
+        var ingresantes = G.Trim($(this).parent().parent().find('.input2').find('.ingresantes').val());
         if ($scope.validar(idCarrera, nomCarrera, idSede, nomSede, acreditado, costo, ingresantes)) {
             var model = new Model(idCarrera, nomCarrera, idSede, nomSede, acreditado, costo, ingresantes);
             var fila = $(this);
