@@ -47,6 +47,7 @@ public class Usuario implements Serializable {
 	private boolean estado;
 
 	@Temporal(TemporalType.DATE)
+	@Column(name="fec_reg", updatable = false)
 	private Date fec_reg;
 
 	@ManyToOne

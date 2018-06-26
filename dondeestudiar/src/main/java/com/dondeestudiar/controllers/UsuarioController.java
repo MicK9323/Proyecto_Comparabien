@@ -174,8 +174,8 @@ public class UsuarioController {
 
     // Editar datos de usuario POST
     @PostMapping(value = "/editar")
-    public String EditarUsuario(@Valid Usuario user, BindingResult result, SessionStatus status,
-                Map<String, Object> model, RedirectAttributes flash, MultipartFile file) {
+    public String EditarUsuario(@Valid Usuario editUser, BindingResult result, SessionStatus status,
+                @SessionAttribute("user") Usuario user,Map<String, Object> model, RedirectAttributes flash, MultipartFile file) {
         if(result.hasErrors()){
             model.put("error",Constantes.INVALID_DATA);
             return "admin/editUsuario";
@@ -209,6 +209,10 @@ public class UsuarioController {
                 return "admin/editUsuario";
             }
         }
+        user.setNom_user(editUser.getNom_user());
+        user.setApe_user(editUser.getApe_user());
+        user.setUsuario(editUser.getUsuario());
+        user.setClave(editUser.getClave());
         usuarioService.mergeUsuario(user);
         status.setComplete();
         flash.addFlashAttribute("success",Constantes.CHANGES_SUCCESSFULL);
